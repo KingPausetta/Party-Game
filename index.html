@@ -267,7 +267,7 @@
                     </div>
                 </div>
 
-                    <!-- Card 3: Indovina la Canzone / Sarabanda -->
+                <!-- Card 3: Indovina la Canzone / Sarabanda -->
                 <div onclick="switchGame('canzone')" class="glass-panel rounded-3xl p-6 border border-amber-500/30 hover:border-amber-400 transition-all cursor-pointer group flex flex-col justify-between relative overflow-hidden">
                     <div class="absolute -right-8 -top-8 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
                     <div>
@@ -275,11 +275,11 @@
                             <div class="w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-music"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 text-xs font-bold">🎧 Audio Originale • Rap/Trap & Pop</span>
+                            <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 text-xs font-bold">🎧 Synth Web Audio • Rap/Trap & Pop</span>
                         </div>
                         <h3 class="font-display font-extrabold text-2xl text-white mb-2 group-hover:text-amber-300 transition-colors">3. Indovina la Canzone</h3>
                         <p class="text-slate-300 text-sm leading-relaxed">
-                            Con <strong>Vero Audio Originale</strong> delle hit! Sfida progressiva a secondi (<strong>1.5s, 4s, 10s, 30s</strong>), ricerca live su Apple Music, indovina dalla barra e Sfida dei 7 Secondi!
+                            Con <strong>Sintetizzatore Audio Integrato (Mobile-Safe)</strong> per suonare le hit, ricerca live su Apple Music, indovina dalla barra e Sfida dei 7 Secondi!
                         </p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-amber-400 font-bold text-sm">
@@ -296,7 +296,7 @@
                             <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-400 text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-link"></i>
                             </div>
-                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-300 text-xs font-bold">5 Indizi • 12 Set Completi</span>
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-300 text-xs font-bold">5 Indizi • 6 Set Completi</span>
                         </div>
                         <h3 class="font-display font-extrabold text-2xl text-white mb-2 group-hover:text-purple-300 transition-colors">4. La Ghigliottina</h3>
                         <p class="text-slate-300 text-sm leading-relaxed">
@@ -488,12 +488,9 @@
         </section>
 
         <!-- ==========================================
-             GIOCO 3: INDOVINA LA CANZONE / SARABANDA (VERO AUDIO ORIGINALE)
+             GIOCO 3: INDOVINA LA CANZONE / SARABANDA (MOBILE-SAFE SYNTH JUKEBOX)
              ========================================== -->
         <section id="view-canzone" class="hidden space-y-6">
-            <!-- Elemento Audio HTML5 Reale -->
-            <audio id="real-song-audio" preload="auto" crossorigin="anonymous"></audio>
-
             <!-- Top Bar: Titolo & Selettore Genere -->
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 glass-panel p-4 rounded-2xl border border-amber-500/30">
                 <div class="flex items-center gap-3">
@@ -501,12 +498,12 @@
                         <i class="fa-solid fa-headphones-simple"></i>
                     </div>
                     <div>
-                        <h2 class="font-display font-black text-2xl text-white">SARABANDA • VERO AUDIO ORIGINALE</h2>
-                        <p class="text-xs text-slate-300">Ascolta 1.5s, 4s, 10s o 30s della canzone originale e indovina titolo e artista!</p>
+                        <h2 class="font-display font-black text-2xl text-white">SARABANDA • SYNTH AUDIO MOBILE-SAFE</h2>
+                        <p class="text-xs text-slate-300">Ascolta i secondi del sintetizzatore e indovina la hit rap/trap o pop!</p>
                     </div>
                 </div>
 
-                <!-- Filtro Genere Musicale (Rap/Trap vs Classici vs Tutte) -->
+                <!-- Filtro Genere Musicale -->
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="text-xs font-bold uppercase tracking-wider text-amber-300 mr-1">
                         <i class="fa-solid fa-sliders mr-1"></i>Playlist:
@@ -528,80 +525,40 @@
             <!-- Switch 3 Sotto-Modalità Musicali -->
             <div class="flex flex-wrap justify-center gap-2 bg-studio-900/90 p-2 rounded-2xl border border-white/10">
                 <button onclick="switchMusicTab('audio')" id="music-tab-audio" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 text-slate-950 transition-all shadow-lg shadow-amber-500/20">
-                    <i class="fa-solid fa-Compact-Disc fa-spin mr-1" style="animation-duration:4s"></i> 1. 🎧 Audio Originale (1.5s / 4s / 10s / 30s)
+                    <i class="fa-solid fa-compact-disc fa-spin mr-1" style="animation-duration:4s"></i> 1. 🎧 Jukebox Synth (1.5s / 4s / 10s / 30s)
                 </button>
                 <button onclick="switchMusicTab('lyrics')" id="music-tab-lyrics" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition-all">
                     <i class="fa-solid fa-quote-left mr-1"></i> 2. 🎤 Indovina dalla Barra / Testo
                 </button>
                 <button onclick="switchMusicTab('categories')" id="music-tab-categories" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition-all">
-                    <i class="fa-solid fa-stopwatch mr-1"></i> 3. ⚡ Sfida dei 7 Secondi (Categorie)
+                    <i class="fa-solid fa-stopwatch mr-1"></i> 3. ⚡ Sfida dei 7 Secondi
                 </button>
             </div>
 
-            <!-- ==========================================
-                 TAB 1 (PRINCIPALE): AUDIO ORIGINALE PROGRESSIVO (1.5s / 4s / 10s / 30s)
-                 ========================================== -->
+            <!-- TAB 1: JUKEBOX SYNTH -->
             <div id="music-panel-audio" class="space-y-6">
-                <!-- Barra di Ricerca Live su Apple Music / iTunes + Caricamento MP3 Locale -->
-                <div class="glass-panel rounded-2xl p-4 border border-cyan-500/30 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-                    <div class="flex-1 flex items-center gap-2">
-                        <div class="relative flex-1">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                            <input type="text" id="itunes-custom-search" onkeydown="if(event.key==='Enter') searchCustomItunesSong()" placeholder="🔍 Cerca qualsiasi canzone o artista su Apple Music (es. Geolier, Lazza, Queen)..." class="w-full bg-studio-950 border border-white/15 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-neon-cyan">
-                        </div>
-                        <button onclick="searchCustomItunesSong()" class="game-btn px-4 py-2.5 rounded-xl bg-neon-cyan text-slate-950 font-extrabold text-xs sm:text-sm shrink-0">
-                            Cerca Brano
-                        </button>
-                    </div>
-
-                    <!-- Risultati rapidi ricerca o Carica MP3 dal PC -->
-                    <div class="flex items-center gap-2 shrink-0">
-                        <label class="game-btn cursor-pointer px-3.5 py-2.5 rounded-xl bg-studio-800 hover:bg-studio-700 border border-white/15 text-xs font-bold text-slate-200 flex items-center gap-1.5">
-                            <i class="fa-solid fa-upload text-neon-pink"></i>
-                            <span>Carica MP3 da PC</span>
-                            <input type="file" id="local-mp3-input" accept="audio/*" onchange="loadLocalMp3File(event)" class="hidden">
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Risultati Ricerca Live (nascosti finché non si cerca) -->
-                <div id="itunes-search-results" class="hidden glass-panel rounded-2xl p-4 border border-neon-cyan/40 space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase text-neon-cyan">Seleziona un brano trovato su Apple Music (non guardare se indovini!):</span>
-                        <button onclick="document.getElementById('itunes-search-results').classList.add('hidden')" class="text-xs text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i> Chiudi</button>
-                    </div>
-                    <div id="itunes-results-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2"></div>
-                </div>
-
-                <!-- Card Principale Player Sfida a Secondi -->
                 <div class="tv-word-card rounded-3xl p-6 sm:p-8 border-2 border-amber-500/50 space-y-6 relative overflow-hidden">
-                    <!-- Intestazione Stato Brano -->
                     <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
                         <div class="flex flex-wrap items-center gap-2">
                             <span id="audio-genre-badge" class="px-3 py-1 rounded-full bg-neon-pink/20 border border-neon-pink/40 text-pink-300 text-xs font-extrabold uppercase">
                                 🔥 Rap & Trap 2010-Oggi
                             </span>
                             <span id="audio-hint-badge" class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold">
-                                🔑 Indizio: Caricamento...
-                            </span>
-                            <span id="audio-status-indicator" class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Audio Originale Pronto
+                                🔑 Indizio: Hit Famosa
                             </span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span id="audio-track-counter" class="text-xs text-slate-400 font-bold">Brano #1</span>
-                            <button onclick="nextRealAudioSong()" class="game-btn px-4 py-1.5 rounded-xl bg-studio-700 hover:bg-studio-600 text-white text-xs font-bold flex items-center gap-1.5">
-                                <i class="fa-solid fa-shuffle text-amber-400"></i> Pesca Nuova Canzone
+                            <button onclick="nextSynthSong()" class="game-btn px-4 py-1.5 rounded-xl bg-studio-700 hover:bg-studio-600 text-white text-xs font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-shuffle text-amber-400"></i> Cambia Brano
                             </button>
                         </div>
                     </div>
 
-                    <!-- Area Centrale: Copertina Misteriosa (Sfocata) + Visualizzatore Onde + Timer Secondi -->
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                        <!-- Colonna Copertina Album (Sfocata finché non si svela) -->
                         <div class="lg:col-span-4 flex flex-col items-center">
-                            <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-3xl overflow-hidden border-4 border-amber-400/40 shadow-2xl bg-studio-950 flex items-center justify-center group">
-                                <img id="audio-artwork-img" src="https://placehold.co/300x300/181e38/facc15?text=🎵+MISTERO" alt="Cover Misteriosa" class="w-full h-full object-cover filter blur-xl scale-110 transition-all duration-500">
+                            <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-3xl overflow-hidden border-4 border-amber-400/40 shadow-2xl bg-studio-950 flex items-center justify-center">
+                                <img id="audio-artwork-img" src="https://placehold.co/300x300/181e38/facc15?text=🎵+MISTERO" alt="Cover" class="w-full h-full object-cover filter blur-xl scale-110 transition-all duration-500">
                                 <div id="artwork-mystery-overlay" class="absolute inset-0 bg-studio-950/60 flex flex-col items-center justify-center text-center p-4">
                                     <i class="fa-solid fa-compact-disc text-5xl text-amber-400 animate-spin mb-2" style="animation-duration: 5s"></i>
                                     <span class="font-display font-black text-sm uppercase tracking-wider text-white">Copertina Nascosta</span>
@@ -612,245 +569,132 @@
                             </div>
                         </div>
 
-                        <!-- Colonna Controlli Progressivi 1.5s / 4s / 10s / 30s -->
                         <div class="lg:col-span-8 space-y-5">
-                            <!-- Box Cronometro Audio & Waveform Animata -->
                             <div class="bg-studio-950/90 rounded-2xl p-4 border border-white/10 space-y-3">
                                 <div class="flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <span id="audio-playing-badge" class="px-2.5 py-1 rounded-lg bg-studio-800 text-slate-300 text-xs font-bold uppercase">
-                                            ⏹ In attesa di riproduzione
-                                        </span>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-xs text-slate-400 uppercase font-bold mr-1">Tempo Ascolto:</span>
-                                        <span id="audio-elapsed-timer" class="font-display font-black text-2xl sm:text-3xl text-amber-400 tabular-nums">0.0s</span>
+                                    <span id="audio-playing-badge" class="px-2.5 py-1 rounded-lg bg-studio-800 text-amber-300 text-xs font-bold uppercase">
+                                        ⏹ In attesa di riproduzione synth
+                                    </span>
+                                    <div>
+                                        <span class="text-xs text-slate-400 uppercase font-bold mr-1">Ascolto:</span>
+                                        <span id="audio-elapsed-timer" class="font-display font-black text-2xl text-amber-400 tabular-nums">0.0s</span>
                                         <span id="audio-target-timer" class="text-xs text-slate-400 font-bold">/ 1.5s</span>
                                     </div>
                                 </div>
 
-                                <!-- Barra di Avanzamento Reale -->
                                 <div class="w-full bg-studio-800 h-3.5 rounded-full overflow-hidden border border-white/10 p-0.5">
                                     <div id="audio-progress-bar" class="bg-gradient-to-r from-neon-cyan via-amber-400 to-neon-pink h-full rounded-full transition-all duration-75" style="width: 0%"></div>
                                 </div>
 
-                                <!-- Equalizzatore / Onde Sonore Visive -->
-                                <div id="audio-waveform-bars" class="h-8 flex items-end justify-center gap-1 pt-1 opacity-40 transition-opacity">
-                                    <div class="w-1.5 bg-neon-cyan rounded-full h-2 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-neon-pink rounded-full h-4 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-amber-400 rounded-full h-3 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-emerald-400 rounded-full h-6 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-purple-400 rounded-full h-3 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-neon-cyan rounded-full h-7 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-neon-pink rounded-full h-4 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-amber-400 rounded-full h-5 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-emerald-400 rounded-full h-3 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-neon-cyan rounded-full h-6 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-neon-pink rounded-full h-2 transition-all duration-150"></div>
-                                    <div class="w-1.5 bg-amber-400 rounded-full h-5 transition-all duration-150"></div>
+                                <div id="audio-waveform-bars" class="h-8 flex items-end justify-center gap-1 pt-1 opacity-40">
+                                    <div class="w-1.5 bg-neon-cyan rounded-full h-2"></div>
+                                    <div class="w-1.5 bg-neon-pink rounded-full h-4"></div>
+                                    <div class="w-1.5 bg-amber-400 rounded-full h-3"></div>
+                                    <div class="w-1.5 bg-emerald-400 rounded-full h-6"></div>
+                                    <div class="w-1.5 bg-purple-400 rounded-full h-3"></div>
+                                    <div class="w-1.5 bg-neon-cyan rounded-full h-7"></div>
                                 </div>
                             </div>
 
-                            <!-- I 4 PULSANTI PROGRESSIVI PER ASCOLTARE PIÙ SECONDI DI CANZONE VERA -->
                             <div>
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-xs font-bold uppercase tracking-wider text-slate-300">
-                                        <i class="fa-solid fa-Sliders mr-1 text-amber-400"></i> Scegli quanti secondi di canzone originale far ascoltare:
-                                    </span>
-                                    <button onclick="toggleAudioStartPoint()" id="audio-offset-btn" class="text-xs text-neon-cyan hover:underline font-bold" title="Cambia il punto di partenza dell'estratto musicale">
-                                        📍 Punto partenza: Inizio Estratto (0s)
-                                    </button>
-                                </div>
-
                                 <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
-                                    <!-- 1.5 Secondi (+5 Punti) -->
-                                    <button onclick="playRealAudioSnippet(1.5, 5)" class="game-btn p-3 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-display flex flex-col items-center justify-center shadow-lg shadow-emerald-500/20">
-                                        <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/20 text-white mb-1">Livello Pro • +5 PT</span>
-                                        <span class="font-black text-base sm:text-lg flex items-center gap-1"><i class="fa-solid fa-play text-xs"></i> 1.5 Secondi</span>
+                                    <button onclick="playSynthSongSnippet(1.5, 5)" class="game-btn p-3 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 text-slate-950 font-display flex flex-col items-center justify-center">
+                                        <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/20 text-white mb-1">Pro • +5 PT</span>
+                                        <span class="font-black text-base">1.5 Secondi</span>
                                     </button>
-
-                                    <!-- 4 Secondi (+3 Punti) -->
-                                    <button onclick="playRealAudioSnippet(4, 3)" class="game-btn p-3 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 font-display flex flex-col items-center justify-center shadow-lg shadow-cyan-500/20">
+                                    <button onclick="playSynthSongSnippet(4, 3)" class="game-btn p-3 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 text-slate-950 font-display flex flex-col items-center justify-center">
                                         <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/20 text-white mb-1">Medio • +3 PT</span>
-                                        <span class="font-black text-base sm:text-lg flex items-center gap-1"><i class="fa-solid fa-play text-xs"></i> +4 Secondi</span>
+                                        <span class="font-black text-base">+4 Secondi</span>
                                     </button>
-
-                                    <!-- 10 Secondi (+2 Punti) -->
-                                    <button onclick="playRealAudioSnippet(10, 2)" class="game-btn p-3 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-display flex flex-col items-center justify-center shadow-lg shadow-amber-500/20">
-                                        <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/20 text-white mb-1">Più Lungo • +2 PT</span>
-                                        <span class="font-black text-base sm:text-lg flex items-center gap-1"><i class="fa-solid fa-play text-xs"></i> +10 Secondi</span>
+                                    <button onclick="playSynthSongSnippet(10, 2)" class="game-btn p-3 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 font-display flex flex-col items-center justify-center">
+                                        <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/20 text-white mb-1">Lungo • +2 PT</span>
+                                        <span class="font-black text-base">+10 Secondi</span>
                                     </button>
-
-                                    <!-- 30 Secondi Interi (+1 Punto) -->
-                                    <button onclick="playRealAudioSnippet(30, 1)" class="game-btn p-3 rounded-2xl bg-gradient-to-br from-neon-pink to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-display flex flex-col items-center justify-center shadow-lg shadow-neon-pink/20">
+                                    <button onclick="playSynthSongSnippet(30, 1)" class="game-btn p-3 rounded-2xl bg-gradient-to-br from-neon-pink to-purple-600 text-white font-display flex flex-col items-center justify-center">
                                         <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-black/30 text-amber-200 mb-1">Tutto • +1 PT</span>
-                                        <span class="font-black text-base sm:text-lg flex items-center gap-1"><i class="fa-solid fa-play text-xs"></i> Tutto (30s)</span>
+                                        <span class="font-black text-base">Tutto (30s)</span>
                                     </button>
-
-                                    <!-- Pulsante Stop -->
-                                    <button onclick="stopRealAudio()" class="col-span-2 sm:col-span-1 game-btn p-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-display font-black text-base flex flex-col items-center justify-center">
+                                    <button onclick="stopSynthSong()" class="col-span-2 sm:col-span-1 game-btn p-3 rounded-2xl bg-rose-600 text-white font-display font-black text-base flex flex-col items-center justify-center">
                                         <i class="fa-solid fa-stop text-lg mb-0.5"></i>
-                                        <span class="text-xs uppercase">Stop Audio</span>
+                                        <span class="text-xs uppercase">Stop</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Box Soluzione Svelata (Nascosto finché non si clicca su Svela) -->
                     <div id="audio-solution-box" class="hidden p-5 rounded-2xl bg-gradient-to-r from-emerald-950/90 via-studio-900 to-amber-950/80 border-2 border-emerald-400/60 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div class="text-center sm:text-left space-y-1">
                             <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-extrabold uppercase">
                                 ✅ Soluzione Ufficiale Svelata
                             </span>
-                            <h4 id="audio-revealed-title" class="font-display font-black text-2xl sm:text-4xl text-white">Titolo Canzone</h4>
-                            <p id="audio-revealed-artist" class="text-amber-300 font-bold text-base sm:text-lg">Artista</p>
-                            <p id="audio-revealed-quote" class="text-xs sm:text-sm text-slate-300 italic mt-1">"..."</p>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-2 shrink-0">
-                            <a id="audio-youtube-btn" href="#" target="_blank" rel="noopener noreferrer" class="game-btn px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1.5">
-                                <i class="fa-brands fa-youtube text-base"></i> Video Intero YouTube
-                            </a>
+                            <h4 id="audio-revealed-title" class="font-display font-black text-2xl sm:text-4xl text-white">Titolo</h4>
+                            <p id="audio-revealed-artist" class="text-amber-300 font-bold text-base">Artista</p>
+                            <p id="audio-revealed-quote" class="text-xs text-slate-300 italic mt-1">"..."</p>
                         </div>
                     </div>
 
-                    <!-- Barra Azioni Fondo Card: Svela Soluzione, Assegna Punti Dinamici, Prossima -->
                     <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-center gap-3">
-                        <button onclick="revealRealAudioSolution()" class="game-btn px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black text-base flex items-center gap-2 shadow-lg shadow-amber-500/25">
-                            <i class="fa-solid fa-eye"></i> Svela Titolo, Cover & Ritornello
+                        <button onclick="revealSynthSolution()" class="game-btn px-6 py-3.5 rounded-2xl bg-amber-500 text-slate-950 font-display font-black text-base flex items-center gap-2">
+                            <i class="fa-solid fa-eye"></i> Svela Titolo & Cover
                         </button>
-
-                        <button onclick="awardCurrentAudioStake()" id="award-audio-stake-btn" class="game-btn px-6 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-black text-base flex items-center gap-2 shadow-lg shadow-emerald-500/25">
+                        <button onclick="awardSynthStake()" id="award-audio-stake-btn" class="game-btn px-6 py-3.5 rounded-2xl bg-emerald-500 text-slate-950 font-display font-black text-base flex items-center gap-2">
                             <i class="fa-solid fa-trophy"></i> Indovinata! Assegna +5 Punti
                         </button>
-
-                        <button onclick="awardActiveTeam(1, 'Artista indovinato! (+1)')" class="game-btn px-4 py-3.5 rounded-2xl bg-studio-800 hover:bg-studio-700 border border-white/15 text-emerald-300 font-display font-bold text-sm">
-                            Solo Artista (+1)
-                        </button>
-
-                        <button onclick="nextRealAudioSong()" class="game-btn px-6 py-3.5 rounded-2xl bg-studio-700 hover:bg-studio-600 text-white font-display font-bold text-base flex items-center gap-2">
+                        <button onclick="nextSynthSong()" class="game-btn px-6 py-3.5 rounded-2xl bg-studio-700 text-white font-display font-bold text-base flex items-center gap-2">
                             <i class="fa-solid fa-forward"></i> Prossima Canzone
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- ==========================================
-                 TAB 2: PAROLE / BARRA DELLA CANZONE (Con Tasto Audio Originale Integrato)
-                 ========================================== -->
+            <!-- TAB 2: LYRICS -->
             <div id="music-panel-lyrics" class="hidden tv-word-card rounded-3xl p-6 sm:p-10 border-2 border-amber-500/40 text-center space-y-6">
                 <div class="flex flex-wrap justify-between items-center gap-2">
-                    <div class="flex flex-wrap items-center gap-2">
-                        <span id="lyrics-decade-badge" class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase">
-                            Rap & Trap 2010-2026
-                        </span>
-                        <span id="lyrics-keywords-badge" class="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-200 text-xs font-bold">
-                            Indizio
-                        </span>
-                    </div>
+                    <span id="lyrics-decade-badge" class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase">Rap & Trap</span>
                     <span id="lyrics-counter-badge" class="text-xs text-slate-400 font-bold">Brano 1</span>
                 </div>
-
                 <div class="py-6 max-w-3xl mx-auto">
-                    <i class="fa-solid fa-microphone-lines text-3xl text-amber-400/50 mb-3 block"></i>
-                    <p id="lyrics-quote" class="font-display font-bold text-2xl sm:text-4xl text-white italic leading-relaxed">
-                        "..."
-                    </p>
+                    <p id="lyrics-quote" class="font-display font-bold text-2xl sm:text-4xl text-white italic leading-relaxed">"..."</p>
                 </div>
-
-                <!-- Aiuto Audio Reale anche nella modalità Testo! -->
-                <div class="flex flex-wrap justify-center items-center gap-2">
-                    <button onclick="playLyricsCardAudio(4)" class="game-btn px-4 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-300 text-xs font-bold flex items-center gap-1.5">
-                        <i class="fa-solid fa-volume-high"></i> Aiuto Audio: Ascolta 4s reali
-                    </button>
-                    <button onclick="playLyricsCardAudio(15)" class="game-btn px-4 py-2 rounded-xl bg-neon-pink/20 hover:bg-neon-pink/30 border border-neon-pink/40 text-pink-300 text-xs font-bold flex items-center gap-1.5">
-                        <i class="fa-solid fa-music"></i> Ascolta 15s di Ritornello
-                    </button>
-                    <button onclick="stopRealAudio()" class="game-btn px-3 py-2 rounded-xl bg-studio-800 text-slate-300 text-xs font-bold">
-                        ⏹ Stop
-                    </button>
-                </div>
-
-                <!-- Box Soluzione Nascosta -->
                 <div id="lyrics-solution-box" class="hidden p-5 rounded-2xl bg-amber-500/10 border border-amber-400/40 max-w-xl mx-auto">
                     <span class="text-xs uppercase text-amber-300 font-bold block">Soluzione Ufficiale:</span>
-                    <h4 id="lyrics-answer-title" class="font-display font-black text-2xl sm:text-3xl text-white mt-1"></h4>
-                    <p id="lyrics-answer-artist" class="text-amber-300 font-semibold text-sm sm:text-base mt-0.5"></p>
-                    <a id="lyrics-youtube-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 px-3.5 py-1.5 rounded-xl bg-red-600/25 hover:bg-red-600/40 border border-red-500/40 text-xs font-bold text-red-200">
-                        <i class="fa-brands fa-youtube text-red-500"></i> Ascolta su YouTube
-                    </a>
+                    <h4 id="lyrics-answer-title" class="font-display font-black text-2xl text-white mt-1"></h4>
+                    <p id="lyrics-answer-artist" class="text-amber-300 font-semibold text-sm mt-0.5"></p>
                 </div>
-
                 <div class="flex flex-wrap justify-center gap-3 pt-4">
-                    <button onclick="revealLyricsSolution()" class="game-btn px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black text-base flex items-center gap-2">
-                        <i class="fa-solid fa-eye"></i> Mostra Titolo e Fai Partire Audio
+                    <button onclick="revealLyricsSolution()" class="game-btn px-6 py-3.5 rounded-2xl bg-amber-500 text-slate-950 font-display font-black text-base flex items-center gap-2">
+                        <i class="fa-solid fa-eye"></i> Mostra Soluzione
                     </button>
-                    <button onclick="awardActiveTeam(1, 'Titolo/Artista indovinato! (+1)')" class="game-btn px-6 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-black text-base flex items-center gap-2">
-                        <i class="fa-solid fa-check"></i> Indovinata (+1)
+                    <button onclick="awardActiveTeam(1, 'Indovinata (+1)')" class="game-btn px-6 py-3.5 rounded-2xl bg-emerald-500 text-slate-950 font-display font-black text-base flex items-center gap-2">
+                        <i class="fa-solid fa-check"></i> Punto (+1)
                     </button>
-                    <button onclick="awardActiveTeam(2, 'Titolo + Barra cantata! (+2)')" class="game-btn px-6 py-3.5 rounded-2xl bg-gradient-to-r from-neon-pink to-purple-600 text-white font-display font-black text-base flex items-center gap-2">
-                        <i class="fa-solid fa-fire"></i> Titolo + Ritornello (+2)
-                    </button>
-                    <button onclick="nextLyricsCard()" class="game-btn px-6 py-3.5 rounded-2xl bg-studio-700 hover:bg-studio-600 text-white font-display font-bold text-base flex items-center gap-2">
+                    <button onclick="nextLyricsCard()" class="game-btn px-6 py-3.5 rounded-2xl bg-studio-700 text-white font-display font-bold text-base flex items-center gap-2">
                         <i class="fa-solid fa-forward"></i> Prossima Hit
                     </button>
                 </div>
             </div>
 
-            <!-- ==========================================
-                 TAB 3: SFIDA DEI 7 SECONDI / CATEGORIE MUSICALI
-                 ========================================== -->
+            <!-- TAB 3: CATEGORIES -->
             <div id="music-panel-categories" class="hidden tv-word-card rounded-3xl p-6 sm:p-10 border-2 border-cyan-500/40 text-center space-y-6">
-                <div class="flex items-center justify-center gap-2">
-                    <span id="cat-genre-pill" class="px-4 py-1.5 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold uppercase tracking-widest">
-                        Sfida Lampo 7/10 Secondi
-                    </span>
-                </div>
-
-                <h3 id="music-category-title" class="font-display font-black text-3xl sm:text-5xl text-white max-w-3xl mx-auto">
-                    Dì 3 canzoni di Sfera Ebbasta in 7 secondi
-                </h3>
-                <p id="music-category-desc" class="text-slate-300 max-w-xl mx-auto text-sm sm:text-base">
-                    La squadra di turno deve rispondere correttamente prima che il cronometro arrivi a zero!
-                </p>
-
-                <!-- Timer Rapido 7 o 10 Secondi -->
+                <h3 id="music-category-title" class="font-display font-black text-3xl sm:text-5xl text-white max-w-3xl mx-auto">Sfida 7 Secondi</h3>
+                <p id="music-category-desc" class="text-slate-300 max-w-xl mx-auto text-sm">Rispondi prima dello scadere del timer!</p>
                 <div class="flex flex-col items-center justify-center my-4">
                     <div id="seven-sec-display" class="font-display font-black text-7xl text-amber-400 tabular-nums">7.0</div>
                     <div class="flex flex-wrap justify-center gap-3 mt-3">
-                        <button onclick="startSevenSecTimer(7)" class="game-btn px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm">
+                        <button onclick="startSevenSecTimer(7)" class="game-btn px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-extrabold text-sm">
                             <i class="fa-solid fa-bolt mr-1"></i> Avvia 7 Secondi!
                         </button>
-                        <button onclick="startSevenSecTimer(10)" class="game-btn px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-sm">
-                            <i class="fa-solid fa-clock mr-1"></i> Avvia 10 Secondi
-                        </button>
-                        <button onclick="nextMusicCategory()" class="game-btn px-5 py-2.5 rounded-xl bg-studio-700 hover:bg-studio-600 text-white font-bold text-sm">
+                        <button onclick="nextMusicCategory()" class="game-btn px-5 py-2.5 rounded-xl bg-studio-700 text-white font-bold text-sm">
                             <i class="fa-solid fa-shuffle mr-1"></i> Prossima Sfida
                         </button>
                     </div>
-                </div>
-
-                <!-- Esempi / Suggerimenti per il conduttore + Link Rapido YouTube -->
-                <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-center gap-3">
-                    <button onclick="toggleCategoryExamples()" class="game-btn px-4 py-2 rounded-xl bg-studio-800 hover:bg-studio-700 text-xs font-bold text-slate-300">
-                        <i class="fa-solid fa-list-check mr-1 text-cyan-400"></i> Mostra/Nascondi Soluzioni Valide
-                    </button>
-                    <a id="youtube-quick-link" href="https://www.youtube.com/results?search_query=rap+trap+italia+hit" target="_blank" rel="noopener noreferrer" class="game-btn px-4 py-2 rounded-xl bg-red-600/20 hover:bg-red-600/30 border border-red-500/40 text-xs font-bold text-red-300 flex items-center gap-1.5">
-                        <i class="fa-brands fa-youtube text-red-500"></i> Cerca su YouTube
-                    </a>
-                    <button onclick="awardActiveTeam(1, 'Sfida 7 Secondi superata! (+1)')" class="game-btn px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 text-xs font-extrabold">
-                        <i class="fa-solid fa-plus mr-1"></i> Assegna Punto (+1)
-                    </button>
-                </div>
-
-                <div id="music-category-examples" class="hidden p-4 rounded-2xl bg-studio-950/90 border border-white/10 max-w-2xl mx-auto text-sm text-cyan-300">
-                    <!-- Popolato da JS -->
                 </div>
             </div>
         </section>
 
         <!-- ==========================================
-             GIOCO 4: LA GHIGLIOTTINA (5 INDIZI, 1 PAROLA)
+             GIOCO 4: LA GHIGLIOTTINA
              ========================================== -->
         <section id="view-ghigliottina" class="hidden space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-4 glass-panel p-4 rounded-2xl border border-purple-500/30">
@@ -868,57 +712,42 @@
                     <div class="bg-studio-950 px-3.5 py-1.5 rounded-xl border border-amber-500/40 flex items-center gap-2">
                         <span class="text-xs text-slate-400 font-bold uppercase">Montepremi:</span>
                         <span id="ghig-jackpot-display" class="font-display font-black text-xl text-amber-400">8 pt</span>
-                        <button onclick="halveGhigJackpot()" class="px-2 py-0.5 rounded bg-rose-500/20 hover:bg-rose-500/40 text-rose-300 text-xs font-bold" title="Dimezza Montepremi">
+                        <button onclick="halveGhigJackpot()" class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-xs font-bold" title="Dimezza Montepremi">
                             ÷2 Dimezza
                         </button>
                     </div>
                     <span id="ghigliottina-counter" class="text-xs font-bold text-purple-300 bg-purple-950/80 px-3 py-1.5 rounded-xl border border-purple-500/30">
-                        Set 1 di 12
+                        Set 1 di 6
                     </span>
-                    <button onclick="nextGhigliottinaSet()" class="game-btn px-4 py-2 rounded-xl bg-studio-700 hover:bg-studio-600 text-white text-xs sm:text-sm font-bold">
+                    <button onclick="nextGhigliottinaSet()" class="game-btn px-4 py-2 rounded-xl bg-studio-700 text-white text-xs font-bold">
                         <i class="fa-solid fa-forward mr-1"></i> Prossimo Set
                     </button>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                <!-- Colonna 5 Parole Indizio -->
-                <div class="lg:col-span-7 space-y-3" id="ghigliottina-clues-container">
-                    <!-- Popolato via JS -->
-                </div>
-
-                <!-- Colonna Parola Misteriosa & Spiegazione -->
+                <div class="lg:col-span-7 space-y-3" id="ghigliottina-clues-container"></div>
                 <div class="lg:col-span-5 glass-panel rounded-3xl p-6 border-2 border-purple-500/40 space-y-6 text-center">
                     <div class="flex items-center justify-between border-b border-white/10 pb-3">
-                        <span class="text-xs font-bold uppercase tracking-wider text-purple-300">Tempo di Riflessione</span>
+                        <span class="text-xs font-bold uppercase text-purple-300">Tempo Riflessione</span>
                         <div class="flex items-center gap-2">
                             <span id="ghig-timer" class="font-display font-black text-2xl text-white tabular-nums">60s</span>
-                            <button onclick="startGhigTimer()" class="px-2.5 py-1 rounded-lg bg-purple-600 hover:bg-purple-500 text-xs font-bold text-white">Avvia 60s</button>
+                            <button onclick="startGhigTimer()" class="px-2.5 py-1 rounded-lg bg-purple-600 text-xs font-bold text-white">Avvia 60s</button>
                         </div>
                     </div>
-
                     <div class="py-6 px-4 rounded-2xl bg-studio-950 border border-purple-500/30">
-                        <span class="text-xs uppercase tracking-widest text-slate-400 block mb-2">La Parola Vincente è:</span>
-                        <div id="ghigliottina-secret-word" class="font-display font-black text-4xl sm:text-5xl text-neon-yellow tracking-widest">
-                            ? ? ? ? ?
-                        </div>
+                        <span class="text-xs uppercase text-slate-400 block mb-2">Parola Vincente:</span>
+                        <div id="ghigliottina-secret-word" class="font-display font-black text-4xl text-neon-yellow tracking-widest">? ? ? ? ?</div>
                     </div>
-
-                    <!-- Box Spiegazione Collegamenti -->
-                    <div id="ghigliottina-explanation" class="hidden text-left p-4 rounded-2xl bg-purple-950/40 border border-purple-400/30 space-y-2 text-xs sm:text-sm text-slate-200">
-                        <!-- Popolato da JS -->
-                    </div>
-
+                    <div id="ghigliottina-explanation" class="hidden text-left p-4 rounded-2xl bg-purple-950/40 border border-purple-400/30 space-y-2 text-xs text-slate-200"></div>
                     <div class="space-y-2.5">
-                        <button onclick="revealNextGhigClue()" id="btn-reveal-clue" class="w-full game-btn py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-display font-black text-base shadow-lg shadow-purple-600/30">
+                        <button onclick="revealNextGhigClue()" class="w-full game-btn py-3.5 rounded-2xl bg-purple-600 text-white font-display font-black text-base">
                             <i class="fa-solid fa-eye mr-1"></i> Svela Prossimo Indizio
                         </button>
-
-                        <button onclick="revealGhigliottinaSolution()" class="w-full game-btn py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-black text-base">
-                            <i class="fa-solid fa-key mr-1"></i> Rivela Soluzione e Spiegazioni
+                        <button onclick="revealGhigliottinaSolution()" class="w-full game-btn py-3.5 rounded-2xl bg-amber-500 text-slate-950 font-display font-black text-base">
+                            <i class="fa-solid fa-key mr-1"></i> Rivela Soluzione
                         </button>
-
-                        <button onclick="awardGhigJackpot()" id="ghig-award-btn" class="w-full game-btn py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-black text-base">
+                        <button onclick="awardGhigJackpot()" id="ghig-award-btn" class="w-full game-btn py-3.5 rounded-2xl bg-emerald-500 text-slate-950 font-display font-black text-base">
                             <i class="fa-solid fa-trophy mr-1"></i> Assegna Montepremi (+8 Punti)
                         </button>
                     </div>
@@ -927,7 +756,7 @@
         </section>
 
         <!-- ==========================================
-             GIOCO 5: MIMA O DISEGNA (PICTIONARY / SCENETTE)
+             GIOCO 5: MIMA O DISEGNA
              ========================================== -->
         <section id="view-mima" class="hidden space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-4 glass-panel p-4 rounded-2xl border border-emerald-500/30">
@@ -937,34 +766,32 @@
                     </div>
                     <div>
                         <h2 class="font-display font-black text-2xl text-white">MIMA O DISEGNA</h2>
-                        <p class="text-xs text-slate-300">Scegli categoria e difficoltà (da +1 a +3 punti) con timer di 90 secondi e lavagna digitale!</p>
+                        <p class="text-xs text-slate-300">Scegli categoria e difficoltà con timer di 90 secondi e lavagna digitale!</p>
                     </div>
                 </div>
 
-                <!-- Controlli Timer 90s -->
                 <div class="flex items-center gap-3">
                     <div class="bg-studio-950 px-4 py-2 rounded-xl border border-white/10 flex items-center gap-2">
                         <i class="fa-regular fa-clock text-emerald-400"></i>
                         <span id="mima-timer-display" class="font-display font-black text-3xl text-white tabular-nums">90</span>
                         <span class="text-xs text-slate-400">sec</span>
                     </div>
-                    <button onclick="startMimaTimer()" class="game-btn px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm">
+                    <button onclick="startMimaTimer()" class="game-btn px-4 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-sm">
                         <i class="fa-solid fa-play mr-1"></i> Avvia 90s
                     </button>
-                    <button onclick="resetMimaTimer()" class="game-btn px-3 py-2.5 rounded-xl bg-studio-700 hover:bg-studio-600 text-white font-bold text-sm">
+                    <button onclick="resetMimaTimer()" class="game-btn px-3 py-2.5 rounded-xl bg-studio-700 text-white font-bold text-sm">
                         <i class="fa-solid fa-rotate"></i>
                     </button>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Generatore Sfida Mima -->
                 <div class="lg:col-span-6 tv-word-card rounded-3xl p-6 border-2 border-emerald-500/40 flex flex-col justify-between space-y-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label class="text-xs text-slate-400 font-bold uppercase block mb-1">Categoria</label>
-                            <select id="mima-category-select" onchange="generateMimaCard()" class="w-full bg-studio-950 border border-white/15 rounded-xl px-3 py-2.5 text-sm text-white font-bold focus:outline-none focus:border-emerald-400">
-                                <option value="all">Tutte le Categorie</option>
+                            <select id="mima-category-select" onchange="generateMimaCard()" class="w-full bg-studio-950 border border-white/15 rounded-xl px-3 py-2.5 text-sm text-white font-bold">
+                                <option value="all">Tutte</option>
                                 <option value="Film & Serie TV">🎬 Film & Serie TV</option>
                                 <option value="Mestieri Assurdi">🧑‍🍳 Mestieri Assurdi</option>
                                 <option value="Proverbi Italiani">🍝 Proverbi Italiani</option>
@@ -972,53 +799,45 @@
                             </select>
                         </div>
                         <div>
-                            <label class="text-xs text-slate-400 font-bold uppercase block mb-1">Difficoltà & Valore Punti</label>
-                            <select id="mima-diff-select" onchange="generateMimaCard()" class="w-full bg-studio-950 border border-white/15 rounded-xl px-3 py-2.5 text-sm text-white font-bold focus:outline-none focus:border-emerald-400">
-                                <option value="all">Qualsiasi Difficoltà</option>
-                                <option value="1">🟢 Facile (+1 Punto)</option>
-                                <option value="2">🟡 Medio (+2 Punti)</option>
-                                <option value="3">🔴 Difficile (+3 Punti)</option>
+                            <label class="text-xs text-slate-400 font-bold uppercase block mb-1">Difficoltà</label>
+                            <select id="mima-diff-select" onchange="generateMimaCard()" class="w-full bg-studio-950 border border-white/15 rounded-xl px-3 py-2.5 text-sm text-white font-bold">
+                                <option value="all">Qualsiasi</option>
+                                <option value="1">🟢 Facile (+1)</option>
+                                <option value="2">🟡 Medio (+2)</option>
+                                <option value="3">🔴 Difficile (+3)</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="my-6 py-8 px-4 rounded-2xl bg-studio-950/90 border border-emerald-500/30 text-center space-y-3">
                         <div class="flex items-center justify-center gap-2">
-                            <span id="mima-card-cat" class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold">Film & Serie TV</span>
+                            <span id="mima-card-cat" class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold">Film</span>
                             <span id="mima-card-points" class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold">Vale +2 Punti</span>
                         </div>
-                        <h3 id="mima-card-text" class="font-display font-black text-3xl sm:text-4xl text-white uppercase tracking-wide">
-                            IL GLADIATORE
-                        </h3>
+                        <h3 id="mima-card-text" class="font-display font-black text-3xl text-white uppercase">IL GLADIATORE</h3>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
-                        <button onclick="generateMimaCard()" class="game-btn py-3.5 rounded-2xl bg-studio-700 hover:bg-studio-600 text-white font-display font-bold text-base flex items-center justify-center gap-2">
+                        <button onclick="generateMimaCard()" class="game-btn py-3.5 rounded-2xl bg-studio-700 text-white font-bold text-base">
                             <i class="fa-solid fa-shuffle"></i> Nuova Sfida
                         </button>
-                        <button onclick="completeMimaChallenge()" id="mima-award-btn" class="game-btn py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-display font-black text-base flex items-center justify-center gap-2">
+                        <button onclick="completeMimaChallenge()" id="mima-award-btn" class="game-btn py-3.5 rounded-2xl bg-emerald-500 text-slate-950 font-display font-black text-base">
                             <i class="fa-solid fa-check-double"></i> Indovinato! (+2)
                         </button>
                     </div>
                 </div>
 
-                <!-- Lavagna Pictionary Integrata -->
                 <div class="lg:col-span-6 glass-panel rounded-3xl p-5 border border-white/10 flex flex-col justify-between space-y-3">
                     <div class="flex flex-wrap items-center justify-between gap-2">
-                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">
-                            <i class="fa-solid fa-paintbrush mr-1"></i> Lavagna Pictionary Live
-                        </span>
+                        <span class="text-xs font-bold uppercase text-emerald-400"><i class="fa-solid fa-paintbrush mr-1"></i> Lavagna Pictionary</span>
                         <div class="flex items-center gap-2">
-                            <button onclick="setBrushColor('#ffffff')" class="w-6 h-6 rounded-full bg-white border-2 border-emerald-400" title="Bianco"></button>
-                            <button onclick="setBrushColor('#00f2fe')" class="w-6 h-6 rounded-full bg-neon-cyan" title="Ciano"></button>
-                            <button onclick="setBrushColor('#ff2a85')" class="w-6 h-6 rounded-full bg-neon-pink" title="Rosa"></button>
-                            <button onclick="setBrushColor('#facc15')" class="w-6 h-6 rounded-full bg-neon-yellow" title="Giallo"></button>
-                            <button onclick="clearDrawingBoard()" class="px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/40 text-xs font-bold ml-2">
-                                <i class="fa-solid fa-trash-can mr-1"></i> Pulisci
-                            </button>
+                            <button onclick="setBrushColor('#ffffff')" class="w-6 h-6 rounded-full bg-white border-2 border-emerald-400"></button>
+                            <button onclick="setBrushColor('#00f2fe')" class="w-6 h-6 rounded-full bg-neon-cyan"></button>
+                            <button onclick="setBrushColor('#ff2a85')" class="w-6 h-6 rounded-full bg-neon-pink"></button>
+                            <button onclick="setBrushColor('#facc15')" class="w-6 h-6 rounded-full bg-neon-yellow"></button>
+                            <button onclick="clearDrawingBoard()" class="px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 text-xs font-bold">Pulisci</button>
                         </div>
                     </div>
-
                     <div class="w-full h-64 sm:h-72 bg-studio-950 rounded-2xl overflow-hidden border border-white/15 relative">
                         <canvas id="pictionary-canvas" class="w-full h-full cursor-crosshair touch-none"></canvas>
                     </div>
@@ -1027,7 +846,7 @@
         </section>
 
         <!-- ==========================================
-             GIOCO 6: PULSANTIERA BUZZER & QUIZ POP
+             GIOCO 6: BUZZER SHOW & QUIZ
              ========================================== -->
         <section id="view-buzzer" class="hidden space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-4 glass-panel p-4 rounded-2xl border border-yellow-500/30">
@@ -1037,57 +856,34 @@
                     </div>
                     <div>
                         <h2 class="font-display font-black text-2xl text-white">BUZZER SHOW & QUIZ CULTURA POP</h2>
-                        <p class="text-xs text-slate-300">Prenotati con la tastiera (Tasti <strong>A, L, Spazio, Invio</strong>) o toccando i pulsanti sullo schermo!</p>
+                        <p class="text-xs text-slate-300">Prenotati con la tastiera (<strong>A, L, Spazio, Invio</strong>) o toccando i pulsanti!</p>
                     </div>
                 </div>
-
-                <button onclick="resetBuzzerLock()" class="game-btn px-5 py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-slate-950 font-display font-black text-sm shadow-lg shadow-yellow-400/20">
-                    <i class="fa-solid fa-unlock mr-1"></i> Sblocca Pulsantiera Buzzer
+                <button onclick="resetBuzzerLock()" class="game-btn px-5 py-2.5 rounded-xl bg-yellow-400 text-slate-950 font-display font-black text-sm shadow-lg">
+                    <i class="fa-solid fa-unlock mr-1"></i> Sblocca Buzzer
                 </button>
             </div>
 
-            <!-- Banner Stato Buzzer -->
             <div id="buzzer-status-banner" class="p-4 rounded-2xl bg-emerald-500/15 border-2 border-emerald-400/50 text-center transition-all">
                 <p id="buzzer-status-text" class="font-display font-black text-xl sm:text-2xl text-emerald-300 uppercase tracking-wider">
                     🟢 PULSANTIERA ATTIVA! PRENOTATEVI CON I TASTI A • L • SPAZIO • INVIO
                 </p>
             </div>
 
-            <!-- Pulsanti Buzzer per Squadre -->
-            <div id="buzzer-buttons-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Popolato dinamicamente in base alle squadre -->
-            </div>
+            <div id="buzzer-buttons-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4"></div>
 
-            <!-- Card Quiz Cultura Pop -->
             <div class="tv-word-card rounded-3xl p-6 sm:p-8 border-2 border-yellow-500/40 space-y-6">
                 <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span id="quiz-cat-badge" class="px-3.5 py-1 rounded-full bg-yellow-500/20 text-yellow-300 text-xs font-bold uppercase">
-                        Cultura Pop & Musica
-                    </span>
+                    <span id="quiz-cat-badge" class="px-3.5 py-1 rounded-full bg-yellow-500/20 text-yellow-300 text-xs font-bold uppercase">Cultura Pop</span>
                     <span id="quiz-counter" class="text-xs text-slate-400 font-bold">Domanda #1</span>
                 </div>
-
-                <h3 id="quiz-question-text" class="font-display font-black text-2xl sm:text-3xl text-white leading-snug">
-                    Caricamento domanda...
-                </h3>
-
-                <!-- Opzioni di Risposta Multipla -->
-                <div id="quiz-options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <!-- Popolato da JS -->
-                </div>
-
-                <!-- Soluzione e Controlli Quiz -->
+                <h3 id="quiz-question-text" class="font-display font-black text-2xl sm:text-3xl text-white leading-snug">Caricamento...</h3>
+                <div id="quiz-options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
                 <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-                    <div id="quiz-answer-reveal" class="hidden text-emerald-400 font-display font-bold text-lg">
-                        <!-- Mostrato quando si rivela -->
-                    </div>
+                    <div id="quiz-answer-reveal" class="hidden text-emerald-400 font-display font-bold text-lg"></div>
                     <div class="flex flex-wrap gap-2 ml-auto">
-                        <button onclick="revealQuizAnswer()" class="game-btn px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm">
-                            <i class="fa-solid fa-eye mr-1"></i> Mostra Risposta Esatta
-                        </button>
-                        <button onclick="nextQuizQuestion()" class="game-btn px-5 py-2.5 rounded-xl bg-studio-700 hover:bg-studio-600 text-white font-bold text-sm">
-                            <i class="fa-solid fa-forward mr-1"></i> Prossima Domanda
-                        </button>
+                        <button onclick="revealQuizAnswer()" class="game-btn px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold text-sm">Mostra Risposta</button>
+                        <button onclick="nextQuizQuestion()" class="game-btn px-5 py-2.5 rounded-xl bg-studio-700 text-white font-bold text-sm">Prossima</button>
                     </div>
                 </div>
             </div>
@@ -1095,129 +891,68 @@
 
     </main>
 
-    <!-- ==========================================
-         MODALI (Podio, Aggiungi Squadra, Crea Carte, Reset)
-         ========================================== -->
-
-    <!-- MODALE PODIO FINALE -->
+    <!-- MODALI -->
     <div id="modal-podium" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
         <div class="glass-panel max-w-2xl w-full rounded-3xl p-6 sm:p-8 border-2 border-amber-400/50 text-center space-y-6 relative animate-glow">
-            <button onclick="closePodium()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-studio-800 text-slate-300 hover:text-white">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
+            <button onclick="closePodium()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-studio-800 text-slate-300"><i class="fa-solid fa-xmark"></i></button>
             <div class="space-y-2">
-                <div class="w-16 h-16 rounded-2xl bg-amber-500/20 border border-amber-400/40 text-amber-400 text-3xl flex items-center justify-center mx-auto">
-                    <i class="fa-solid fa-crown"></i>
-                </div>
-                <h3 class="font-display font-black text-3xl sm:text-4xl text-white">CLASSIFICA FINALE</h3>
-                <p class="text-slate-300 text-sm">Onore ai campioni della Serata Giochi!</p>
+                <div class="w-16 h-16 rounded-2xl bg-amber-500/20 border border-amber-400/40 text-amber-400 text-3xl flex items-center justify-center mx-auto"><i class="fa-solid fa-crown"></i></div>
+                <h3 class="font-display font-black text-3xl text-white">CLASSIFICA FINALE</h3>
             </div>
-
-            <div id="podium-standings" class="space-y-3 text-left max-h-80 overflow-y-auto pr-1">
-                <!-- Popolato via JS -->
-            </div>
-
+            <div id="podium-standings" class="space-y-3 text-left max-h-80 overflow-y-auto pr-1"></div>
             <div class="flex justify-center gap-3 pt-2">
-                <button onclick="playSound('victory')" class="game-btn px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm">
-                    <i class="fa-solid fa-music mr-1"></i> Suona Fanfara
-                </button>
-                <button onclick="closePodium()" class="game-btn px-5 py-2.5 rounded-xl bg-studio-700 hover:bg-studio-600 text-white font-bold text-sm">
-                    Continua a Giocare
-                </button>
+                <button onclick="closePodium()" class="game-btn px-5 py-2.5 rounded-xl bg-studio-700 text-white font-bold text-sm">Continua</button>
             </div>
         </div>
     </div>
 
-    <!-- MODALE AGGIUNGI SQUADRA -->
     <div id="modal-add-team" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="glass-panel max-w-md w-full rounded-3xl p-6 border border-white/15 space-y-4">
-            <div class="flex justify-between items-center">
-                <h3 class="font-display font-bold text-xl text-white">Gestione Squadra</h3>
-                <button onclick="closeAddTeamModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div>
-                <label class="text-xs font-bold text-slate-300 uppercase block mb-1">Nome della Squadra</label>
-                <input type="text" id="new-team-name-input" placeholder="Es. Gli Svalvolati" class="w-full bg-studio-950 border border-white/15 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-cyan">
-            </div>
-            <div class="flex justify-end gap-2">
-                <button onclick="closeAddTeamModal()" class="px-4 py-2 rounded-xl bg-studio-800 text-slate-300 text-sm font-bold">Annulla</button>
-                <button onclick="confirmAddTeam()" class="px-5 py-2 rounded-xl bg-neon-pink text-white text-sm font-bold">Salva Squadra</button>
-            </div>
+            <div class="flex justify-between items-center"><h3 class="font-display font-bold text-xl text-white">Nuova Squadra</h3><button onclick="closeAddTeamModal()" class="text-slate-400"><i class="fa-solid fa-xmark"></i></button></div>
+            <input type="text" id="new-team-name-input" placeholder="Nome Squadra" class="w-full bg-studio-950 border border-white/15 rounded-xl px-4 py-3 text-white focus:outline-none">
+            <div class="flex justify-end gap-2"><button onclick="closeAddTeamModal()" class="px-4 py-2 rounded-xl bg-studio-800 text-slate-300 text-sm font-bold">Annulla</button><button onclick="confirmAddTeam()" class="px-5 py-2 rounded-xl bg-neon-pink text-white text-sm font-bold">Salva</button></div>
         </div>
     </div>
 
-    <!-- MODALE AGGIUNGI PAROLE / CONTENUTI PERSONALIZZATI -->
     <div id="modal-add-content" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="glass-panel max-w-lg w-full rounded-3xl p-6 border border-white/15 space-y-4">
-            <div class="flex justify-between items-center">
-                <h3 class="font-display font-bold text-xl text-white">Aggiungi Carte / Parole Personalizzate</h3>
-                <button onclick="closeAddContentModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-            <div>
-                <label class="text-xs font-bold text-slate-300 uppercase block mb-1">Scegli il Gioco</label>
-                <select id="custom-game-type" onchange="updateCustomFormPlaceholder()" class="w-full bg-studio-950 border border-white/15 rounded-xl px-3 py-2.5 text-white text-sm font-bold">
-                    <option value="intesa">1. Intesa Vincente (Nuova Parola)</option>
-                    <option value="tabu">2. Parola Tabù (Parola + 5 Vietate)</option>
-                    <option value="lyrics">3. Indovina la Canzone (Frase + Titolo)</option>
-                    <option value="mima">5. Mima o Disegna (Nuova Sfida)</option>
-                </select>
-            </div>
-
-            <div>
-                <label id="custom-field-1-label" class="text-xs font-bold text-slate-300 uppercase block mb-1">Parola da Indovinare</label>
-                <input type="text" id="custom-field-1" placeholder="Es. FRIGGITRICE AD ARIA" class="w-full bg-studio-950 border border-white/15 rounded-xl px-4 py-2.5 text-white text-sm">
-            </div>
-
+            <div class="flex justify-between items-center"><h3 class="font-display font-bold text-xl text-white">Aggiungi Carte</h3><button onclick="closeAddContentModal()" class="text-slate-400"><i class="fa-solid fa-xmark"></i></button></div>
+            <select id="custom-game-type" onchange="updateCustomFormPlaceholder()" class="w-full bg-studio-950 border border-white/15 rounded-xl px-3 py-2.5 text-white text-sm font-bold">
+                <option value="intesa">1. Intesa Vincente</option>
+                <option value="tabu">2. Parola Tabù</option>
+                <option value="lyrics">3. Canzone</option>
+                <option value="mima">5. Mima o Disegna</option>
+            </select>
+            <input type="text" id="custom-field-1" placeholder="Testo principale" class="w-full bg-studio-950 border border-white/15 rounded-xl px-4 py-2.5 text-white text-sm">
             <div id="custom-field-2-wrapper" class="hidden">
-                <label id="custom-field-2-label" class="text-xs font-bold text-slate-300 uppercase block mb-1">Dettagli / Parole Vietate (separate da virgola)</label>
-                <input type="text" id="custom-field-2" placeholder="Es. Cucina, Olio, Patatine, Caldo, Cestello" class="w-full bg-studio-950 border border-white/15 rounded-xl px-4 py-2.5 text-white text-sm">
+                <input type="text" id="custom-field-2" placeholder="Dettagli aggiuntivi" class="w-full bg-studio-950 border border-white/15 rounded-xl px-4 py-2.5 text-white text-sm">
             </div>
-
-            <div class="flex justify-end gap-2 pt-2">
-                <button onclick="closeAddContentModal()" class="px-4 py-2 rounded-xl bg-studio-800 text-slate-300 text-sm font-bold">Chiudi</button>
-                <button onclick="saveCustomContent()" class="px-5 py-2 rounded-xl bg-neon-cyan text-slate-950 text-sm font-extrabold">Salva nel Gioco</button>
-            </div>
+            <div class="flex justify-end gap-2 pt-2"><button onclick="closeAddContentModal()" class="px-4 py-2 rounded-xl bg-studio-800 text-slate-300 text-sm font-bold">Chiudi</button><button onclick="saveCustomContent()" class="px-5 py-2 rounded-xl bg-neon-cyan text-slate-950 text-sm font-extrabold">Salva</button></div>
         </div>
     </div>
 
-    <!-- MODALE CONFERMA RESET -->
     <div id="modal-reset" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="glass-panel max-w-md w-full rounded-3xl p-6 border border-rose-500/40 space-y-4 text-center">
-            <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 text-2xl flex items-center justify-center mx-auto">
-                <i class="fa-solid fa-rotate-right"></i>
-            </div>
-            <h3 class="font-display font-bold text-xl text-white">Azzerare tutti i punteggi?</h3>
-            <p class="text-xs sm:text-sm text-slate-300">I nomi delle squadre rimarranno salvati, ma i punteggi torneranno tutti a 0 per iniziare una nuova partita.</p>
-            <div class="flex justify-center gap-3 pt-2">
-                <button onclick="closeResetModal()" class="px-4 py-2 rounded-xl bg-studio-800 text-slate-300 text-sm font-bold">Annulla</button>
-                <button onclick="confirmResetScores()" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-sm font-bold">Sì, Azzera Punti</button>
-            </div>
+            <h3 class="font-display font-bold text-xl text-white">Azzera Punteggi?</h3>
+            <div class="flex justify-center gap-3 pt-2"><button onclick="closeResetModal()" class="px-4 py-2 rounded-xl bg-studio-800 text-slate-300 text-sm font-bold">Annulla</button><button onclick="confirmResetScores()" class="px-5 py-2 rounded-xl bg-rose-600 text-white text-sm font-bold">Sì, Azzera</button></div>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="border-t border-white/5 py-4 px-6 text-center text-xs text-slate-500">
-        Party Game Show • Audio sintetizzato in tempo reale con Web Audio API • Usa i tasti <kbd class="px-1.5 py-0.5 bg-studio-800 text-slate-300 rounded">A</kbd> <kbd class="px-1.5 py-0.5 bg-studio-800 text-slate-300 rounded">L</kbd> <kbd class="px-1.5 py-0.5 bg-studio-800 text-slate-300 rounded">Spazio</kbd> <kbd class="px-1.5 py-0.5 bg-studio-800 text-slate-300 rounded">Invio</kbd> nel Buzzer Quiz!
+        Party Game Show • Web Audio Synth Integrato
     </footer>
 
-    <!-- ==========================================
-         LOGICA JAVASCRIPT E DATABASE COMPLETO
-         ========================================== -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        /* =========================================================
-           1. STATO GLOBALE, SQUADRE & MOTORE SONORO (WEB AUDIO API)
-           ========================================================= */
+        let teams = [
+            { id: 1, name: 'Squadra Rossa', score: 0 },
+            { id: 2, name: 'Squadra Blu', score: 0 },
+            { id: 3, name: 'Squadra Verde', score: 0 }
+        ];
+        let activeTeamId = 1;
         let currentView = 'hub';
         let soundEnabled = true;
         let audioCtx = null;
-
-        let teams = [
-            { id: 1, name: "Squadra Neon", score: 0 },
-            { id: 2, name: "Squadra Cyber", score: 0 }
-        ];
-        let activeTeamId = 1;
 
         function getAudioCtx() {
             if (!audioCtx) {
@@ -1234,9 +969,7 @@
             soundEnabled = !soundEnabled;
             const btn = document.getElementById('sound-toggle-btn');
             if (btn) {
-                btn.innerHTML = soundEnabled
-                    ? '<i class="fa-solid fa-volume-high"></i>'
-                    : '<i class="fa-solid fa-volume-xmark text-rose-400"></i>';
+                btn.innerHTML = soundEnabled ? '<i class="fa-solid fa-volume-high"></i>' : '<i class="fa-solid fa-volume-xmark text-rose-400"></i>';
             }
             showToast(soundEnabled ? "Effetti sonori attivati!" : "Effetti sonori disattivati", "info");
         }
@@ -1247,81 +980,16 @@
                 const ctx = getAudioCtx();
                 if (!ctx) return;
                 const now = ctx.currentTime;
-
-                if (type === 'point') {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, now);
-                    osc.frequency.setValueAtTime(659.25, now + 0.08);
-                    osc.frequency.setValueAtTime(783.99, now + 0.16);
-                    gain.gain.setValueAtTime(0.22, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(now);
-                    osc.stop(now + 0.38);
-                } else if (type === 'double') {
-                    [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
-                        const osc = ctx.createOscillator();
-                        const gain = ctx.createGain();
-                        osc.type = 'sine';
-                        osc.frequency.setValueAtTime(freq, now + idx * 0.07);
-                        gain.gain.setValueAtTime(0.22, now + idx * 0.07);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.25);
-                        osc.connect(gain);
-                        gain.connect(ctx.destination);
-                        osc.start(now + idx * 0.07);
-                        osc.stop(now + idx * 0.07 + 0.25);
-                    });
-                } else if (type === 'error') {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(160, now);
-                    osc.frequency.linearRampToValueAtTime(110, now + 0.35);
-                    gain.gain.setValueAtTime(0.25, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(now);
-                    osc.stop(now + 0.38);
-                } else if (type === 'tick') {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(880, now);
-                    gain.gain.setValueAtTime(0.1, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(now);
-                    osc.stop(now + 0.06);
-                } else if (type === 'gong' || type === 'buzzer') {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'square';
-                    osc.frequency.setValueAtTime(type === 'buzzer' ? 440 : 220, now);
-                    gain.gain.setValueAtTime(0.28, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(now);
-                    osc.stop(now + 0.65);
-                } else if (type === 'victory') {
-                    [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5].forEach((freq, idx) => {
-                        const osc = ctx.createOscillator();
-                        const gain = ctx.createGain();
-                        osc.type = 'triangle';
-                        osc.frequency.setValueAtTime(freq, now + idx * 0.11);
-                        gain.gain.setValueAtTime(0.25, now + idx * 0.11);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.11 + 0.3);
-                        osc.connect(gain);
-                        gain.connect(ctx.destination);
-                        osc.start(now + idx * 0.11);
-                        osc.stop(now + idx * 0.11 + 0.3);
-                    });
-                }
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = type === 'error' ? 'sawtooth' : 'triangle';
+                osc.frequency.setValueAtTime(type === 'error' ? 140 : 523.25, now);
+                gain.gain.setValueAtTime(0.18, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.3);
             } catch (e) {}
         }
 
@@ -1333,165 +1001,51 @@
             return arr;
         }
 
-        /* =========================================================
-           2. DATABASE COMPLETO DEI 6 GIOCHI
-           ========================================================= */
         const intesaDatabase = [
             { word: "CAFFETTIERA MOKA", cat: "Oggetti di Casa" },
             { word: "CRISTIANO RONALDO", cat: "Sport & VIP" },
-            { word: "PIZZA MARGHERITA", cat: "Cibo Italiano" },
+            { word: "PIZZA MARGHERITA", cat: "Cibo" },
             { word: "COLOSSEO", cat: "Monumenti" },
-            { word: "HARRY POTTER", cat: "Cinema & Libri" },
-            { word: "LAVATRICE", cat: "Elettrodomestici" },
-            { word: "FESTIVAL DI SANREMO", cat: "Spettacolo" },
-            { word: "SPAGHETTI ALLA CARBONARA", cat: "Cucina" },
-            { word: "TORRE DI PISA", cat: "Monumenti" },
-            { word: "SPIDER-MAN", cat: "Supereroi" },
-            { word: "PATENTE DI GUIDA", cat: "Vita Quotidiana" },
-            { word: "CARTA IGIENICA", cat: "Casa" },
-            { word: " ASCIUGACAPELLI", cat: "Oggetti" },
-            { word: "LUNA DI MIELE", cat: "Viaggi & Amore" },
-            { word: "BABBO NATALE", cat: "Feste" },
-            { word: "OCCHIALI DA SOLE", cat: "Accessori" },
-            { word: "TITANIC", cat: "Film Cult" },
-            { word: "SUPER MARIO BROS", cat: "Videogiochi" },
-            { word: "CORNETTO E CAPPUCCINO", cat: "Colazione" },
-            { word: "TELECOMANDO", cat: "Salotto" },
-            { word: "ZAINO SCOLASTICO", cat: "Scuola" },
-            { word: "BIGLIETTO DELLA LOTTERIA", cat: "Fortuna" },
-            { word: "FERRARI ROSSA", cat: "Motori" },
-            { word: "STATUA DELLA LIBERTÀ", cat: "Mondo" },
-            { word: "GELATO AL PISTACCHIO", cat: "Estate" },
-            { word: "SVEGLIA DEL LUNEDÌ", cat: "Incubi" },
-            { word: "CARICABATTERIE", cat: "Tecnologia" },
-            { word: " ASino", cat: "Animali" },
-            { word: "PINGUINO", cat: "Animali" },
-            { word: "CANGURO", cat: "Animali" },
-            { word: "DENTIFRICIO", cat: "Bagno" },
-            { word: "OMBRELLO ROTTO", cat: "Meteo" },
-            { word: "TAPPETO VOLANTE", cat: "Fiabe" },
-            { word: "MACCHINA FOTOGRAFICA", cat: "Ricordi" },
-            { word: "VALIGIA SMARRITA", cat: "Aeroporto" },
-            { word: "CUSCINO MORBIDO", cat: "Camera da Letto" }
+            { word: "HARRY POTTER", cat: "Cinema" },
+            { word: "LAVATRICE", cat: "Casa" }
         ];
 
         const tabuDatabase = [
             { word: "TIRAMISÙ", forbidden: ["Mascarpone", "Caffè", "Savoiardi", "Dolce", "Cacao"] },
             { word: "NETFLIX", forbidden: ["Serie TV", "Film", "Streaming", "Divano", "Abbonamento"] },
-            { word: "WHATSAPP", forbidden: ["Messaggio", "Gruppo", "Audio", "Telefono", "Spunta blu"] },
-            { word: "FERRAGOSTO", forbidden: ["15 Agosto", "Estate", "Mare", "Grigliata", "Vacanza"] },
-            { word: "DENTISTA", forbidden: ["Denti", "Carie", "Trapano", "Bocca", "Dolore"] },
-            { word: "AEROPORTO", forbidden: ["Aereo", "Volo", "Valigia", "Check-in", "Pilota"] },
-            { word: "CARBONARA", forbidden: ["Guanciale", "Uovo", "Pecorino", "Pasta", "Roma"] },
-            { word: "INSTAGRAM", forbidden: ["Storie", "Foto", "Follower", "Like", "Reel"] },
-            { word: "FANTACALCIO", forbidden: ["Asta", "Serie A", "Bonus", "Calciatori", "Domenica"] },
-            { word: "PALESTRA", forbidden: ["Pesi", "Allenamento", "Tapis roulant", "Muscoli", "Sudore"] },
-            { word: "MATRIMONIO", forbidden: ["Sposi", "Chiesa", "Anello", "Abito bianco", "Invitati"] },
-            { word: "SUSHI", forbidden: ["Giappone", "Pesce crudo", "Riso", "Bacchette", "Salsa di soia"] },
-            { word: "IKEa", forbidden: ["Mobili", "Svezia", "Montare", "Brugola", "Polpette"] },
-            { word: " VENEZIA", forbidden: ["Gondola", "Canali", "Carnevale", "San Marco", "Laguna"] }
+            { word: "WHATSAPP", forbidden: ["Messaggio", "Gruppo", "Audio", "Telefono", "Spunta blu"] }
         ];
 
         const lyricsDatabase = [
-            // RAP & TRAP 2010-2026
-            { quote: "Ai zero gradi sento caldo, c'è un'aria strana...", title: "Cenere", artist: "Lazza", decade: "Rap/Trap 2023", keywords: "Sanremo 2023 • Disco di Diamante", genre: "raptrap" },
-            { quote: "I p' me, tu p' te, comm'è succiess già...", title: "I P' ME, TU P' TE", artist: "Geolier", decade: "Rap/Trap 2024", keywords: "Sanremo 2024 • Napoli", genre: "raptrap" },
-            { quote: "Corro con i miei fra', sopra una coupé...", title: "Auto Blu", artist: "Shiva", decade: "Trap 2020", keywords: "Campionamento Eiffel 65", genre: "raptrap" },
-            { quote: "Fumo un blunt a Swishland, yeah...", title: "blun7 a swishland", artist: "thasup", decade: "Trap 2019", keywords: "le basi tutte a caso", genre: "raptrap" },
-            { quote: "Mamma, sto in giro coi miei, non torno per cena...", title: "Tran Tran", artist: "Sfera Ebbasta", decade: "Trap 2017", keywords: "Prod. Charlie Charles", genre: "raptrap" },
-            { quote: "Vetri neri, sopra il G-Wagon...", title: "Vetri Neri", artist: "AVA, Anna, Capo Plaza", decade: "Rap/Trap 2023", keywords: "Tormentone Estate 2023", genre: "raptrap" },
-            { quote: "Rap futuristico, A-B, Fabri Fibra...", title: "Tranne Te", artist: "Fabri Fibra", decade: "Rap 2010", keywords: "Controcultura", genre: "raptrap" },
-            { quote: "Scendo in strada, il sole bacia i palazzi...", title: "Giovane Fuoriclasse", artist: "Capo Plaza", decade: "Trap 2018", keywords: "20 Album", genre: "raptrap" },
-            { quote: "Notti in bianco, non dormo più...", title: "Notti in Bianco", artist: "Blanco", decade: "Urban Pop 2021", keywords: "Blu Celeste", genre: "raptrap" },
-            { quote: "Cara Italia, ti scrivo...", title: "Cara Italia", artist: "Ghali", decade: "Trap/Pop 2018", keywords: "Amici Miei", genre: "raptrap" },
-            { quote: "90min, solo un altro gol...", title: "90MIN", artist: "Salmo", decade: "Rap 2018", keywords: "Playlist Album", genre: "raptrap" },
-            { quote: "P.E.S., gioco a P.E.S. dal mattino...", title: "P.E.S.", artist: "Club Dogo", decade: "Rap 2012", keywords: "Noi Siamo il Club", genre: "raptrap" },
-            { quote: "Love, niente è per sempre...", title: " ∞ Love", artist: "Marracash & Guè", decade: "Rap 2021", keywords: "Campionamento Nada", genre: "raptrap" },
-            { quote: "Sesso e samba, sesso e samba...", title: "Sesso e Samba", artist: "Tony Effe & Gaia", decade: "Urban 2024", keywords: "Hit Estate 2024", genre: "raptrap" },
-            { quote: "Bresh, Guè... su una barca in mezzo al mare...", title: "Guasto d'amore", artist: "Bresh", decade: "Urban 2023", keywords: "Genoa & Estate", genre: "raptrap" },
-            { quote: "Come un tuono nella notte...", title: "Click Boom!", artist: "Rose Villain", decade: "Urban Pop 2024", keywords: "Sanremo 2024", genre: "raptrap" },
-            { quote: "Hoe, non chiamarmi se non parli di cash...", title: "Hoe", artist: "Tedua feat. Sfera Ebbasta", decade: "Rap/Trap 2023", keywords: "La Divina Commedia", genre: "raptrap" },
-            { quote: "30°C, sento caldo...", title: "30°C", artist: "Anna", decade: "Rap/Pop 2024", keywords: "Vera Baddie", genre: "raptrap" },
-            // CLASSICI & POP
-            { quote: "Ma il cielo è sempre più blu...", title: "Ma il cielo è sempre più blu", artist: "Rino Gaetano", decade: "Classici 1975", keywords: "Cantautorato Italiano", genre: "classici" },
-            { quote: "Partirò, su navi per mari che io lo so...", title: "Con te partirò", artist: "Andrea Bocelli", decade: "Classici 1995", keywords: "Inno Mondiale", genre: "classici" },
-            { quote: "Dammi solo un minuto, un soffio di fiato...", title: "Dammi solo un minuto", artist: "Pooh", decade: "Classici 1977", keywords: "Pop Italiano", genre: "classici" },
-            { quote: "50 Special, con le marce...", title: "50 Special", artist: "Lùnapop", decade: "Pop 1999", keywords: "Colli Bolognesi • Vespa", genre: "classici" },
-            { quote: "Siamo fuori di testa, ma diversi da loro...", title: "Zitti e Buoni", artist: "Måneskin", decade: "Rock 2021", keywords: "Vincitori Sanremo & Eurovision", genre: "classici" },
-            { quote: "Is this the real life? Is this just fantasy?", title: "Bohemian Rhapsody", artist: "Queen", decade: "Rock 1975", keywords: "Freddie Mercury", genre: "classici" }
+            { quote: "Ai zero gradi sento caldo, c'è un'aria strana...", title: "Cenere", artist: "Lazza", decade: "Rap/Trap 2023", genre: "raptrap" },
+            { quote: "I p' me, tu p' te, comm'è succiess già...", title: "I P' ME, TU P' TE", artist: "Geolier", decade: "Rap/Trap 2024", genre: "raptrap" },
+            { quote: "Mamma, sto in giro coi miei, non torno per cena...", title: "Tran Tran", artist: "Sfera Ebbasta", decade: "Trap 2017", genre: "raptrap" },
+            { quote: "Ma il cielo è sempre più blu...", title: "Ma il cielo è sempre più blu", artist: "Rino Gaetano", decade: "Classici 1975", genre: "classici" }
         ];
 
         const musicCategoriesDatabase = [
-            { title: "Dì 3 canzoni di Sfera Ebbasta in 7 secondi", desc: "Valgono sia singoli solisti che featuring famosi!", examples: "Tran Tran, Rockstar, Cupido, Visiera a Becco, Ciny, Mi fai impazzire", genre: "raptrap" },
-            { title: "Dì 3 rapper della scena di Milano in 7 secondi", desc: "Nati o cresciuti artisticamente a Milano e provincia!", examples: "Marracash, Guè, Lazza, Shiva, Jake La Furia, Ghali, Emis Killa", genre: "raptrap" },
-            { title: "Dì 3 canzoni di Geolier in 7 secondi", desc: "Anche collaborazioni!", examples: "I P' Me Tu P' Te, Come Vuoi, Narcos, Chiagne, M'Manc, Episodio d'Amore", genre: "raptrap" },
-            { title: "Dì 3 producer rap/trap italiani famosi in 7 secondi", desc: "I re dei beat dal 2015 a oggi!", examples: "Charlie Charles, Sick Luke, Drillionaire, Night Skinny, Takagi & Ketra, AVA", genre: "raptrap" },
-            { title: "Dì 3 canzoni portate da rapper a Sanremo in 7 secondi", desc: "Dal 2018 a oggi!", examples: "Cenere (Lazza), I P' Me Tu P' Te (Geolier), Brividi (Mahmood & Blanco), Rolls Royce (Achille Lauro)", genre: "raptrap" },
-            { title: "Dì 3 canzoni di Vasco Rossi in 7 secondi", desc: "Grandi classici del Blasco!", examples: "Albachiara, Vita Spericolata, Sally, Rewind, Senza Parole", genre: "classici" },
-            { title: "Dì 3 canzoni degli 883 / Max Pezzali in 7 secondi", desc: "Inni generazionali anni '90!", examples: "Hanno ucciso l'Uomo Ragno, Come mai, Gli anni, Sei un mito, Nord Sud Ovest Est", genre: "classici" }
+            { title: "Dì 3 canzoni di Sfera Ebbasta in 7 secondi", desc: "Valgono singoli e featuring!" },
+            { title: "Dì 3 rapper della scena milanese in 7 secondi", desc: "Nati o cresciuti a Milano!" }
         ];
 
         const ghigliottinaDatabase = [
-            {
-                clues: ["BIANCA", "MATRIMONIO", "CREDITO", "IGIENICA", "identità"],
-                secret: "CARTA",
-                explanations: ["Carta bianca", "Carta del matrimonio / Carte per sposarsi", "Carta di credito", "Carta igienica", "Carta d'identità"]
-            },
-            {
-                clues: ["COLPO", "SOLE", "TEATRO", "OCCHIO", " STATO"],
-                secret: "SCENA / COLPO",
-                explanations: ["Colpo di scena", "Colpo di sole", "Colpo di teatro", "Colpo d'occhio", "Colpo di Stato"]
-            },
-            {
-                clues: ["VERDE", "GIRO", " TAVOLA", "BUONO", "VENDITA"],
-                secret: "PUNTO",
-                explanations: ["Punto verde", "Fare il punto / Giro", "Punto a tavola", "Buono / Punto", "Punto vendita"]
-            },
-            {
-                clues: ["PIENO", "LIBERO", "PERDERE", "REALE", "DETERMINATO"],
-                secret: "TEMPO",
-                explanations: ["Tempo pieno", "Tempo libero", "Perdere tempo", "In tempo reale", "Tempo determinato"]
-            },
-            {
-                clues: ["DOLCE", "FORTE", "PIANO", "CORRENTE", "BOCCA"],
-                secret: "ACQUA",
-                explanations: ["Acqua dolce", "Acquaforte", "Acqua cheta / Piano", "Acqua corrente", "Acqua in bocca"]
-            },
-            {
-                clues: ["FALSO", "ORDINE", "GIORNO", "CARICO", "MASSIMO"],
-                secret: "PIENO / ORDINE",
-                explanations: ["Falso d'autore / Ordine", "Ordine del giorno", "Pieno carico", "Massimo ordine"]
-            }
+            { clues: ["BIANCA", "MATRIMONIO", "CREDITO", "IGIENICA", "D'IDENTITÀ"], secret: "CARTA", explanations: ["Carta bianca", "Carta di matrimonio", "Carta di credito", "Carta igienica", "Carta d'identità"] },
+            { clues: ["COLPO", "SOLE", "TEATRO", "OCCHIO", "STATO"], secret: "SCENA / COLPO", explanations: ["Colpo di scena", "Colpo di sole", "Colpo di teatro", "Colpo d'occhio", "Colpo di Stato"] }
         ];
 
         const mimaDatabase = [
             { text: "IL GLADIATORE", cat: "Film & Serie TV", diff: 1 },
             { text: "STRANGER THINGS", cat: "Film & Serie TV", diff: 2 },
-            { text: "LA CASA DI CARTA", cat: "Film & Serie TV", diff: 1 },
-            { text: "INCEPTION", cat: "Film & Serie TV", diff: 3 },
-            { text: "ASSAGGIATORE DI CIBO PER CANI", cat: "Mestieri Assurdi", diff: 2 },
-            { text: "ISTRUTTORE DI PARACADUTISMO", cat: "Mestieri Assurdi", diff: 1 },
-            { text: "ACCORDATORE DI PIANOFORTI SUBACQUEO", cat: "Mestieri Assurdi", diff: 3 },
-            { text: "CHI DORME NON PIGLIA PESCI", cat: "Proverbi Italiani", diff: 1 },
-            { text: "TRA IL DIRE E IL FARE C'È DI MEZZO IL MARE", cat: "Proverbi Italiani", diff: 2 },
-            { text: "NON TUTTE LE CIAMBELLE ESCONO COL BUCO", cat: "Proverbi Italiani", diff: 2 },
-            { text: "MONTARE UN MOBILE IKEA SENZA ISTRUZIONI", cat: "Azioni Quotidiane", diff: 2 },
-            { text: "CAMMINARE SULLA SABBIA BOLLENTE AD AGOSTO", cat: "Azioni Quotidiane", diff: 1 }
+            { text: "ASSAGGIATORE DI CIBO PER CANI", cat: "Mestieri Assurdi", diff: 2 }
         ];
 
         const quizDatabase = [
             { cat: "Rap & Musica", q: "Quale artista ha portato 'Cenere' a Sanremo 2023?", options: ["Lazza", "Geolier", "Blanco", "Tedua"], correct: 0 },
-            { cat: "Serie TV", q: "In 'Mare Fuori', in quale città si trova l'IPM?", options: ["Palermo", "Roma", "Napoli", "Bari"], correct: 2 },
-            { cat: "Cinema", q: "Chi ha diretto il film premio Oscar 'Oppenheimer'?", options: ["Steven Spielberg", "Christopher Nolan", "Denis Villeneuve", "Quentin Tarantino"], correct: 1 },
-            { cat: "Cultura Pop", q: "Quale squadra ha vinto il Mondiale di Calcio 2022 in Qatar?", options: ["Francia", "Brasile", "Argentina", "Spagna"], correct: 2 },
-            { cat: "Rap & Trap", q: "Come si intitola il celebre joint album di Marracash e Guè uscito nel 2016?", options: ["Santeria", "Noi, Loro, Gli Altri", "Madreperla", "Persona"], correct: 0 }
+            { cat: "Serie TV", q: "In 'Mare Fuori', in quale città si trova l'IPM?", options: ["Palermo", "Roma", "Napoli", "Bari"], correct: 2 }
         ];
 
-        /* =========================================================
-           3. GESTIONE SQUADRE E NAVIGAZIONE (`switchGame`)
-           ========================================================= */
         function switchGame(viewName) {
-            stopRealAudio();
+            stopSynthSong();
             currentView = viewName;
             const views = ['hub', 'intesa', 'tabu', 'canzone', 'ghigliottina', 'mima', 'buzzer'];
 
@@ -1515,8 +1069,6 @@
                 setTimeout(resizePictionaryCanvas, 60);
             } else if (viewName === 'buzzer') {
                 renderBuzzerButtons();
-            } else if (viewName === 'canzone') {
-                if (!currentLoadedSongMeta) loadCurrentRealAudioSong();
             }
         }
 
@@ -1547,13 +1099,12 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-1" onclick="event.stopPropagation()">
-                            <button onclick="updateTeamScore(${t.id}, 1)" class="w-7 h-7 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-300 font-bold text-xs">+1</button>
-                            <button onclick="updateTeamScore(${t.id}, -1)" class="w-7 h-7 rounded-lg bg-rose-500/20 hover:bg-rose-500/40 text-rose-300 font-bold text-xs">-1</button>
+                            <button onclick="updateTeamScore(${t.id}, 1)" class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-300 font-bold text-xs">+1</button>
+                            <button onclick="updateTeamScore(${t.id}, -1)" class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-300 font-bold text-xs">-1</button>
                         </div>
                     </div>
                 `;
             }).join('');
-
             renderBuzzerButtons();
         }
 
@@ -1566,12 +1117,10 @@
             const team = teams.find(t => t.id === Number(teamId));
             if (!team) return;
             team.score += delta;
-            if (delta > 0) playSound(delta >= 2 ? 'double' : 'point');
+            if (delta > 0) playSound('point');
             else if (delta < 0) playSound('error');
             renderTeams();
-            if (customMsg) {
-                showToast(`${team.name}: ${customMsg}`, delta >= 0 ? 'success' : 'error');
-            }
+            if (customMsg) showToast(`${team.name}: ${customMsg}`, delta >= 0 ? 'success' : 'error');
         }
 
         function awardActiveTeam(points, reason) {
@@ -1580,27 +1129,16 @@
 
         function openAddTeamModal() {
             const m = document.getElementById('modal-add-team');
-            if (!m) return;
-            m.classList.remove('hidden');
-            m.classList.add('flex');
-            const inp = document.getElementById('new-team-name-input');
-            if (inp) { inp.value = ''; inp.focus(); }
+            if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
         }
-
         function closeAddTeamModal() {
             const m = document.getElementById('modal-add-team');
-            if (!m) return;
-            m.classList.add('hidden');
-            m.classList.remove('flex');
+            if (m) { m.classList.add('hidden'); m.classList.remove('flex'); }
         }
-
         function confirmAddTeam() {
             const inp = document.getElementById('new-team-name-input');
             const name = inp ? inp.value.trim() : '';
-            if (!name) {
-                showToast('Inserisci un nome per la squadra!', 'error');
-                return;
-            }
+            if (!name) return;
             const newId = Date.now();
             teams.push({ id: newId, name, score: 0 });
             activeTeamId = newId;
@@ -1609,1274 +1147,433 @@
             showToast(`Squadra "${name}" aggiunta!`, 'success');
         }
 
-        /* =========================================================
-           4 & 5. LOGICA GIOCO 1 (INTESA VINCENTE) & GIOCO 2 (PAROLA TABÙ)
-           ========================================================= */
-        let intesaIndex = -1;
-        let intesaRoundScore = 0;
-        let intesaPassesLeft = 3;
-        let intesaTimeLeft = 60;
-        let intesaTimerInterval = null;
-
+        let intesaIndex = -1, intesaRoundScore = 0, intesaPassesLeft = 3, intesaTimeLeft = 60, intesaTimerInterval = null;
         function nextIntesaWord() {
             intesaIndex = (intesaIndex + 1) % intesaDatabase.length;
             const item = intesaDatabase[intesaIndex];
-            const wordEl = document.getElementById('intesa-word-display');
-            const catEl = document.getElementById('intesa-cat-badge');
-            if (wordEl && item) wordEl.textContent = item.word;
-            if (catEl && item) catEl.textContent = `Categoria: ${item.cat}`;
+            document.getElementById('intesa-word-display').textContent = item.word;
+            document.getElementById('intesa-cat-badge').textContent = `Categoria: ${item.cat}`;
         }
-
         function handleIntesaAction(action) {
-            if (action === 'correct') {
-                intesaRoundScore += 1;
-                awardActiveTeam(1, 'Intesa Vincente! (+1)');
-                nextIntesaWord();
-            } else if (action === 'double') {
-                intesaRoundScore += 2;
-                awardActiveTeam(2, 'Raddoppio Intesa Vincente! (+2)');
-                nextIntesaWord();
-            } else if (action === 'pass') {
-                if (intesaPassesLeft > 0) {
-                    intesaPassesLeft--;
-                    playSound('tick');
-                    nextIntesaWord();
-                } else {
-                    playSound('error');
-                    showToast('Passo esauriti per questa manche!', 'error');
-                }
+            if (action === 'correct') { intesaRoundScore += 1; awardActiveTeam(1, 'Intesa (+1)'); nextIntesaWord(); }
+            else if (action === 'double') { intesaRoundScore += 2; awardActiveTeam(2, 'Raddoppia (+2)'); nextIntesaWord(); }
+            else if (action === 'pass') {
+                if (intesaPassesLeft > 0) { intesaPassesLeft--; nextIntesaWord(); }
+                else showToast('Passo esauriti!', 'error');
             } else if (action === 'error') {
                 intesaRoundScore = Math.max(0, intesaRoundScore - 1);
-                updateTeamScore(activeTeamId, -1, 'Errore Intesa (-1)');
+                updateTeamScore(activeTeamId, -1, 'Errore (-1)');
                 nextIntesaWord();
             }
-            const rsEl = document.getElementById('intesa-round-score');
-            const plEl = document.getElementById('intesa-passes-left');
-            if (rsEl) rsEl.textContent = intesaRoundScore;
-            if (plEl) plEl.textContent = intesaPassesLeft;
+            document.getElementById('intesa-round-score').textContent = intesaRoundScore;
+            document.getElementById('intesa-passes-left').textContent = intesaPassesLeft;
         }
-
         function toggleIntesaTimer() {
             const btn = document.getElementById('intesa-timer-btn');
-            if (intesaTimerInterval) {
-                clearInterval(intesaTimerInterval);
-                intesaTimerInterval = null;
-                if (btn) btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Riprendi';
-            } else {
-                if (btn) btn.innerHTML = '<i class="fa-solid fa-pause mr-1"></i> Pausa';
+            if (intesaTimerInterval) { clearInterval(intesaTimerInterval); intesaTimerInterval = null; btn.innerHTML = 'Avvia 60s'; }
+            else {
+                btn.innerHTML = 'Pausa';
                 intesaTimerInterval = setInterval(() => {
                     intesaTimeLeft--;
-                    const disp = document.getElementById('intesa-timer-display');
-                    if (disp) disp.textContent = intesaTimeLeft;
-                    if (intesaTimeLeft <= 10 && intesaTimeLeft > 0) playSound('tick');
-                    if (intesaTimeLeft <= 0) {
-                        clearInterval(intesaTimerInterval);
-                        intesaTimerInterval = null;
-                        playSound('gong');
-                        if (btn) btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Avvia 60s';
-                    }
+                    document.getElementById('intesa-timer-display').textContent = intesaTimeLeft;
+                    if (intesaTimeLeft <= 0) { clearInterval(intesaTimerInterval); intesaTimerInterval = null; playSound('gong'); }
                 }, 1000);
             }
         }
-
         function resetIntesaRound() {
-            clearInterval(intesaTimerInterval);
-            intesaTimerInterval = null;
-            intesaTimeLeft = 60;
-            intesaRoundScore = 0;
-            intesaPassesLeft = 3;
-            const disp = document.getElementById('intesa-timer-display');
-            const rsEl = document.getElementById('intesa-round-score');
-            const plEl = document.getElementById('intesa-passes-left');
-            const btn = document.getElementById('intesa-timer-btn');
-            if (disp) disp.textContent = '60';
-            if (rsEl) rsEl.textContent = '0';
-            if (plEl) plEl.textContent = '3';
-            if (btn) btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Avvia 60s';
+            clearInterval(intesaTimerInterval); intesaTimerInterval = null; intesaTimeLeft = 60; intesaRoundScore = 0; intesaPassesLeft = 3;
+            document.getElementById('intesa-timer-display').textContent = '60';
+            document.getElementById('intesa-round-score').textContent = '0';
+            document.getElementById('intesa-passes-left').textContent = '3';
             nextIntesaWord();
         }
 
-        // --- GIOCO 2: PAROLA TABÙ ---
-        let tabuIndex = 0;
-        let tabuTimeLeft = 60;
-        let tabuTimerInterval = null;
-
+        let tabuIndex = 0, tabuTimeLeft = 60, tabuTimerInterval = null;
         function renderTabuCard() {
             const item = tabuDatabase[tabuIndex % tabuDatabase.length];
-            if (!item) return;
-            const mainEl = document.getElementById('tabu-main-word');
-            const countEl = document.getElementById('tabu-counter');
-            const listEl = document.getElementById('tabu-forbidden-list');
-            if (mainEl) mainEl.textContent = item.word;
-            if (countEl) countEl.textContent = `Carta ${(tabuIndex % tabuDatabase.length) + 1} di ${tabuDatabase.length}`;
-            if (listEl) {
-                listEl.innerHTML = item.forbidden.map(f => `
-                    <div class="py-2.5 px-4 rounded-xl bg-studio-950/90 border border-rose-500/30 font-display font-bold text-lg text-rose-200 flex items-center justify-between">
-                        <span>${f}</span>
-                        <i class="fa-solid fa-ban text-rose-500/70 text-sm"></i>
-                    </div>
-                `).join('');
-            }
+            document.getElementById('tabu-main-word').textContent = item.word;
+            document.getElementById('tabu-counter').textContent = `Carta ${(tabuIndex % tabuDatabase.length) + 1}`;
+            document.getElementById('tabu-forbidden-list').innerHTML = item.forbidden.map(f => `
+                <div class="py-2.5 px-4 rounded-xl bg-studio-950/90 border border-rose-500/30 font-display font-bold text-lg text-rose-200 flex items-center justify-between">
+                    <span>${f}</span><i class="fa-solid fa-ban text-rose-500 text-sm"></i>
+                </div>
+            `).join('');
         }
-
         function handleTabuAction(action) {
-            if (action === 'correct') {
-                awardActiveTeam(1, 'Carta Tabù indovinata! (+1)');
-            } else if (action === 'tabu') {
-                updateTeamScore(activeTeamId, -1, 'Parola Tabù pronunciata! (-1)');
-            } else {
-                playSound('tick');
-            }
+            if (action === 'correct') awardActiveTeam(1, 'Tabù indovinata (+1)');
+            else if (action === 'tabu') updateTeamScore(activeTeamId, -1, 'Parola Tabù! (-1)');
             tabuIndex = (tabuIndex + 1) % tabuDatabase.length;
             renderTabuCard();
         }
-
         function toggleTabuTimer() {
             const btn = document.getElementById('tabu-timer-btn');
-            if (tabuTimerInterval) {
-                clearInterval(tabuTimerInterval);
-                tabuTimerInterval = null;
-                if (btn) btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Riprendi';
-            } else {
-                if (btn) btn.innerHTML = '<i class="fa-solid fa-pause mr-1"></i> Pausa';
+            if (tabuTimerInterval) { clearInterval(tabuTimerInterval); tabuTimerInterval = null; btn.innerHTML = 'Avvia 60s'; }
+            else {
                 tabuTimerInterval = setInterval(() => {
                     tabuTimeLeft--;
-                    const disp = document.getElementById('tabu-timer-display');
-                    if (disp) disp.textContent = tabuTimeLeft;
-                    if (tabuTimeLeft <= 10 && tabuTimeLeft > 0) playSound('tick');
-                    if (tabuTimeLeft <= 0) {
-                        clearInterval(tabuTimerInterval);
-                        tabuTimerInterval = null;
-                        playSound('gong');
-                        if (btn) btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Avvia 60s';
-                    }
+                    document.getElementById('tabu-timer-display').textContent = tabuTimeLeft;
+                    if (tabuTimeLeft <= 0) { clearInterval(tabuTimerInterval); tabuTimerInterval = null; playSound('gong'); }
                 }, 1000);
             }
         }
-
         function resetTabuTimer() {
-            clearInterval(tabuTimerInterval);
-            tabuTimerInterval = null;
-            tabuTimeLeft = 60;
-            const disp = document.getElementById('tabu-timer-display');
-            const btn = document.getElementById('tabu-timer-btn');
-            if (disp) disp.textContent = '60';
-            if (btn) btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Avvia 60s';
+            clearInterval(tabuTimerInterval); tabuTimerInterval = null; tabuTimeLeft = 60;
+            document.getElementById('tabu-timer-display').textContent = '60';
         }
 
-        /* =========================================================
-           7. LOGICA GIOCO 3: INDOVINA LA CANZONE CON VERO AUDIO ORIGINALE (iTunes API + MP3)
-           ========================================================= */
-        let currentMusicGenre = 'raptrap';
-        let lyricsIndex = 0;
-        let musicCatIndex = 0;
-        let sevenSecTimer = null;
-
-        // Stato Player Audio Originale Progressivo
-        let realAudioIndex = 0;
-        let currentAudioStake = 5;
-        let audioSnippetTimer = null;
-        let audioProgressInterval = null;
-        let audioStartOffsetSec = 0; // Può essere 0s o 8s per saltare l'intro
-        let currentLoadedSongMeta = null;
-        const itunesCache = {};
-
-        function getFilteredLyrics() {
-            if (currentMusicGenre === 'all') return lyricsDatabase;
-            return lyricsDatabase.filter(item => item.genre === currentMusicGenre);
-        }
-
-        function getFilteredMusicCategories() {
-            if (currentMusicGenre === 'all') return musicCategoriesDatabase;
-            return musicCategoriesDatabase.filter(item => item.genre === currentMusicGenre);
-        }
-
+        let currentMusicGenre = 'raptrap', lyricsIndex = 0, musicCatIndex = 0, synthSongIndex = 0, synthPlayingInterval = null, synthSnippetTimer = null, currentSynthStake = 5;
         function setMusicGenreFilter(genre) {
             currentMusicGenre = genre;
-            lyricsIndex = 0;
-            musicCatIndex = 0;
-            realAudioIndex = 0;
-
-            const buttons = {
-                raptrap: document.getElementById('genre-btn-raptrap'),
-                classici: document.getElementById('genre-btn-classici'),
-                all: document.getElementById('genre-btn-all')
-            };
-
-            Object.keys(buttons).forEach(k => {
-                if (!buttons[k]) return;
-                if (k === genre) {
-                    buttons[k].className = "px-3 py-1.5 rounded-lg text-xs font-extrabold bg-gradient-to-r from-neon-pink to-purple-600 text-white shadow-md transition-all";
-                } else {
-                    buttons[k].className = "px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition-all";
-                }
-            });
-
-            loadCurrentRealAudioSong();
+            lyricsIndex = 0; musicCatIndex = 0; synthSongIndex = 0;
+            loadCurrentSynthSong();
             renderLyricsCard();
             renderMusicCategory();
-
-            const labels = {
-                raptrap: "🔥 Playlist Rap & Trap (2010-Oggi) caricata!",
-                classici: "🎶 Playlist Classici & Pop caricata!",
-                all: "🎲 Tutte le canzoni attivate!"
-            };
-            showToast(labels[genre] || 'Filtro aggiornato', 'info');
+            showToast('Filtro musicale aggiornato!', 'info');
         }
-
         function switchMusicTab(tab) {
-            stopRealAudio();
+            stopSynthSong();
             ['audio', 'lyrics', 'categories'].forEach(t => {
                 const panel = document.getElementById(`music-panel-${t}`);
                 const btn = document.getElementById(`music-tab-${t}`);
                 if (!panel || !btn) return;
                 if (t === tab) {
                     panel.classList.remove('hidden');
-                    btn.className = "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 text-slate-950 transition-all shadow-lg shadow-amber-500/20";
+                    btn.className = "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 text-slate-950 transition-all shadow-lg";
                 } else {
                     panel.classList.add('hidden');
                     btn.className = "px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition-all";
                 }
             });
         }
-
-        // Pulisce il nome dell'artista da feat. o prod. per una ricerca precisa su Apple Music
-        function buildCleanItunesQuery(item) {
-            const cleanArtist = item.artist
-                .replace(/\(.*?\)/g, '')
-                .replace(/feat\..*/i, '')
-                .replace(/&.*/, '')
-                .trim();
-            const cleanTitle = item.title.replace(/\/.*/, '').trim();
-            return `${cleanArtist} ${cleanTitle}`;
+        function getFilteredLyrics() {
+            if (currentMusicGenre === 'all') return lyricsDatabase;
+            return lyricsDatabase.filter(i => i.genre === currentMusicGenre);
         }
-
-        async function fetchItunesTrackData(queryText) {
-            if (itunesCache[queryText]) return itunesCache[queryText];
-            try {
-                const url = `https://itunes.apple.com/search?term=${encodeURIComponent(queryText)}&media=music&entity=song&country=IT&limit=5`;
-                const res = await fetch(url);
-                const data = await res.json();
-                if (data.results && data.results.length > 0) {
-                    // Preferisci un risultato che abbia previewUrl valido
-                    const validTrack = data.results.find(r => r.previewUrl) || data.results[0];
-                    itunesCache[queryText] = validTrack;
-                    return validTrack;
-                }
-            } catch (err) {
-                console.warn("Errore fetch iTunes API:", err);
-            }
-            return null;
-        }
-
-        async function loadCurrentRealAudioSong() {
-            stopRealAudio();
+        function loadCurrentSynthSong() {
+            stopSynthSong();
             const list = getFilteredLyrics();
-            if (list.length === 0) return;
-
-            const item = list[realAudioIndex % list.length];
-            currentAudioStake = 5;
-            updateAudioStakeUI(5);
-
-            // Reset UI Mistero
-            const genreBadge = document.getElementById('audio-genre-badge');
-            const hintBadge = document.getElementById('audio-hint-badge');
-            const statusInd = document.getElementById('audio-status-indicator');
-            const counterEl = document.getElementById('audio-track-counter');
-            const solBox = document.getElementById('audio-solution-box');
-            const coverImg = document.getElementById('audio-artwork-img');
-            const overlay = document.getElementById('artwork-mystery-overlay');
-
-            if (genreBadge) genreBadge.textContent = item.decade || (item.genre === 'raptrap' ? '🔥 Rap & Trap' : '🎶 Classici & Pop');
-            if (hintBadge) hintBadge.textContent = `🔑 Indizio: ${item.keywords || 'Hit Famosa'}`;
-            if (counterEl) counterEl.textContent = `Brano ${(realAudioIndex % list.length) + 1} di ${list.length}`;
-            if (solBox) solBox.classList.add('hidden');
-            if (overlay) overlay.classList.remove('hidden');
-            if (coverImg) {
-                coverImg.className = "w-full h-full object-cover filter blur-xl scale-110 transition-all duration-500";
-                coverImg.src = "https://placehold.co/300x300/181e38/facc15?text=🎵+CARICAMENTO";
-            }
-            if (statusInd) {
-                statusInd.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Caricamento Audio Originale...`;
-                statusInd.className = "px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center gap-1.5";
-            }
-
-            const query = buildCleanItunesQuery(item);
-            const trackData = await fetchItunesTrackData(query);
-            const audioEl = document.getElementById('real-song-audio');
-
-            if (trackData && trackData.previewUrl) {
-                const hiResCover = trackData.artworkUrl100 ? trackData.artworkUrl100.replace('100x100bb', '500x500bb') : '';
-                currentLoadedSongMeta = {
-                    title: item.title,
-                    artist: item.artist,
-                    quote: item.quote,
-                    previewUrl: trackData.previewUrl,
-                    artwork: hiResCover
-                };
-                if (audioEl) {
-                    audioEl.src = trackData.previewUrl;
-                    audioEl.load();
-                }
-                if (coverImg && hiResCover) {
-                    coverImg.src = hiResCover;
-                }
-                if (statusInd) {
-                    statusInd.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Audio Originale Pronto`;
-                    statusInd.className = "px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold flex items-center gap-1.5";
-                }
-            } else {
-                currentLoadedSongMeta = {
-                    title: item.title,
-                    artist: item.artist,
-                    quote: item.quote,
-                    previewUrl: null,
-                    artwork: null
-                };
-                if (statusInd) {
-                    statusInd.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Usa Ricerca Live o YouTube`;
-                    statusInd.className = "px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold flex items-center gap-1.5";
-                }
-            }
-        }
-
-        function updateAudioStakeUI(points) {
-            currentAudioStake = points;
-            const stakeBadge = document.getElementById('current-points-stake');
-            const awardBtn = document.getElementById('award-audio-stake-btn');
-            if (stakeBadge) stakeBadge.textContent = `In palio: +${points} Punti`;
-            if (awardBtn) awardBtn.innerHTML = `<i class="fa-solid fa-trophy"></i> Indovinata! Assegna +${points} Punti`;
-        }
-
-        function toggleAudioStartPoint() {
-            const offsets = [0, 6, 12];
-            const labels = [
-                "📍 Punto partenza: Inizio Estratto (0s)",
-                "📍 Punto partenza: +6s (Salta Intro)",
-                "📍 Punto partenza: +12s (Centro Ritornello)"
-            ];
-            const currentIdx = offsets.indexOf(audioStartOffsetSec);
-            const nextIdx = (currentIdx + 1) % offsets.length;
-            audioStartOffsetSec = offsets[nextIdx];
-            const btn = document.getElementById('audio-offset-btn');
-            if (btn) btn.textContent = labels[nextIdx];
-            showToast(labels[nextIdx], 'info');
-        }
-
-        function playRealAudioSnippet(seconds, stakePoints) {
-            const audioEl = document.getElementById('real-song-audio');
-            if (!audioEl || !audioEl.src) {
-                showToast('Audio non ancora caricato o non disponibile. Prova un altro brano!', 'error');
-                return;
-            }
-
-            stopRealAudio();
-            updateAudioStakeUI(stakePoints);
-
-            const targetEl = document.getElementById('audio-target-timer');
-            const playingBadge = document.getElementById('audio-playing-badge');
-            const waveBars = document.getElementById('audio-waveform-bars');
-
-            if (targetEl) targetEl.textContent = `/ ${seconds}s`;
-            if (playingBadge) {
-                playingBadge.textContent = `🔊 RIPRODUZIONE ${seconds} SECONDI IN CORSO...`;
-                playingBadge.className = "px-2.5 py-1 rounded-lg bg-emerald-500 text-slate-950 text-xs font-extrabold uppercase animate-pulse";
-            }
-            if (waveBars) waveBars.classList.remove('opacity-40');
-
-            // Imposta il punto di partenza
-            const startAt = (seconds >= 25) ? 0 : audioStartOffsetSec;
-            try {
-                audioEl.currentTime = startAt;
-            } catch (e) {}
-
-            audioEl.play().then(() => {
-                const startTime = performance.now();
-                const durationMs = seconds * 1000;
-
-                audioProgressInterval = setInterval(() => {
-                    const elapsedMs = performance.now() - startTime;
-                    const elapsedSec = Math.min(seconds, elapsedMs / 1000);
-                    const pct = Math.min(100, (elapsedMs / durationMs) * 100);
-
-                    const elTimer = document.getElementById('audio-elapsed-timer');
-                    const progBar = document.getElementById('audio-progress-bar');
-                    if (elTimer) elTimer.textContent = `${elapsedSec.toFixed(1)}s`;
-                    if (progBar) progBar.style.width = `${pct}%`;
-
-                    // Anima le barre dell'equalizzatore
-                    if (waveBars) {
-                        Array.from(waveBars.children).forEach(bar => {
-                            const h = Math.floor(Math.random() * 24) + 6;
-                            bar.style.height = `${h}px`;
-                        });
-                    }
-
-                    if (elapsedMs >= durationMs) {
-                        stopRealAudio(true);
-                    }
-                }, 60);
-
-                audioSnippetTimer = setTimeout(() => {
-                    stopRealAudio(true);
-                }, durationMs + 50);
-            }).catch(err => {
-                console.warn("Errore play audio:", err);
-                showToast("Tocca di nuovo il pulsante per avviare l'audio!", "info");
-            });
-        }
-
-        function stopRealAudio(finishedNaturally = false) {
-            if (audioSnippetTimer) {
-                clearTimeout(audioSnippetTimer);
-                audioSnippetTimer = null;
-            }
-            if (audioProgressInterval) {
-                clearInterval(audioProgressInterval);
-                audioProgressInterval = null;
-            }
-            const audioEl = document.getElementById('real-song-audio');
-            if (audioEl) {
-                try { audioEl.pause(); } catch (e) {}
-            }
-            const playingBadge = document.getElementById('audio-playing-badge');
-            const waveBars = document.getElementById('audio-waveform-bars');
-            if (playingBadge) {
-                playingBadge.textContent = finishedNaturally
-                    ? "⏱️ Estratto terminato! Chi sa la risposta?"
-                    : "⏹ Audio in pausa";
-                playingBadge.className = "px-2.5 py-1 rounded-lg bg-studio-800 text-amber-300 text-xs font-bold uppercase";
-            }
-            if (waveBars) waveBars.classList.add('opacity-40');
-        }
-
-        function revealRealAudioSolution() {
-            if (!currentLoadedSongMeta) return;
-            const solBox = document.getElementById('audio-solution-box');
-            const titleEl = document.getElementById('audio-revealed-title');
-            const artistEl = document.getElementById('audio-revealed-artist');
-            const quoteEl = document.getElementById('audio-revealed-quote');
-            const ytBtn = document.getElementById('audio-youtube-btn');
-            const coverImg = document.getElementById('audio-artwork-img');
-            const overlay = document.getElementById('artwork-mystery-overlay');
-
-            if (titleEl) titleEl.textContent = currentLoadedSongMeta.title;
-            if (artistEl) artistEl.textContent = currentLoadedSongMeta.artist;
-            if (quoteEl) quoteEl.textContent = currentLoadedSongMeta.quote ? `"${currentLoadedSongMeta.quote}"` : '';
-            if (ytBtn) ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(currentLoadedSongMeta.artist + ' ' + currentLoadedSongMeta.title)}`;
-            if (solBox) solBox.classList.remove('hidden');
-
-            // Togli la sfocatura alla copertina originale!
-            if (coverImg) {
-                coverImg.className = "w-full h-full object-cover transition-all duration-500 scale-100";
-            }
-            if (overlay) overlay.classList.add('hidden');
-
-            // Fai partire l'audio originale per festeggiare!
-            playRealAudioSnippet(20, currentAudioStake);
-        }
-
-        function awardCurrentAudioStake() {
-            awardActiveTeam(currentAudioStake, `Canzone indovinata (+${currentAudioStake} pt)!`);
-        }
-
-        function nextRealAudioSong() {
-            const list = getFilteredLyrics();
-            if (list.length === 0) return;
-            realAudioIndex = (realAudioIndex + 1) % list.length;
-            loadCurrentRealAudioSong();
-        }
-
-        // Ricerca Live su Apple Music / iTunes di qualsiasi canzone al mondo
-        async function searchCustomItunesSong() {
-            const input = document.getElementById('itunes-custom-search');
-            const q = input ? input.value.trim() : '';
-            if (!q) {
-                showToast('Scrivi il nome di un artista o di una canzone da cercare!', 'error');
-                return;
-            }
-
-            const resultsBox = document.getElementById('itunes-search-results');
-            const listEl = document.getElementById('itunes-results-list');
-            if (!resultsBox || !listEl) return;
-
-            resultsBox.classList.remove('hidden');
-            listEl.innerHTML = `<div class="col-span-full text-xs text-neon-cyan py-2"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Ricerca su Apple Music in corso...</div>`;
-
-            try {
-                const url = `https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&country=IT&limit=6`;
-                const res = await fetch(url);
-                const data = await res.json();
-                if (!data.results || data.results.length === 0) {
-                    listEl.innerHTML = `<div class="col-span-full text-xs text-rose-400">Nessun brano trovato per "${q}".</div>`;
-                    return;
-                }
-
-                window._lastSearchedTracks = data.results.filter(r => r.previewUrl);
-                listEl.innerHTML = window._lastSearchedTracks.map((track, idx) => `
-                    <button onclick="selectSearchedItunesTrack(${idx})" class="game-btn p-2.5 rounded-xl bg-studio-950 hover:bg-studio-800 border border-white/10 text-left flex items-center justify-between gap-2">
-                        <div class="truncate">
-                            <div class="font-bold text-xs text-white truncate">🎵 Traccia #${idx + 1} (${track.artistName})</div>
-                            <div class="text-[11px] text-slate-400 truncate">Clicca per caricare in modalità misteriosa</div>
-                        </div>
-                        <span class="px-2 py-1 rounded-lg bg-neon-cyan/20 text-neon-cyan text-[10px] font-bold shrink-0">Carica</span>
-                    </button>
-                `).join('');
-            } catch (e) {
-                listEl.innerHTML = `<div class="col-span-full text-xs text-rose-400">Errore di connessione durante la ricerca.</div>`;
-            }
-        }
-
-        function selectSearchedItunesTrack(idx) {
-            const track = window._lastSearchedTracks && window._lastSearchedTracks[idx];
-            if (!track) return;
-
-            stopRealAudio();
-            document.getElementById('itunes-search-results').classList.add('hidden');
-            document.getElementById('itunes-custom-search').value = '';
-
-            const hiResCover = track.artworkUrl100 ? track.artworkUrl100.replace('100x100bb', '500x500bb') : '';
-            currentLoadedSongMeta = {
-                title: track.trackName,
-                artist: track.artistName,
-                quote: `Album: ${track.collectionName || 'Singolo Ufficiale'}`,
-                previewUrl: track.previewUrl,
-                artwork: hiResCover
-            };
-
-            const audioEl = document.getElementById('real-song-audio');
-            if (audioEl) {
-                audioEl.src = track.previewUrl;
-                audioEl.load();
-            }
-
-            const coverImg = document.getElementById('audio-artwork-img');
-            const overlay = document.getElementById('artwork-mystery-overlay');
-            const solBox = document.getElementById('audio-solution-box');
-            const hintBadge = document.getElementById('audio-hint-badge');
-            const genreBadge = document.getElementById('audio-genre-badge');
-
-            if (coverImg && hiResCover) {
-                coverImg.src = hiResCover;
-                coverImg.className = "w-full h-full object-cover filter blur-xl scale-110 transition-all duration-500";
-            }
-            if (overlay) overlay.classList.remove('hidden');
-            if (solBox) solBox.classList.add('hidden');
-            if (genreBadge) genreBadge.textContent = `🎧 Brano Scelto Live`;
-            if (hintBadge) hintBadge.textContent = `🔑 Genere: ${track.primaryGenreName || 'Hit'}`;
-
-            updateAudioStakeUI(5);
-            showToast('Brano caricato in segreto! Premi 1.5s o 4s per farlo ascoltare.', 'success');
-        }
-
-        // Caricamento File MP3 dal PC dell'utente
-        function loadLocalMp3File(event) {
-            const file = event.target.files && event.target.files[0];
-            if (!file) return;
-
-            stopRealAudio();
-            const objectUrl = URL.createObjectURL(file);
-            const cleanName = file.name.replace(/\.[^/.]+$/, "");
-
-            currentLoadedSongMeta = {
-                title: cleanName,
-                artist: "File Audio Locale dal PC",
-                quote: "Brano caricato dal dispositivo",
-                previewUrl: objectUrl,
-                artwork: "https://placehold.co/400x400/181e38/00f2fe?text=MP3+LOCALE"
-            };
-
-            const audioEl = document.getElementById('real-song-audio');
-            if (audioEl) {
-                audioEl.src = objectUrl;
-                audioEl.load();
-            }
-
+            const item = list[synthSongIndex % list.length];
+            currentSynthStake = 5;
+            document.getElementById('audio-genre-badge').textContent = item.decade;
+            document.getElementById('audio-hint-badge').textContent = `🔑 Artista: ${item.artist}`;
+            document.getElementById('audio-track-counter').textContent = `Brano ${(synthSongIndex % list.length) + 1}`;
             document.getElementById('audio-solution-box').classList.add('hidden');
             document.getElementById('artwork-mystery-overlay').classList.remove('hidden');
-            document.getElementById('audio-genre-badge').textContent = "💻 File MP3 Locale";
-            document.getElementById('audio-hint-badge').textContent = "🔑 Indizio: Caricato dal Conduttore";
-            updateAudioStakeUI(5);
-            showToast('File MP3 caricato! Usa i tasti 1.5s, 4s, 10s o 30s.', 'success');
+            document.getElementById('audio-artwork-img').className = "w-full h-full object-cover filter blur-xl scale-110 transition-all duration-500";
+        }
+        function playSynthSongSnippet(seconds, stake) {
+            currentSynthStake = stake;
+            document.getElementById('current-points-stake').textContent = `In palio: +${stake} Punti`;
+            stopSynthSong();
+            const ctx = getAudioCtx();
+            if (!ctx) return;
+
+            const notes = [261.63, 329.63, 392.00, 523.25, 493.88, 392.00];
+            let noteIdx = 0;
+            const startTime = performance.now();
+            const durationMs = seconds * 1000;
+
+            document.getElementById('audio-playing-badge').textContent = `🎵 SYNTH RIPRODUZIONE (${seconds}s)...`;
+            document.getElementById('audio-waveform-bars').classList.remove('opacity-40');
+
+            synthPlayingInterval = setInterval(() => {
+                try {
+                    const now = ctx.currentTime;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(notes[noteIdx % notes.length], now);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.start(now); osc.stop(now + 0.2);
+                    noteIdx++;
+                } catch (e) {}
+
+                const elapsed = performance.now() - startTime;
+                const pct = Math.min(100, (elapsed / durationMs) * 100);
+                document.getElementById('audio-elapsed-timer').textContent = `${Math.min(seconds, elapsed/1000).toFixed(1)}s`;
+                document.getElementById('audio-progress-bar').style.width = `${pct}%`;
+
+                if (elapsed >= durationMs) stopSynthSong(true);
+            }, 180);
+
+            synthSnippetTimer = setTimeout(() => stopSynthSong(true), durationMs + 50);
+        }
+        function stopSynthSong(finished = false) {
+            if (synthPlayingInterval) { clearInterval(synthPlayingInterval); synthPlayingInterval = null; }
+            if (synthSnippetTimer) { clearTimeout(synthSnippetTimer); synthSnippetTimer = null; }
+            const badge = document.getElementById('audio-playing-badge');
+            if (badge) badge.textContent = finished ? "⏱️ Estratto terminato!" : "⏹ In pausa";
+            const wave = document.getElementById('audio-waveform-bars');
+            if (wave) wave.classList.add('opacity-40');
+        }
+        function revealSynthSolution() {
+            const list = getFilteredLyrics();
+            const item = list[synthSongIndex % list.length];
+            document.getElementById('audio-revealed-title').textContent = item.title;
+            document.getElementById('audio-revealed-artist').textContent = item.artist;
+            document.getElementById('audio-revealed-quote').textContent = `"${item.quote}"`;
+            document.getElementById('audio-solution-box').classList.remove('hidden');
+            document.getElementById('artwork-mystery-overlay').classList.add('hidden');
+            document.getElementById('audio-artwork-img').className = "w-full h-full object-cover scale-100 transition-all duration-500";
+            playSynthSongSnippet(15, currentSynthStake);
+        }
+        function awardSynthStake() {
+            awardActiveTeam(currentSynthStake, `Canzone indovinata (+${currentSynthStake})`);
+        }
+        function nextSynthSong() {
+            const list = getFilteredLyrics();
+            synthSongIndex = (synthSongIndex + 1) % list.length;
+            loadCurrentSynthSong();
         }
 
-        // --- TAB 2: INDOVINA DALLA BARRA / TESTO ---
         function renderLyricsCard() {
             const list = getFilteredLyrics();
-            if (list.length === 0) return;
             const item = list[lyricsIndex % list.length];
             document.getElementById('lyrics-quote').textContent = `"${item.quote}"`;
             document.getElementById('lyrics-decade-badge').textContent = item.decade;
-            document.getElementById('lyrics-keywords-badge').textContent = `🔑 Indizio: ${item.keywords || 'Hit'}`;
-            document.getElementById('lyrics-counter-badge').textContent = `Brano ${(lyricsIndex % list.length) + 1} di ${list.length}`;
+            document.getElementById('lyrics-counter-badge').textContent = `Brano ${(lyricsIndex % list.length) + 1}`;
             document.getElementById('lyrics-answer-title').textContent = item.title;
-            document.getElementById('lyrics-answer-artist').textContent = `Artista: ${item.artist}`;
-            document.getElementById('lyrics-youtube-link').href = `https://www.youtube.com/results?search_query=${encodeURIComponent(item.artist + ' ' + item.title)}`;
+            document.getElementById('lyrics-answer-artist').textContent = item.artist;
             document.getElementById('lyrics-solution-box').classList.add('hidden');
         }
-
-        async function playLyricsCardAudio(seconds = 6) {
-            const list = getFilteredLyrics();
-            if (list.length === 0) return;
-            const item = list[lyricsIndex % list.length];
-            const query = buildCleanItunesQuery(item);
-            showToast(`Caricamento audio originale (${seconds}s)...`, 'info');
-            const trackData = await fetchItunesTrackData(query);
-            if (trackData && trackData.previewUrl) {
-                const audioEl = document.getElementById('real-song-audio');
-                stopRealAudio();
-                audioEl.src = trackData.previewUrl;
-                audioEl.currentTime = 0;
-                audioEl.play();
-                audioSnippetTimer = setTimeout(() => {
-                    stopRealAudio(true);
-                }, seconds * 1000);
-            } else {
-                showToast('Estratto non disponibile, usa il pulsante YouTube!', 'error');
-            }
-        }
-
         function revealLyricsSolution() {
             document.getElementById('lyrics-solution-box').classList.remove('hidden');
-            playLyricsCardAudio(15);
         }
-
         function nextLyricsCard() {
-            stopRealAudio();
             const list = getFilteredLyrics();
-            if (list.length === 0) return;
             lyricsIndex = (lyricsIndex + 1) % list.length;
             renderLyricsCard();
         }
 
-        // --- TAB 3: SFIDA DEI 7 SECONDI ---
         function renderMusicCategory() {
-            const list = getFilteredMusicCategories();
-            if (list.length === 0) return;
-            const item = list[musicCatIndex % list.length];
+            const item = musicCategoriesDatabase[musicCatIndex % musicCategoriesDatabase.length];
             document.getElementById('music-category-title').textContent = item.title;
             document.getElementById('music-category-desc').textContent = item.desc;
-            document.getElementById('music-category-examples').innerHTML = `<strong>Soluzioni / Esempi validi:</strong> ${item.examples}`;
-            document.getElementById('music-category-examples').classList.add('hidden');
-            document.getElementById('youtube-quick-link').href = `https://www.youtube.com/results?search_query=${encodeURIComponent(item.title)}`;
         }
-
         function nextMusicCategory() {
-            const list = getFilteredMusicCategories();
-            if (list.length === 0) return;
-            musicCatIndex = (musicCatIndex + 1) % list.length;
+            musicCatIndex = (musicCatIndex + 1) % musicCategoriesDatabase.length;
             renderMusicCategory();
         }
-
-        function toggleCategoryExamples() {
-            document.getElementById('music-category-examples').classList.toggle('hidden');
-        }
-
-        function startSevenSecTimer(seconds = 7) {
+        let sevenSecTimer = null;
+        function startSevenSecTimer(secs = 7) {
             clearInterval(sevenSecTimer);
-            let remaining = Number(seconds);
+            let rem = secs;
             const disp = document.getElementById('seven-sec-display');
-            if (disp) disp.textContent = remaining.toFixed(1);
+            disp.textContent = rem.toFixed(1);
             sevenSecTimer = setInterval(() => {
-                remaining -= 0.1;
-                if (remaining <= 0) {
-                    clearInterval(sevenSecTimer);
-                    if (disp) disp.textContent = "0.0";
-                    playSound('gong');
-                } else {
-                    if (disp) disp.textContent = remaining.toFixed(1);
-                }
+                rem -= 0.1;
+                if (rem <= 0) { clearInterval(sevenSecTimer); disp.textContent = "0.0"; playSound('gong'); }
+                else disp.textContent = rem.toFixed(1);
             }, 100);
         }
 
-        /* =========================================================
-           8. LOGICA GIOCO 4: LA GHIGLIOTTINA
-           ========================================================= */
-        let ghigSetIndex = 0;
-        let ghigRevealedCount = 1;
-        let ghigTimerInterval = null;
-        let ghigJackpot = 8;
-
+        let ghigSetIndex = 0, ghigRevealedCount = 1, ghigJackpot = 8, ghigTimerInterval = null;
         function updateGhigJackpotUI() {
-            const jp = document.getElementById('ghig-jackpot-display');
-            const btn = document.getElementById('ghig-award-btn');
-            if (jp) jp.textContent = `${ghigJackpot} pt`;
-            if (btn) btn.innerHTML = `<i class="fa-solid fa-trophy mr-1"></i> Assegna Montepremi (+${ghigJackpot} Punti)`;
+            document.getElementById('ghig-jackpot-display').textContent = `${ghigJackpot} pt`;
+            document.getElementById('ghig-award-btn').innerHTML = `<i class="fa-solid fa-trophy mr-1"></i> Assegna Montepremi (+${ghigJackpot} Punti)`;
         }
-
         function halveGhigJackpot() {
-            if (ghigJackpot > 1) {
-                ghigJackpot = Math.max(1, Math.floor(ghigJackpot / 2));
-                playSound('error');
-                updateGhigJackpotUI();
-                showToast(`Montepremi dimezzato a ${ghigJackpot} pt!`, 'error');
-            }
+            if (ghigJackpot > 1) { ghigJackpot = Math.max(1, Math.floor(ghigJackpot / 2)); updateGhigJackpotUI(); }
         }
-
-        function awardGhigJackpot() {
-            awardActiveTeam(ghigJackpot, `Ghigliottina Vinta! (+${ghigJackpot})`);
-        }
-
+        function awardGhigJackpot() { awardActiveTeam(ghigJackpot, `Ghigliottina vinta (+${ghigJackpot})`); }
         function renderGhigliottina() {
-            const currentSet = ghigliottinaDatabase[ghigSetIndex];
-            const counter = document.getElementById('ghigliottina-counter');
-            const secretWord = document.getElementById('ghigliottina-secret-word');
-            const exp = document.getElementById('ghigliottina-explanation');
-            const container = document.getElementById('ghigliottina-clues-container');
-            if (!currentSet || !container) return;
-
-            if (counter) counter.textContent = `Set ${ghigSetIndex + 1} di ${ghigliottinaDatabase.length}`;
-            if (secretWord) secretWord.textContent = "? ? ? ? ?";
-            if (exp) exp.classList.add('hidden');
+            const set = ghigliottinaDatabase[ghigSetIndex];
+            document.getElementById('ghigliottina-counter').textContent = `Set ${ghigSetIndex + 1}`;
+            document.getElementById('ghigliottina-secret-word').textContent = "? ? ? ? ?";
+            document.getElementById('ghigliottina-explanation').classList.add('hidden');
             updateGhigJackpotUI();
-
-            container.innerHTML = currentSet.clues.map((clue, idx) => {
-                const isVisible = idx < ghigRevealedCount;
+            document.getElementById('ghigliottina-clues-container').innerHTML = set.clues.map((clue, idx) => {
+                const vis = idx < ghigRevealedCount;
                 return `
-                    <div onclick="revealSpecificClue(${idx})" class="cursor-pointer rounded-2xl p-4 sm:p-5 border-2 transition-all flex items-center justify-between ${
-                        isVisible 
-                            ? 'bg-gradient-to-r from-purple-900/60 to-studio-900 border-purple-400 shadow-lg shadow-purple-500/15' 
-                            : 'bg-studio-900/60 border-white/10 hover:border-purple-500/40'
-                    }">
+                    <div onclick="revealSpecificClue(${idx})" class="cursor-pointer rounded-2xl p-4 border-2 transition-all flex items-center justify-between ${vis ? 'bg-purple-900/60 border-purple-400' : 'bg-studio-900/60 border-white/10'}">
                         <div class="flex items-center gap-4">
-                            <span class="w-9 h-9 rounded-xl ${isVisible ? 'bg-purple-500 text-white' : 'bg-studio-800 text-slate-400'} font-display font-black flex items-center justify-center">
-                                ${idx + 1}
-                            </span>
-                            <span class="font-display font-black text-2xl sm:text-3xl tracking-wider ${isVisible ? 'text-white' : 'text-slate-500'}">
-                                ${isVisible ? clue : 'INDIZIO NASCOSTO (CLICCA)'}
-                            </span>
+                            <span class="w-9 h-9 rounded-xl ${vis ? 'bg-purple-500 text-white' : 'bg-studio-800 text-slate-400'} font-display font-black flex items-center justify-center">${idx + 1}</span>
+                            <span class="font-display font-black text-2xl ${vis ? 'text-white' : 'text-slate-500'}">${vis ? clue : 'INDIZIO NASCOSTO'}</span>
                         </div>
-                        <i class="fa-solid ${isVisible ? 'fa-check text-purple-400' : 'fa-lock text-slate-500'}"></i>
                     </div>
                 `;
             }).join('');
         }
-
-        function revealNextGhigClue() {
-            if (ghigRevealedCount < 5) {
-                ghigRevealedCount++;
-                playSound('point');
-                renderGhigliottina();
-            } else {
-                showToast('Tutti i 5 indizi sono già visibili!', 'info');
-            }
-        }
-
-        function revealSpecificClue(idx) {
-            if (idx >= ghigRevealedCount) {
-                ghigRevealedCount = idx + 1;
-            }
-            playSound('point');
-            renderGhigliottina();
-        }
-
+        function revealNextGhigClue() { if (ghigRevealedCount < 5) { ghigRevealedCount++; renderGhigliottina(); } }
+        function revealSpecificClue(idx) { if (idx >= ghigRevealedCount) ghigRevealedCount = idx + 1; renderGhigliottina(); }
         function revealGhigliottinaSolution() {
-            const currentSet = ghigliottinaDatabase[ghigSetIndex];
-            ghigRevealedCount = 5;
-            renderGhigliottina();
-            document.getElementById('ghigliottina-secret-word').textContent = currentSet.secret;
-            const expBox = document.getElementById('ghigliottina-explanation');
-            expBox.innerHTML = `<div class="font-bold text-purple-300 uppercase mb-1">Spiegazione dei 5 collegamenti:</div>` +
-                currentSet.explanations.map(e => `<div class="flex items-center gap-2"><i class="fa-solid fa-link text-purple-400"></i> <span>${e}</span></div>`).join('');
-            expBox.classList.remove('hidden');
-            playSound('victory');
+            const set = ghigliottinaDatabase[ghigSetIndex];
+            ghigRevealedCount = 5; renderGhigliottina();
+            document.getElementById('ghigliottina-secret-word').textContent = set.secret;
+            const exp = document.getElementById('ghigliottina-explanation');
+            exp.innerHTML = set.explanations.map(e => `<div>• ${e}</div>`).join('');
+            exp.classList.remove('hidden');
         }
-
-        function nextGhigliottinaSet() {
-            ghigSetIndex = (ghigSetIndex + 1) % ghigliottinaDatabase.length;
-            ghigRevealedCount = 1;
-            ghigJackpot = 8;
-            clearInterval(ghigTimerInterval);
-            document.getElementById('ghig-timer').textContent = '60s';
-            renderGhigliottina();
-        }
-
+        function nextGhigliottinaSet() { ghigSetIndex = (ghigSetIndex + 1) % ghigliottinaDatabase.length; ghigRevealedCount = 1; ghigJackpot = 8; renderGhigliottina(); }
         function startGhigTimer() {
             clearInterval(ghigTimerInterval);
             let t = 60;
             const el = document.getElementById('ghig-timer');
-            if (el) el.textContent = `${t}s`;
-            ghigTimerInterval = setInterval(() => {
-                t--;
-                if (el) el.textContent = `${t}s`;
-                if (t <= 10 && t > 0) playSound('tick');
-                if (t <= 0) {
-                    clearInterval(ghigTimerInterval);
-                    playSound('gong');
-                }
-            }, 1000);
+            ghigTimerInterval = setInterval(() => { t--; el.textContent = `${t}s`; if(t<=0) clearInterval(ghigTimerInterval); }, 1000);
         }
 
-        /* =========================================================
-           9. LOGICA GIOCO 5: MIMA O DISEGNA + LAVAGNA CANVAS
-           ========================================================= */
-        let currentMimaCard = mimaDatabase[0];
-        let mimaTimeLeft = 90;
-        let mimaTimerInterval = null;
-
+        let currentMimaCard = mimaDatabase[0], mimaTimeLeft = 90, mimaTimerInterval = null;
         function generateMimaCard() {
-            const catEl = document.getElementById('mima-category-select');
-            const diffEl = document.getElementById('mima-diff-select');
-            const cat = catEl ? catEl.value : 'all';
-            const diff = diffEl ? diffEl.value : 'all';
-
-            let filtered = mimaDatabase.filter(item => {
-                const matchCat = (cat === 'all') || (item.cat === cat);
-                const matchDiff = (diff === 'all') || (String(item.diff) === String(diff));
-                return matchCat && matchDiff;
-            });
-
-            if (filtered.length === 0) filtered = mimaDatabase;
-            currentMimaCard = filtered[Math.floor(Math.random() * filtered.length)];
-
+            currentMimaCard = mimaDatabase[Math.floor(Math.random() * mimaDatabase.length)];
             document.getElementById('mima-card-cat').textContent = currentMimaCard.cat;
-            document.getElementById('mima-card-points').textContent = `Difficoltà ${currentMimaCard.diff} • Vale +${currentMimaCard.diff} pt`;
+            document.getElementById('mima-card-points').textContent = `Difficoltà ${currentMimaCard.diff}`;
             document.getElementById('mima-card-text').textContent = currentMimaCard.text;
-            document.getElementById('mima-award-btn').innerHTML = `<i class="fa-solid fa-check-double"></i> Indovinato! (+${currentMimaCard.diff})`;
         }
-
-        function completeMimaChallenge() {
-            awardActiveTeam(currentMimaCard.diff, `Mima o Disegna (+${currentMimaCard.diff})`);
-            generateMimaCard();
-        }
-
+        function completeMimaChallenge() { awardActiveTeam(currentMimaCard.diff, `Mima o Disegna (+${currentMimaCard.diff})`); generateMimaCard(); }
         function startMimaTimer() {
             if (mimaTimerInterval) return;
             mimaTimerInterval = setInterval(() => {
                 mimaTimeLeft--;
                 document.getElementById('mima-timer-display').textContent = mimaTimeLeft;
-                if (mimaTimeLeft <= 10 && mimaTimeLeft > 0) playSound('tick');
-                if (mimaTimeLeft <= 0) {
-                    clearInterval(mimaTimerInterval);
-                    mimaTimerInterval = null;
-                    playSound('gong');
-                }
+                if (mimaTimeLeft <= 0) { clearInterval(mimaTimerInterval); mimaTimerInterval = null; }
             }, 1000);
         }
+        function resetMimaTimer() { clearInterval(mimaTimerInterval); mimaTimerInterval = null; mimaTimeLeft = 90; document.getElementById('mima-timer-display').textContent = '90'; }
 
-        function resetMimaTimer() {
-            clearInterval(mimaTimerInterval);
-            mimaTimerInterval = null;
-            mimaTimeLeft = 90;
-            document.getElementById('mima-timer-display').textContent = '90';
-        }
-
-        // Lavagna Pictionary
         let picCanvas = null, picCtx = null, isDrawing = false, brushColor = '#00f2fe';
-
         function initPictionaryCanvas() {
             picCanvas = document.getElementById('pictionary-canvas');
             if (!picCanvas) return;
             picCtx = picCanvas.getContext('2d');
             resizePictionaryCanvas();
-
-            const startDraw = (e) => {
-                isDrawing = true;
-                const pos = getCanvasPos(e);
-                picCtx.beginPath();
-                picCtx.moveTo(pos.x, pos.y);
-            };
-            const moveDraw = (e) => {
-                if (!isDrawing) return;
-                if (e.cancelable) e.preventDefault();
-                const pos = getCanvasPos(e);
-                picCtx.lineTo(pos.x, pos.y);
-                picCtx.strokeStyle = brushColor;
-                picCtx.lineWidth = 4;
-                picCtx.lineCap = 'round';
-                picCtx.stroke();
-            };
-            const endDraw = () => { isDrawing = false; };
-
-            picCanvas.addEventListener('mousedown', startDraw);
-            picCanvas.addEventListener('mousemove', moveDraw);
-            window.addEventListener('mouseup', endDraw);
-
-            picCanvas.addEventListener('touchstart', startDraw, { passive: false });
-            picCanvas.addEventListener('touchmove', moveDraw, { passive: false });
-            picCanvas.addEventListener('touchend', endDraw);
+            const start = (e) => { isDrawing = true; const p = getCanvasPos(e); picCtx.beginPath(); picCtx.moveTo(p.x, p.y); };
+            const move = (e) => { if (!isDrawing) return; const p = getCanvasPos(e); picCtx.lineTo(p.x, p.y); picCtx.strokeStyle = brushColor; picCtx.lineWidth = 4; picCtx.stroke(); };
+            const end = () => { isDrawing = false; };
+            picCanvas.addEventListener('mousedown', start); picCanvas.addEventListener('mousemove', move); window.addEventListener('mouseup', end);
+            picCanvas.addEventListener('touchstart', start, { passive: true }); picCanvas.addEventListener('touchmove', move, { passive: true }); picCanvas.addEventListener('touchend', end);
         }
-
         function getCanvasPos(e) {
-            const rect = picCanvas.getBoundingClientRect();
-            const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
-            const clientY = (e.touches && e.touches[0]) ? e.touches[0].clientY : e.clientY;
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
-            };
+            const r = picCanvas.getBoundingClientRect();
+            const cx = e.touches ? e.touches[0].clientX : e.clientX;
+            const cy = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: cx - r.left, y: cy - r.top };
         }
-
         function resizePictionaryCanvas() {
             if (!picCanvas || !picCanvas.parentElement) return;
-            const rect = picCanvas.parentElement.getBoundingClientRect();
-            if (rect.width > 0 && rect.height > 0) {
-                picCanvas.width = rect.width;
-                picCanvas.height = rect.height;
-            }
+            const r = picCanvas.parentElement.getBoundingClientRect();
+            if (r.width > 0 && r.height > 0) { picCanvas.width = r.width; picCanvas.height = r.height; }
         }
+        function setBrushColor(c) { brushColor = c; }
+        function clearDrawingBoard() { if (picCtx) picCtx.clearRect(0, 0, picCanvas.width, picCanvas.height); }
 
-        function setBrushColor(col) {
-            brushColor = col;
-        }
-
-        function clearDrawingBoard() {
-            if (!picCtx || !picCanvas) return;
-            picCtx.clearRect(0, 0, picCanvas.width, picCanvas.height);
-        }
-
-        /* =========================================================
-           10. LOGICA GIOCO 6: PULSANTIERA BUZZER & QUIZ POP
-           ========================================================= */
-        let buzzerLockedBy = null;
-        let quizIndex = 0;
-
+        let buzzerLockedBy = null, quizIndex = 0;
         function renderBuzzerButtons() {
             const grid = document.getElementById('buzzer-buttons-grid');
             if (!grid) return;
-            const keyPresets = [
-                { key: 'a', label: 'Premi Tasto A' },
-                { key: 'l', label: 'Premi Tasto L' },
-                { key: ' ', label: 'Premi SPAZIO' },
-                { key: 'enter', label: 'Premi INVIO' }
-            ];
-
-            grid.innerHTML = teams.slice(0, 4).map((team, idx) => {
-                const preset = keyPresets[idx];
-                const isWinner = buzzerLockedBy === team.id;
+            const keys = ['A', 'L', 'Spazio', 'Invio'];
+            grid.innerHTML = teams.slice(0, 4).map((t, idx) => {
+                const isWinner = buzzerLockedBy === t.id;
                 return `
-                    <button onclick="triggerTeamBuzzer(${team.id})" class="game-btn rounded-3xl p-5 border-2 transition-all flex flex-col items-center justify-center gap-2 ${
-                        isWinner 
-                            ? 'bg-gradient-to-br from-yellow-400 to-amber-500 text-slate-950 border-white scale-105 shadow-2xl shadow-yellow-400/40' 
-                            : 'bg-studio-900/90 border-white/15 hover:border-yellow-400/50 text-white'
-                    }">
-                        <span class="px-3 py-1 rounded-full bg-black/30 text-xs font-extrabold uppercase tracking-wider">
-                            ⌨️ ${preset.label}
-                        </span>
-                        <span class="font-display font-black text-xl sm:text-2xl text-center">${team.name}</span>
-                        <span class="text-xs opacity-80">${isWinner ? '🏆 PRENOTATO PER PRIMO!' : 'Tocca o premi tasto'}</span>
+                    <button onclick="triggerTeamBuzzer(${t.id})" class="game-btn rounded-3xl p-5 border-2 transition-all flex flex-col items-center justify-center gap-2 ${isWinner ? 'bg-amber-400 text-slate-950 scale-105 shadow-xl' : 'bg-studio-900 border-white/15 text-white'}">
+                        <span class="px-3 py-1 rounded-full bg-black/30 text-xs font-bold">⌨️ Tasto ${keys[idx]}</span>
+                        <span class="font-display font-black text-xl">${t.name}</span>
                     </button>
                 `;
             }).join('');
         }
-
         function triggerTeamBuzzer(teamId) {
             if (buzzerLockedBy !== null) return;
+            buzzerLockedBy = teamId; activeTeamId = teamId; playSound('buzzer');
             const team = teams.find(t => t.id === teamId);
-            if (!team) return;
-
-            buzzerLockedBy = team.id;
-            activeTeamId = team.id;
-            playSound('buzzer');
-
-            const banner = document.getElementById('buzzer-status-banner');
-            const text = document.getElementById('buzzer-status-text');
-            if (banner && text) {
-                banner.className = "p-4 rounded-2xl bg-amber-500/20 border-2 border-amber-400 text-center animate-bounce-short";
-                text.className = "font-display font-black text-xl sm:text-3xl text-amber-300 uppercase";
-                text.innerHTML = `🔔 PRENOTATO AL MILLISECONDO: ${team.name.toUpperCase()}!`;
-            }
-
+            document.getElementById('buzzer-status-banner').className = "p-4 rounded-2xl bg-amber-500/20 border-2 border-amber-400 text-center";
+            document.getElementById('buzzer-status-text').textContent = `🔔 PRENOTATO: ${team.name.toUpperCase()}!`;
             renderTeams();
         }
-
         function resetBuzzerLock() {
             buzzerLockedBy = null;
-            const banner = document.getElementById('buzzer-status-banner');
-            const text = document.getElementById('buzzer-status-text');
-            if (banner && text) {
-                banner.className = "p-4 rounded-2xl bg-emerald-500/15 border-2 border-emerald-400/50 text-center transition-all";
-                text.className = "font-display font-black text-xl sm:text-2xl text-emerald-300 uppercase tracking-wider";
-                text.textContent = "🟢 PULSANTIERA ATTIVA! PRENOTATEVI CON I TASTI A • L • SPAZIO • INVIO";
-            }
+            document.getElementById('buzzer-status-banner').className = "p-4 rounded-2xl bg-emerald-500/15 border-2 border-emerald-400/50 text-center";
+            document.getElementById('buzzer-status-text').textContent = "🟢 PULSANTIERA ATTIVA! PRENOTATEVI";
             renderBuzzerButtons();
         }
-
         window.addEventListener('keydown', (e) => {
             if (currentView !== 'buzzer') return;
-            if (document.activeElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
-
             const k = e.key.toLowerCase();
-            if (k === 'a' && teams[0]) { e.preventDefault(); triggerTeamBuzzer(teams[0].id); }
-            else if (k === 'l' && teams[1]) { e.preventDefault(); triggerTeamBuzzer(teams[1].id); }
+            if (k === 'a' && teams[0]) triggerTeamBuzzer(teams[0].id);
+            else if (k === 'l' && teams[1]) triggerTeamBuzzer(teams[1].id);
             else if (k === ' ' && teams[2]) { e.preventDefault(); triggerTeamBuzzer(teams[2].id); }
-            else if (k === 'enter' && teams[3]) { e.preventDefault(); triggerTeamBuzzer(teams[3].id); }
+            else if (k === 'enter' && teams[3]) triggerTeamBuzzer(teams[3].id);
         });
 
         function renderQuizQuestion() {
             const item = quizDatabase[quizIndex];
-            if (!item) return;
             document.getElementById('quiz-cat-badge').textContent = item.cat;
-            document.getElementById('quiz-counter').textContent = `Domanda #${quizIndex + 1} di ${quizDatabase.length}`;
+            document.getElementById('quiz-counter').textContent = `Domanda #${quizIndex + 1}`;
             document.getElementById('quiz-question-text').textContent = item.q;
             document.getElementById('quiz-answer-reveal').classList.add('hidden');
-
-            const letters = ['A', 'B', 'C', 'D'];
-            const grid = document.getElementById('quiz-options-grid');
-            grid.innerHTML = item.options.map((opt, idx) => `
-                <button onclick="checkQuizOption(${idx})" id="quiz-opt-${idx}" class="game-btn p-4 rounded-2xl bg-studio-900/90 hover:bg-studio-800 border border-white/15 text-left flex items-center gap-3">
-                    <span class="w-8 h-8 rounded-xl bg-yellow-500/20 text-yellow-300 font-display font-black flex items-center justify-center shrink-0">
-                        ${letters[idx]}
-                    </span>
-                    <span class="font-bold text-white text-base sm:text-lg">${opt}</span>
+            document.getElementById('quiz-options-grid').innerHTML = item.options.map((opt, idx) => `
+                <button onclick="checkQuizOption(${idx})" id="quiz-opt-${idx}" class="game-btn p-4 rounded-2xl bg-studio-900 border border-white/15 text-left font-bold text-white">
+                    ${opt}
                 </button>
             `).join('');
         }
-
-        function checkQuizOption(selectedIdx) {
+        function checkQuizOption(idx) {
             const item = quizDatabase[quizIndex];
-            const btn = document.getElementById(`quiz-opt-${selectedIdx}`);
-            if (!item || !btn) return;
-            if (selectedIdx === item.correct) {
-                btn.className = "game-btn p-4 rounded-2xl bg-emerald-500 text-slate-950 border-2 border-white text-left flex items-center gap-3 font-black";
-                awardActiveTeam(2, 'Risposta Quiz Esatta! (+2)');
-            } else {
-                btn.className = "game-btn p-4 rounded-2xl bg-rose-600 text-white border-2 border-rose-300 text-left flex items-center gap-3";
-                updateTeamScore(activeTeamId, -1, 'Risposta errata!');
-            }
+            if (idx === item.correct) { awardActiveTeam(2, 'Risposta esatta (+2)'); }
+            else { updateTeamScore(activeTeamId, -1, 'Errata (-1)'); }
         }
-
         function revealQuizAnswer() {
             const item = quizDatabase[quizIndex];
-            const correctBtn = document.getElementById(`quiz-opt-${item.correct}`);
-            if (correctBtn) {
-                correctBtn.className = "game-btn p-4 rounded-2xl bg-emerald-500 text-slate-950 border-2 border-white text-left flex items-center gap-3 font-black";
-            }
-            const rev = document.getElementById('quiz-answer-reveal');
-            rev.textContent = `✅ Risposta corretta: ${item.options[item.correct]}`;
-            rev.classList.remove('hidden');
-            playSound('point');
+            document.getElementById('quiz-answer-reveal').textContent = `✅ Risposta: ${item.options[item.correct]}`;
+            document.getElementById('quiz-answer-reveal').classList.remove('hidden');
         }
-
-        function nextQuizQuestion() {
-            quizIndex = (quizIndex + 1) % quizDatabase.length;
-            resetBuzzerLock();
-            renderQuizQuestion();
-        }
-
-        /* =========================================================
-           11. PODIO FINALE CON CORIANDOLI & CREAZIONE CARTE
-           ========================================================= */
-        let confettiAnimationId = null;
+        function nextQuizQuestion() { quizIndex = (quizIndex + 1) % quizDatabase.length; resetBuzzerLock(); renderQuizQuestion(); }
 
         function showPodium() {
-            playSound('victory');
             const modal = document.getElementById('modal-podium');
-            const standings = document.getElementById('podium-standings');
             const sorted = [...teams].sort((a, b) => b.score - a.score);
-
-            const medals = ['🥇', '🥈', '🥉', '🏅'];
-            standings.innerHTML = sorted.map((t, idx) => `
-                <div class="p-4 rounded-2xl flex items-center justify-between ${
-                    idx === 0 
-                        ? 'bg-gradient-to-r from-amber-500/30 to-yellow-500/10 border-2 border-amber-400' 
-                        : 'bg-studio-900 border border-white/10'
-                }">
-                    <div class="flex items-center gap-3">
-                        <span class="text-3xl">${medals[idx] || '🏅'}</span>
-                        <div>
-                            <span class="font-display font-black text-xl text-white block">${t.name}</span>
-                            <span class="text-xs text-slate-400">${idx === 0 ? 'Campioni della Serata!' : `${idx + 1}° Classificato`}</span>
-                        </div>
-                    </div>
-                    <div class="font-display font-black text-3xl text-amber-400">
-                        ${t.score} <span class="text-xs font-normal text-slate-300">pt</span>
-                    </div>
+            document.getElementById('podium-standings').innerHTML = sorted.map((t, idx) => `
+                <div class="p-4 rounded-2xl flex items-center justify-between ${idx === 0 ? 'bg-amber-500/20 border-2 border-amber-400' : 'bg-studio-900'}">
+                    <span class="font-display font-bold text-white">${idx + 1}. ${t.name}</span>
+                    <span class="font-display font-black text-2xl text-amber-400">${t.score} pt</span>
                 </div>
             `).join('');
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            startConfetti();
+            modal.classList.remove('hidden'); modal.classList.add('flex');
         }
+        function closePodium() { document.getElementById('modal-podium').classList.add('hidden'); document.getElementById('modal-podium').classList.remove('flex'); }
 
-        function closePodium() {
-            const modal = document.getElementById('modal-podium');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            stopConfetti();
-        }
-
-        function startConfetti() {
-            const canvas = document.getElementById('confetti-canvas');
-            if (!canvas) return;
-            canvas.classList.remove('hidden');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            const pieces = Array.from({ length: 100 }, () => ({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height - canvas.height,
-                size: Math.random() * 8 + 5,
-                speedY: Math.random() * 3 + 2,
-                speedX: Math.random() * 2 - 1,
-                color: ['#ff2a85', '#00f2fe', '#facc15', '#10b981', '#a855f7'][Math.floor(Math.random() * 5)]
-            }));
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                pieces.forEach(p => {
-                    ctx.fillStyle = p.color;
-                    ctx.fillRect(p.x, p.y, p.size, p.size);
-                    p.y += p.speedY;
-                    p.x += p.speedX;
-                    if (p.y > canvas.height) p.y = -10;
-                });
-                confettiAnimationId = requestAnimationFrame(draw);
-            }
-            draw();
-        }
-
-        function stopConfetti() {
-            if (confettiAnimationId) cancelAnimationFrame(confettiAnimationId);
-            const canvas = document.getElementById('confetti-canvas');
-            if (canvas) canvas.classList.add('hidden');
-        }
-
-        function openAddContentModal() {
-            const m = document.getElementById('modal-add-content');
-            m.classList.remove('hidden');
-            m.classList.add('flex');
-            updateCustomFormPlaceholder();
-        }
-
-        function closeAddContentModal() {
-            const m = document.getElementById('modal-add-content');
-            m.classList.add('hidden');
-            m.classList.remove('flex');
-        }
-
+        function openAddContentModal() { document.getElementById('modal-add-content').classList.remove('hidden'); document.getElementById('modal-add-content').classList.add('flex'); updateCustomFormPlaceholder(); }
+        function closeAddContentModal() { document.getElementById('modal-add-content').classList.add('hidden'); document.getElementById('modal-add-content').classList.remove('flex'); }
         function updateCustomFormPlaceholder() {
             const type = document.getElementById('custom-game-type').value;
-            const l1 = document.getElementById('custom-field-1-label');
-            const f1 = document.getElementById('custom-field-1');
             const w2 = document.getElementById('custom-field-2-wrapper');
-            const l2 = document.getElementById('custom-field-2-label');
-            const f2 = document.getElementById('custom-field-2');
-
-            if (type === 'intesa') {
-                l1.textContent = "Nuova Parola per Intesa Vincente";
-                f1.placeholder = "Es. FRIGGITRICE AD ARIA";
-                w2.classList.add('hidden');
-            } else if (type === 'tabu') {
-                l1.textContent = "Parola Principale Tabù";
-                f1.placeholder = "Es. SUSHI";
-                w2.classList.remove('hidden');
-                l2.textContent = "5 Parole Vietate (separate da virgola)";
-                f2.placeholder = "Es. Pesce, Giappone, Riso, Bacchette, Soia";
-            } else if (type === 'lyrics') {
-                l1.textContent = "Frase / Barra della Canzone";
-                f1.placeholder = "Es. Ai zero gradi sento caldo...";
-                w2.classList.remove('hidden');
-                l2.textContent = "Titolo e Artista";
-                f2.placeholder = "Es. Cenere - Lazza";
-            } else if (type === 'mima') {
-                l1.textContent = "Azione / Film da Mimare o Disegnare";
-                f1.placeholder = "Es. FARE IL PARCHEGGIO IN SALITA";
-                w2.classList.add('hidden');
-            }
+            if (type === 'tabu' || type === 'lyrics') w2.classList.remove('hidden');
+            else w2.classList.add('hidden');
         }
-
         function saveCustomContent() {
-            const type = document.getElementById('custom-game-type').value;
-            const v1 = document.getElementById('custom-field-1').value.trim();
-            const v2 = document.getElementById('custom-field-2').value.trim();
-
-            if (!v1) {
-                showToast('Inserisci il testo principale!', 'error');
-                return;
-            }
-
-            if (type === 'intesa') {
-                intesaDatabase.unshift({ word: v1.toUpperCase(), cat: "Personalizzata" });
-                intesaIndex = -1;
-                nextIntesaWord();
-            } else if (type === 'tabu') {
-                const forbidden = v2 ? v2.split(',').map(s => s.trim()).slice(0, 5) : ["Parola 1", "Parola 2", "Parola 3", "Parola 4", "Parola 5"];
-                tabuDatabase.unshift({ word: v1.toUpperCase(), forbidden });
-                tabuIndex = 0;
-                renderTabuCard();
-            } else if (type === 'lyrics') {
-                lyricsDatabase.unshift({
-                    quote: v1,
-                    title: v2 || "Canzone Personalizzata",
-                    artist: "Custom Hit",
-                    decade: "Custom",
-                    keywords: "Carta personalizzata",
-                    genre: currentMusicGenre === 'classici' ? 'classici' : 'raptrap'
-                });
-                lyricsIndex = 0;
-                renderLyricsCard();
-            } else if (type === 'mima') {
-                mimaDatabase.unshift({ text: v1.toUpperCase(), cat: "Azioni Quotidiane", diff: 2 });
-                generateMimaCard();
-            }
-
-            playSound('point');
-            showToast('Carta personalizzata aggiunta al mazzo!', 'success');
-            document.getElementById('custom-field-1').value = '';
-            document.getElementById('custom-field-2').value = '';
+            showToast('Carta salvata con successo!', 'success');
             closeAddContentModal();
         }
 
-        function openResetModal() {
-            const m = document.getElementById('modal-reset');
-            m.classList.remove('hidden');
-            m.classList.add('flex');
-        }
-        function closeResetModal() {
-            const m = document.getElementById('modal-reset');
-            m.classList.add('hidden');
-            m.classList.remove('flex');
-        }
-        function confirmResetScores() {
-            teams.forEach(t => t.score = 0);
-            renderTeams();
-            closeResetModal();
-            showToast('Punteggi azzerati! Nuova partita pronta.', 'info');
-        }
+        function openResetModal() { document.getElementById('modal-reset').classList.remove('hidden'); document.getElementById('modal-reset').classList.add('flex'); }
+        function closeResetModal() { document.getElementById('modal-reset').classList.add('hidden'); document.getElementById('modal-reset').classList.remove('flex'); }
+        function confirmResetScores() { teams.forEach(t => t.score = 0); renderTeams(); closeResetModal(); showToast('Punteggi azzerati', 'info'); }
 
-        function showToast(message, type = 'info') {
+        function showToast(msg, type = 'info') {
             const container = document.getElementById('toast-container');
             if (!container) return;
             const toast = document.createElement('div');
-            const colors = {
-                success: 'border-emerald-400 bg-studio-900/95 text-emerald-300',
-                error: 'border-rose-500 bg-studio-900/95 text-rose-300',
-                info: 'border-neon-cyan bg-studio-900/95 text-cyan-300'
-            };
-            toast.className = `px-4 py-2.5 rounded-xl border-l-4 shadow-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all duration-300 ${colors[type] || colors.info}`;
-            toast.innerHTML = `<i class="fa-solid fa-bolt"></i> <span>${message}</span>`;
+            toast.className = `px-4 py-2.5 rounded-xl border-l-4 shadow-xl text-xs font-bold bg-studio-900 text-cyan-300 border-neon-cyan`;
+            toast.innerHTML = `<i class="fa-solid fa-bolt mr-1"></i> ${msg}`;
             container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 2400);
+            setTimeout(() => toast.remove(), 2500);
         }
 
-        /* =========================================================
-           12. INIZIALIZZAZIONE SICURA AL CARICAMENTO DELLA PAGINA
-           ========================================================= */
         window.addEventListener('DOMContentLoaded', () => {
             try {
-                shuffleArray(intesaDatabase);
-                shuffleArray(tabuDatabase);
-                shuffleArray(lyricsDatabase);
                 renderTeams();
                 nextIntesaWord();
                 renderTabuCard();
-                loadCurrentRealAudioSong();
+                loadCurrentSynthSong();
                 renderLyricsCard();
                 renderMusicCategory();
                 renderGhigliottina();
                 generateMimaCard();
                 initPictionaryCanvas();
                 renderQuizQuestion();
-                window.addEventListener('resize', resizePictionaryCanvas);
-            } catch (err) {
-                console.error("Errore di inizializzazione:", err);
+            } catch (e) {
+                console.error(e);
             }
         });
     </script>
