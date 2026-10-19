@@ -326,7 +326,7 @@
             </div>
         </section>
 
-        <!-- VISTA 3: INDOVINA LA CANZONE (REALE & UFFICIALE) -->
+        <!-- VISTA 3: INDOVINA LA CANZONE (RANDOM & AUDIO ORIGINALE) -->
         <section id="view-canzone" class="hidden space-y-6">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 glass-panel p-4 rounded-2xl border border-amber-500/30">
                 <div class="flex items-center gap-3">
@@ -334,28 +334,30 @@
                         <i class="fa-solid fa-music"></i>
                     </div>
                     <div>
-                        <h2 class="font-display font-black text-2xl text-white">INDOVINA LA CANZONE (Vero Audio Ufficiale)</h2>
-                        <p class="text-xs text-slate-300">Ascolta anteprime originali o cerca qualsiasi canzone al mondo</p>
+                        <h2 class="font-display font-black text-2xl text-white">INDOVINA LA CANZONE (Canzoni Random & Originali)</h2>
+                        <p class="text-xs text-slate-300">Estrai a sorteggio tra oltre 40 hit italiane (Rap, Trap, Pop)</p>
                     </div>
                 </div>
                 
                 <div class="flex items-center gap-2">
                     <button onclick="unlockPhoneAudio()" id="unlock-audio-btn" class="game-btn px-4 py-2 rounded-xl bg-neon-pink text-white font-bold text-xs shadow-lg shadow-neon-pink/30 animate-pulse">
-                        <i class="fa-solid fa-volume-high mr-1.5"></i> 1. Clicca per Sbloccare Audio
+                        <i class="fa-solid fa-volume-high mr-1.5"></i> 🔓 Sblocca Audio sul Telefono
                     </button>
                 </div>
             </div>
 
-            <!-- Pannello di Ricerca Canzoni Live -->
+            <!-- Pannello di Estrazione Random & Ricerca -->
             <div class="glass-panel p-4 rounded-2xl border border-white/10 flex flex-col sm:flex-row gap-3 items-center justify-between">
                 <div class="flex flex-wrap gap-2 items-center w-full sm:w-auto">
+                    <button onclick="getRandomSong()" class="game-btn px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-display font-black text-xs shadow-lg shadow-amber-500/30">
+                        <i class="fa-solid fa-dice mr-1.5"></i> 🎲 Estrai Canzone Casuale
+                    </button>
                     <button onclick="loadPresetSong('Lazza Cenere')" class="px-3 py-1.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-xs hover:bg-amber-500 hover:text-slate-950">🔥 Lazza</button>
                     <button onclick="loadPresetSong('Geolier I P Me Tu P Te')" class="px-3 py-1.5 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 font-bold text-xs hover:bg-cyan-500 hover:text-slate-950">🔥 Geolier</button>
                     <button onclick="loadPresetSong('Sfera Ebbasta Tran Tran')" class="px-3 py-1.5 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-300 font-bold text-xs hover:bg-purple-500 hover:text-slate-950">🔥 Sfera</button>
-                    <button onclick="loadPresetSong('Marracash Guè')" class="px-3 py-1.5 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold text-xs hover:bg-rose-500 hover:text-slate-950">🔥 Marracash</button>
                 </div>
                 <div class="flex gap-2 w-full sm:w-auto">
-                    <input type="text" id="song-search-input" placeholder="Cerca artista o canzone..." class="bg-studio-950 border border-white/15 rounded-xl px-3 py-2 text-xs text-white w-full sm:w-52 focus:outline-none focus:border-amber-400">
+                    <input type="text" id="song-search-input" placeholder="Cerca artista o canzone..." class="bg-studio-950 border border-white/15 rounded-xl px-3 py-2 text-xs text-white w-full sm:w-48 focus:outline-none focus:border-amber-400">
                     <button onclick="searchItunesSong()" class="game-btn px-4 py-2 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs shrink-0">
                         <i class="fa-solid fa-magnifying-glass"></i> Cerca
                     </button>
@@ -369,10 +371,10 @@
                 </div>
 
                 <div class="relative w-48 h-48 sm:w-56 sm:h-56 mx-auto rounded-3xl overflow-hidden border-4 border-amber-400/40 shadow-2xl bg-studio-950 flex items-center justify-center">
-                    <img id="song-cover-img" src="https://placehold.co/400x400/1e293b/facc15?text=Carica+Brano" alt="Album Cover" class="w-full h-full object-cover filter blur-xl scale-110 transition-all duration-700">
+                    <img id="song-cover-img" src="https://placehold.co/400x400/1e293b/facc15?text=Premi+Estrai" alt="Album Cover" class="w-full h-full object-cover filter blur-xl scale-110 transition-all duration-700">
                     <div id="song-cover-overlay" class="absolute inset-0 bg-studio-950/75 flex flex-col items-center justify-center p-4">
                         <i class="fa-solid fa-compact-disc text-5xl text-amber-400 animate-spin mb-2" style="animation-duration:4s"></i>
-                        <span id="song-prompt-text" class="font-display font-black text-sm uppercase text-white">Scegli una canzone per iniziare</span>
+                        <span id="song-prompt-text" class="font-display font-black text-sm uppercase text-white">Clicca "Estrai Canzone Casuale"</span>
                         <span id="song-points-badge" class="mt-2 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-black text-xs">In Palio: +5 Punti</span>
                     </div>
                 </div>
@@ -395,7 +397,7 @@
                             ⏹ Stop
                         </button>
                     </div>
-                    <p id="audio-status-text" class="text-xs text-amber-300 font-bold">💡 Ricordati di cliccare "Sblocca Audio" in alto la prima volta!</p>
+                    <p id="audio-status-text" class="text-xs text-amber-300 font-bold">💡 Ricordati di cliccare "Sblocca Audio sul Telefono" in alto prima di ascoltare!</p>
                 </div>
 
                 <div id="song-solution-box" class="hidden p-5 rounded-2xl bg-emerald-950/90 border-2 border-emerald-400 space-y-2">
@@ -588,7 +590,7 @@
             });
             if (viewName === 'mima') setTimeout(resizePictionaryCanvas, 50);
             if (viewName === 'buzzer') renderBuzzerButtons();
-            if (viewName === 'canzone' && !currentSong) loadPresetSong('Lazza Cenere');
+            if (viewName === 'canzone' && !currentSong) getRandomSong();
         }
 
         function renderTeams() {
@@ -635,8 +637,17 @@
             showToast(`Squadra "${name}" aggiunta!`, 'success');
         }
 
-        /* --- MOTORE CANZONI CON API ITUNES REALI --- */
+        /* --- MOTORE CANZONI RANDOM & API ITUNES REALI --- */
         let currentSong = null, activeAudio = null, currentSongStake = 5;
+
+        const randomSongQueries = [
+            "Lazza Cenere", "Geolier I P Me Tu P Te", "Sfera Ebbasta Tran Tran", "Marracash La Fama", 
+            "Blanco Brividi", "Ghali Casa Mia", "Salmo 90min", "Capo Plaza Giovane Fuoriclasse", 
+            "Tedua Lo-Fi For U", "Shiva Auto Blu", "Fabri Fibra Stavo Pensando A Te", "Club Dogo Pes", 
+            "Annalisa Saa Paradise", "Mahmood Tuta Gold", "Tananai Tango", "Rosa Chemical Made In Italy", 
+            "Colapesce Dimartino Musica Leggerissima", "Ultimo I Tuoi Particolari", "Pinguini Tattici Nucleari Ringo Starr",
+            "Jovanotti Il Piu Grande Spettacolo", "Vasco Rossi Una Vita In Vacanza", "Ligabue Urlando Contro Il Cielo"
+        ];
 
         function unlockPhoneAudio() {
             activeAudio = new Audio();
@@ -649,10 +660,16 @@
             showToast("Audio sbloccato correttamente sul telefono!", "success");
         }
 
-        async function searchItunesSong() {
+        async function getRandomSong() {
+            const randomQuery = randomSongQueries[Math.floor(Math.random() * randomSongQueries.length)];
+            document.getElementById('song-search-input').value = randomQuery;
+            await searchItunesSong(true);
+        }
+
+        async function searchItunesSong(isRandom = false) {
             const query = document.getElementById('song-search-input').value.trim();
             if (!query) return;
-            showToast("Ricerca brano in corso...", "info");
+            if (!isRandom) showToast("Ricerca brano in corso...", "info");
             try {
                 const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=1&country=IT`);
                 const data = await res.json();
@@ -664,7 +681,7 @@
                         previewUrl: item.previewUrl,
                         artwork: item.artworkUrl100.replace('100x100bb', '600x600bb')
                     });
-                    showToast(`Trovato: ${item.trackName} - ${item.artistName}`, "success");
+                    if (!isRandom) showToast(`Trovato: ${item.trackName} - ${item.artistName}`, "success");
                 } else {
                     showToast("Nessun brano trovato, riprova.", "error");
                 }
@@ -682,11 +699,11 @@
             stopSong();
             currentSong = song;
             currentSongStake = 5;
-            document.getElementById('song-track-info').textContent = "Brano Ufficiale Caricato";
+            document.getElementById('song-track-info').textContent = "Brano Ufficiale Estratto";
             document.getElementById('song-cover-img').src = song.artwork;
             document.getElementById('song-cover-overlay').classList.remove('hidden');
             document.getElementById('song-solution-box').classList.add('hidden');
-            document.getElementById('song-prompt-text').textContent = "Pronto per l'ascolto!";
+            document.getElementById('song-prompt-text').textContent = "Brano pronto! Ascolta l'anteprima";
             document.getElementById('audio-status-text').textContent = "Traccia pronta. Clicca sui secondi di ascolto!";
         }
 
@@ -696,7 +713,7 @@
             stopSong();
 
             if (!currentSong || !currentSong.previewUrl) {
-                showToast("Prima cerca e carica una canzone!", "error");
+                showToast("Prima estrai o cerca una canzone!", "error");
                 return;
             }
 
@@ -708,7 +725,7 @@
                     document.getElementById('audio-status-text').textContent = `⏹ Tempo scaduto (${seconds}s)`;
                 }, seconds * 1000);
             }).catch(e => {
-                showToast("Errore riproduzione: clicca prima 'Sblocca Audio'", "error");
+                showToast("Errore riproduzione: clicca prima 'Sblocca Audio sul Telefono'", "error");
             });
         }
 
