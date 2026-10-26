@@ -107,6 +107,11 @@
                         <span>Podio</span>
                     </button>
 
+                    <button onclick="shuffleAndLoadNewContent()" id="ai-refresh-btn" class="game-btn px-3 py-2 rounded-xl bg-gradient-to-r from-neon-purple to-neon-pink hover:opacity-95 text-white font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-lg shadow-neon-pink/20" title="Rimescola tutti i mazzi e genera nuove domande">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span class="hidden md:inline">Nuove Parole & Shuffle</span>
+                    </button>
+
                     <button onclick="toggleSound()" id="sound-toggle-btn" class="game-btn w-9 h-9 rounded-xl bg-studio-800 hover:bg-studio-700 border border-white/10 flex items-center justify-center text-neon-cyan" title="Audio">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
@@ -644,14 +649,34 @@
             "Lazza Cenere", "Geolier I P Me Tu P Te", "Sfera Ebbasta Tran Tran", "Marracash La Fama", 
             "Blanco Brividi", "Ghali Casa Mia", "Salmo 90min", "Capo Plaza Giovane Fuoriclasse", 
             "Tedua Lo-Fi For U", "Shiva Auto Blu", "Fabri Fibra Stavo Pensando A Te", "Club Dogo Pes", 
-            "Annalisa Saa Paradise", "Mahmood Tuta Gold", "Tananai Tango", "Rosa Chemical Made In Italy", 
+            "Annalisa Sinceramente", "Mahmood Tuta Gold", "Tananai Tango", "Rosa Chemical Made In Italy", 
             "Colapesce Dimartino Musica Leggerissima", "Ultimo I Tuoi Particolari", "Pinguini Tattici Nucleari Ringo Starr",
-            "Jovanotti Il Piu Grande Spettacolo", "Vasco Rossi Una Vita In Vacanza", "Ligabue Urlando Contro Il Cielo",
+            "Jovanotti Il Piu Grande Spettacolo", "Vasco Rossi Albachiara", "Ligabue Certe Notti",
             "Fedez Mille", "Pinguini Tattici Nucleari Gioventù Brucata", "Tony Effe Sesso e Samba", "Anna Bando", "Kid Yugi Eva",
             "Artie 5ive Topboy", "Rose Villain Click Boom", "Guè Pequeno Bling Bling", "Marracash Crazy Love",
             "Irama Tu No", "The Kolors Italodisco", "Angelina Mango La Noia", "Geolier Il Male Che Mi Fai", 
-            "Sfera Ebbasta Visiera A Becco", "Rkomi Nuovo Range", "Ernia Superclassico", "Bresh Angelina Jolie"
+            "Sfera Ebbasta Visiera A Becco", "Rkomi Nuovo Range", "Ernia Superclassico", "Bresh Guasto D'Amore",
+            "Cesare Cremonini 50 Special", "883 Hanno Ucciso L'Uomo Ragno", "Tiziano Ferro Rosso Relativo",
+            "Maneskin Zitti E Buoni", "Caparezza Vieni A Ballare In Puglia", "Carl Brave Fotografia",
+            "Coez La Musica Non C'è", "Gazzelle Destri", "Calcutta Paracetamolo", "Achille Lauro Rolls Royce",
+            "Elettra Lamborghini Pem Pem", "Baby K Roma Bangkok", "Boomdabash Karaoke", "Madame Il Bene Nel Male",
+            "Elodie Bagno A Mezzanotte", "Alfa Bellissimissima", "Olly Devastante", "Rhove Shakerando",
+            "PakY Rozzi", "Noyz Narcos Nemico Pubblico", "Luchè Non Abbiamo Età", "Rocco Hunt Nu Juorno Buono",
+            "Clementino Cos Cos Cos", "Tha Supreme M8nstar", "Mara Sattei Duemilaminuti", "Gigi D'Agostino L'Amour Toujours",
+            "Eiffel 65 Blue", "Lunapop Qualcosa Di Grande", "Negramaro Estate", "Modà Come Un Pittore",
+            "Marco Mengoni Due Vite", "Giorgia Come Saprei", "Laura Pausini La Solitudine", "Eros Ramazzotti Più Bella Cosa",
+            "Adriano Celentano Azzurro", "Rino Gaetano Ma Il Cielo È Sempre Più Blu", "Lucio Battisti Il Mio Canto Libero",
+            "Raffaella Carrà Pedro", "Ricchi e Poveri Sarà Perché Ti Amo", "Toto Cutugno L'Italiano"
         ];
+
+        // Funzione universale Fisher-Yates per randomizzare qualsiasi array all'avvio
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
 
         function unlockPhoneAudio() {
             activeAudio = new Audio();
@@ -664,8 +689,10 @@
             showToast("Audio sbloccato correttamente sul telefono!", "success");
         }
 
+        let songDeckIdx = 0;
         async function getRandomSong() {
-            const randomQuery = randomSongQueries[Math.floor(Math.random() * randomSongQueries.length)];
+            const randomQuery = randomSongQueries[songDeckIdx % randomSongQueries.length];
+            songDeckIdx++;
             document.getElementById('song-search-input').value = randomQuery;
             await searchItunesSong(true);
         }
@@ -680,89 +707,13 @@
                 if (data.results && data.results.length > 0) {
                     const item = data.results[0];
                     setSongData({
-                        title: item.trackName,
-                        artist: item.artistName,
-                        previewUrl: item.previewUrl,
-                        artwork: item.artworkUrl100.replace('100x100bb', '600x600bb')
-                    });
-                    if (!isRandom) showToast(`Trovato: ${item.trackName} - ${item.artistName}`, "success");
-                } else {
-                    showToast("Nessun brano trovato, riprova.", "error");
-                }
-            } catch (e) {
-                showToast("Errore di connessione durante la ricerca.", "error");
-            }
-        }
-
-        async function loadPresetSong(term) {
-            document.getElementById('song-search-input').value = term;
-            await searchItunesSong();
-        }
-
-        function setSongData(song) {
-            stopSong();
-            currentSong = song;
-            currentSongStake = 5;
-            document.getElementById('song-track-info').textContent = "Brano Ufficiale Estratto";
-            document.getElementById('song-cover-img').src = song.artwork;
-            document.getElementById('song-cover-overlay').classList.remove('hidden');
-            document.getElementById('song-solution-box').classList.add('hidden');
-            document.getElementById('song-prompt-text').textContent = "Brano pronto! Ascolta l'anteprima";
-            document.getElementById('audio-status-text').textContent = "Traccia pronta. Clicca sui secondi di ascolto!";
-        }
-
-        function playSongSnippet(seconds, stake) {
-            currentSongStake = stake;
-            document.getElementById('song-points-badge').textContent = `In Palio: +${stake} Punti`;
-            stopSong();
-
-            if (!currentSong || !currentSong.previewUrl) {
-                showToast("Prima estrai o cerca una canzone!", "error");
-                return;
-            }
-
-            activeAudio = new Audio(currentSong.previewUrl);
-            activeAudio.play().then(() => {
-                document.getElementById('audio-status-text').textContent = `🎵 In riproduzione originale (${seconds}s)...`;
-                setTimeout(() => {
-                    stopSong();
-                    document.getElementById('audio-status-text').textContent = `⏹ Tempo scaduto (${seconds}s)`;
-                }, seconds * 1000);
-            }).catch(e => {
-                showToast("Errore riproduzione: clicca prima 'Sblocca Audio sul Telefono'", "error");
-            });
-        }
-
-        function stopSong() {
-            if (activeAudio) {
-                activeAudio.pause();
-                activeAudio.currentTime = 0;
-                activeAudio = null;
-            }
-        }
-
-        function revealSongSolution() {
-            if (!currentSong) return;
-            stopSong();
-            document.getElementById('song-real-title').textContent = currentSong.title;
-            document.getElementById('song-real-artist').textContent = currentSong.artist;
-            document.getElementById('song-solution-box').classList.remove('hidden');
-            document.getElementById('song-cover-overlay').classList.add('hidden');
-            document.getElementById('song-cover-img').classList.remove('filter', 'blur-xl', 'scale-110');
-            playSongSnippet(30, currentSongStake);
-        }
-
-        function awardSongPoints() {
-            awardActiveTeam(currentSongStake, `Canzone indovinata (+${currentSongStake})`);
-        }
-
-        /* --- ALTRI GIOCHI & UTILITIES --- */
+        /* --- ALTRI GIOCHI & UTILITIES (DATABASE SUPER ESPANSI & RANDOMIZZATI) --- */
         let intesaIdx = 0, intesaScore = 0, intesaPass = 3, intesaTime = 60, intesaTimer = null;
         const intesaDb = [
             { word: "CAFFETTIERA MOKA", cat: "Casa" }, { word: "CRISTIANO RONALDO", cat: "Sport" },
             { word: "PIZZA MARGHERITA", cat: "Cibo" }, { word: "COLOSSEO", cat: "Monumenti" },
             { word: "HARRY POTTER", cat: "Cinema" }, { word: "LAVATRICE", cat: "Elettrodomestici" },
-            { word: "PIRAMIDI DI GIZA", cat: "Storia" }, { word: "SPAGHETTI CARBONARA", cat: "Cibo" },
+            { word: "PIRAMIDI DI GIZA", cat: "Storia" }, { word: "SPAGHETTI ALLA CARBONARA", cat: "Cibo" },
             { word: "CHITARRA ELETTRICA", cat: "Strumenti" }, { word: "GATTO CON GLI STIVALI", cat: "Favole" },
             { word: "FRANCESCO TOTTI", cat: "Sport" }, { word: "LAVASTOVIGLIE", cat: "Elettrodomestici" },
             { word: "ZAINO DA CAMPEGGIO", cat: "Oggetti" }, { word: "TORRE EIFFEL", cat: "Monumenti" },
@@ -776,12 +727,44 @@
             { word: "FESTIVAL DI SANREMO", cat: "Eventi" }, { word: "CAPPELLO DI PAGLIA", cat: "Abbigliamento" },
             { word: "MONTE BIANCO", cat: "Geografia" }, { word: "OCEANO ATLANTICO", cat: "Geografia" },
             { word: "POLMONE", cat: "Corpo Umano" }, { word: "MARTEDÌ GRASSO", cat: "Festività" },
-            { word: "PATTINAGGIO SUL GHIACCIO", cat: "Sport" }, { word: "GIOCO DELL'OCA", cat: "Giochi" }
+            { word: "PATTINAGGIO SUL GHIACCIO", cat: "Sport" }, { word: "GIOCO DELL'OCA", cat: "Giochi" },
+            { word: "ASCIUGACAPELLI", cat: "Elettrodomestici" }, { word: "TORRE DI PISA", cat: "Monumenti" },
+            { word: "LIONEL MESSI", cat: "Sport" }, { word: "LASAGNE ALLA BOLOGNESE", cat: "Cibo" },
+            { word: "STRANGER THINGS", cat: "Serie TV" }, { word: "SPAZZOLINO ELETTRICO", cat: "Oggetti" },
+            { word: "CENERENTOLA", cat: "Favole" }, { word: "FORNO A MICROONDE", cat: "Elettrodomestici" },
+            { word: "CARTA DI CREDITO", cat: "Oggetti" }, { word: "GRANDE MURAGLIA CINESE", cat: "Monumenti" },
+            { word: "CAPPUCCETTO ROSSO", cat: "Favole" }, { word: "JANNIK SINNER", cat: "Sport" },
+            { word: "PATATINE FRITTE", cat: "Cibo" }, { word: "SUPER MARIO", cat: "Videogiochi" },
+            { word: "OCCHIALI DA SOLE", cat: "Accessori" }, { word: "PAPA FRANCESCO", cat: "Personaggi" },
+            { word: "TITANIC", cat: "Cinema" }, { word: "MONOPATTINO ELETTRICO", cat: "Trasporti" },
+            { word: "LA CASA DI CARTA", cat: "Serie TV" }, { word: "NUTELLA", cat: "Cibo" },
+            { word: "CANGURO", cat: "Animali" }, { word: "sEMAFORO ROSSO", cat: "Strada" },
+            { word: "VALIGIA RIGIDA", cat: "Viaggi" }, { word: "FERRARI ROSSA", cat: "Motori" },
+            { word: "CAPODANNO", cat: "Festività" }, { word: "PARACADUTE", cat: "Sport Estremi" },
+            { word: "MACCHINA FOTOGRAFICA", cat: "Tecnologia" }, { word: "PINOCCHIO", cat: "Favole" },
+            { word: "ORSO POLARE", cat: "Animali" }, { word: "MONTAGNE RUSSE", cat: "Divertimento" },
+            { word: "Ponte Vecchio", cat: "Monumenti" }, { word: "Piazza San Marco", cat: "Luoghi" },
+            { word: "Gondola Veneziana", cat: "Trasporti" }, { word: "Mozzarella di Bufala", cat: "Cibo" },
+            { word: "Bacio Perugina", cat: "Dolci" }, { word: "Vasco Rossi", cat: "Musica" },
+            { word: "Raffaella Carrà", cat: "TV" }, { word: "Alberto Angela", cat: "TV" },
+            { word: "Gerry Scotti", cat: "TV" }, { word: "Amadeus", cat: "TV" },
+            { word: "Focaccia Genovese", cat: "Cibo" }, { word: "Arancino Siciliano", cat: "Cibo" },
+            { word: "Pandoro di Natale", cat: "Dolci" }, { word: "Costiera Amalfitana", cat: "Geografia" },
+            { word: "Etna", cat: "Geografia" }, { word: "Vesuvio", cat: "Geografia" },
+            { word: "Isola d'Elba", cat: "Geografia" }, { word: "fEdE NUZIALE", cat: "Oggetti" },
+            { word: "Telescopio Spaziale", cat: "Scienza" }, { word: "Buco Nero", cat: "Astronomia" },
+            { word: "Via Lattea", cat: "Astronomia" }, { word: "Sistema Solare", cat: "Astronomia" },
+            { word: "Giulio Cesare", cat: "Storia" }, { word: "Napoleone Bonaparte", cat: "Storia" },
+            { word: "Cristoforo Colombo", cat: "Storia" }, { word: "Cleopatra", cat: "Storia" },
+            { word: "Albert Einstein", cat: "Scienza" }, { word: "Marie Curie", cat: "Scienza" },
+            { word: "Pikachu", cat: "Cartoni" }, { word: "Goku", cat: "Anime" },
+            { word: "Naruto", cat: "Anime" }, { word: "One Piece", cat: "Anime" },
+            { word: "Topolino", cat: "Fumetti" }, { word: "Paperon de' Paperoni", cat: "Fumetti" }
         ];
         function nextIntesaWord() {
-            intesaIdx = (intesaIdx + 1) % intesaDb.length;
-            const item = intesaDb[intesaIdx];
-            document.getElementById('intesa-word-display').textContent = item.word;
+            const item = intesaDb[intesaIdx % intesaDb.length];
+            intesaIdx++;
+            document.getElementById('intesa-word-display').textContent = item.word.toUpperCase();
             document.getElementById('intesa-cat-badge').textContent = `Categoria: ${item.cat}`;
         }
         function handleIntesaAction(action) {
@@ -800,7 +783,7 @@
                 intesaTimer = setInterval(() => {
                     intesaTime--;
                     document.getElementById('intesa-timer-display').textContent = intesaTime;
-                    if (intesaTime <= 0) { clearInterval(intesaTimer); intesaTimer = null; }
+                    if (intesaTime <= 0) { clearInterval(intesaTimer); intesaTimer = null; btn.textContent = 'Avvia 60s'; }
                 }, 1000);
             }
         }
@@ -811,28 +794,48 @@
             { word: "TIRAMISÙ", forbidden: ["Mascarpone", "Caffè", "Savoiardi", "Dolce", "Cacao"] },
             { word: "NETFLIX", forbidden: ["Serie TV", "Film", "Streaming", "Divano", "Abbonamento"] },
             { word: "WHATSAPP", forbidden: ["Messaggio", "Gruppo", "Audio", "Telefono", "Spunta"] },
-            { word: "ASTRONAUTA", forbidden: ["Spazio", "Luna", "Tuta", "Nave", "Volare"] },
+            { word: "ASTRONAUTA", forbidden: ["Spazio", "Luna", "Tuta", "Razzo", "Gravità"] },
             { word: "FOTOGRAFIA", forbidden: ["Macchina", "Obiettivo", "Scattare", "Immagine", "Flash"] },
-            { word: "PALLAVOLO", forbidden: ["Rete", "Mani", "Schiacciata", "Campo", "Palla"] },
-            { word: "ZANZARA", forbidden: ["Insetto", "Sangue", "Pungere", "Estate", "Volare"] },
-            { word: "DIZIONARIO", forbidden: ["Parole", "Libro", "Vocabolario", "Significato", "Leggere"] },
-            { word: "MARIO BROS", forbidden: ["Idraulico", "Funghi", "Luigi", "Videogioco", "Baffi"] },
+            { word: "PALLAVOLO", forbidden: ["Rete", "Mani", "Schiacciata", "Muro", "Palla"] },
+            { word: "ZANZARA", forbidden: ["Insetto", "Sangue", "Pungere", "Estate", "Prurito"] },
+            { word: "DIZIONARIO", forbidden: ["Parole", "Libro", "Vocabolario", "Significato", "Alfabeto"] },
+            { word: "MARIO BROS", forbidden: ["Idraulico", "Funghi", "Luigi", "Nintendo", "Baffi"] },
             { word: "SUSHI", forbidden: ["Riso", "Pesce", "Crudo", "Giappone", "Bacchette"] },
-            { word: "PASSAPORTO", forbidden: ["Viaggiare", "Documento", "Aereo", "Dogana", "Timbro"] },
-            { word: "VAMPIRO", forbidden: ["Dracula", "Sangue", "Aglio", "Notte", "Denti"] },
+            { word: "PASSAPORTO", forbidden: ["Viaggiare", "Documento", "Aereo", "Dogana", "Frontiera"] },
+            { word: "VAMPIRO", forbidden: ["Dracula", "Sangue", "Aglio", "Notte", "Canini"] },
             { word: "CHITARRA", forbidden: ["Corde", "Suonare", "Strumento", "Musica", "Plettro"] },
-            { word: "BILIARDO", forbidden: ["Stecca", "Palle", "Tavolo", "Buche", "Verde"] },
-            { word: "YOUTUBE", forbidden: ["Video", "Iscriviti", "Canale", "Internet", "Guardare"] },
+            { word: "BILIARDO", forbidden: ["Stecca", "Palle", "Tavolo", "Buche", "Otto"] },
+            { word: "YOUTUBE", forbidden: ["Video", "Iscriviti", "Canale", "Youtuber", "Visualizzazioni"] },
             { word: "OROLOGIO", forbidden: ["Ora", "Tempo", "Lancette", "Polso", "Minuti"] },
-            { word: "OMBRELLO", forbidden: ["Pioggia", "Acqua", "Ripararsi", "Bagnarsi", "Aperto"] },
-            { word: "AMAZON", forbidden: ["Comprare", "Spedizione", "Prime", "Pacchi", "Online"] },
+            { word: "OMBRELLO", forbidden: ["Pioggia", "Acqua", "Ripararsi", "Bagnarsi", "Aprire"] },
+            { word: "AMAZON", forbidden: ["Comprare", "Spedizione", "Prime", "Corriere", "Pacco"] },
             { word: "FRIGORIFERO", forbidden: ["Freddo", "Cibo", "Cucina", "Ghiaccio", "Conservare"] },
-            { word: "BARBIERE", forbidden: ["Capelli", "Tagliare", "Barba", "Forbici", "Pettine"] }
+            { word: "BARBIERE", forbidden: ["Capelli", "Tagliare", "Barba", "Forbici", "Rasoio"] },
+            { word: "INSTAGRAM", forbidden: ["Storie", "Foto", "Follower", "Like", "Reel"] },
+            { word: "CARNEVALE", forbidden: ["Maschera", "Coriandoli", "Carri", "Costume", "Febbraio"] },
+            { word: "DENTISTA", forbidden: ["Denti", "Carie", "Trapano", "Bocca", "Dolore"] },
+            { word: "CINEMA", forbidden: ["Film", "Popcorn", "Schermo", "Poltrone", "Biglietto"] },
+            { word: "AEREO", forbidden: ["Volare", "Ali", "Pilota", "Aeroporto", "Valigia"] },
+            { word: "FERRARI", forbidden: ["Rossa", "Auto", "Cavallino", "Maranello", "Formula 1"] },
+            { word: "SANREMO", forbidden: ["Festival", "Canzoni", "Ariston", "Fiori", "Conduttore"] },
+            { word: "FANTACALCIO", forbidden: ["Asta", "Calciatori", "Bonus", "Malus", "Domenica"] },
+            { word: "SPAGHETTI", forbidden: ["Pasta", "Lunga", "Forchetta", "Sugo", "Arrotolare"] },
+            { word: "PALESTRA", forbidden: ["Pesi", "Allenamento", "Muscoli", "Tapis Roulant", "Sudare"] },
+            { word: "DISCOTECA", forbidden: ["Ballare", "Notte", "DJ", "Musica", "Drink"] },
+            { word: "TARTARUGA", forbidden: ["Guscio", "Lenta", "Animale", "Mare", "Ninja"] },
+            { word: "CAMINO", forbidden: ["Fuoco", "Legna", "Inverno", "Babbo Natale", "Fumo"] },
+            { word: "LAVAGNA", forbidden: ["Scuola", "Gesso", "Cancellino", "Scrivere", "Professore"] },
+            { word: " ASCIUGAMANO", forbidden: ["Bagno", "Doccia", "Bagnato", "Asciugarsi", "Telo"] },
+            { word: "STAZIONE", forbidden: ["Treno", "Binario", "Biglietto", "Partenza", "Ferrovia"] },
+            { word: "CUSCINO", forbidden: ["Letto", "Dormire", "Testa", "Morbido", "Federa"] },
+            { word: "SEMAFORO", forbidden: ["Rosso", "Verde", "Giallo", "Strada", "Incrocio"] },
+            { word: "GELATO", forbidden: ["Cono", "Coppetta", "Gusti", "Estate", "Freddo"] },
+            { word: "MATRIMONIO", forbidden: ["Sposi", "Chiesa", "Anello", "Abito Bianco", "Nozze"] }
         ];
         function renderTabuCard() {
             const item = tabuDb[tabuIdx % tabuDb.length];
             document.getElementById('tabu-main-word').textContent = item.word;
-            document.getElementById('tabu-counter').textContent = `Carta ${(tabuIdx % tabuDb.length) + 1}`;
+            document.getElementById('tabu-counter').textContent = `Carta ${(tabuIdx % tabuDb.length) + 1} di ${tabuDb.length}`;
             document.getElementById('tabu-forbidden-list').innerHTML = item.forbidden.map(f => `
                 <div class="py-2 px-4 rounded-xl bg-studio-950 border border-rose-500/30 text-rose-200 font-bold flex justify-between items-center">
                     <span>${f}</span><i class="fa-solid fa-ban text-rose-500 text-xs"></i>
@@ -848,10 +851,11 @@
             const btn = document.getElementById('tabu-timer-btn');
             if (tabuTimer) { clearInterval(tabuTimer); tabuTimer = null; btn.textContent = 'Avvia 60s'; }
             else {
+                btn.textContent = 'Pausa';
                 tabuTimer = setInterval(() => {
                     tabuTime--;
                     document.getElementById('tabu-timer-display').textContent = tabuTime;
-                    if (tabuTime <= 0) { clearInterval(tabuTimer); tabuTimer = null; }
+                    if (tabuTime <= 0) { clearInterval(tabuTimer); tabuTimer = null; tabuTime = 60; btn.textContent = 'Avvia 60s'; }
                 }, 1000);
             }
         }
@@ -859,24 +863,35 @@
         let ghigIdx = 0, ghigRevealed = 1, ghigJackpot = 8;
         const ghigDb = [
             { clues: ["BIANCA", "MATRIMONIO", "CREDITO", "IGIENICA", "D'IDENTITÀ"], secret: "CARTA", exp: ["Carta bianca", "Carta di matrimonio", "Carta di credito", "Carta igienica", "Carta d'identità"] },
-            { clues: ["COLPO", "SOLE", "TEATRO", "OCCHIO", "STATO"], secret: "SCENA / COLPO", exp: ["Colpo di scena", "Colpo di sole", "Colpo di teatro", "Colpo d'occhio", "Colpo di Stato"] },
-            { clues: ["CADENTE", "MARINA", "COMETA", "CINEMA", "NOTTE"], secret: "STELLA", exp: ["Stella cadente", "Stella marina", "Stella cometa", "Stella del cinema", "Notte stellata"] },
-            { clues: ["SALTARE", "VOCALE", "TIRARE", "STRUMENTO", "PAZZO"], secret: "CORDA", exp: ["Saltare la corda", "Corda vocale", "Tirare la corda", "Strumento a corda", "Roba da matti / Fuori di corda (o Dare la corda)"] },
+            { clues: ["SCENA", "SOLE", "TEATRO", "OCCHIO", "STATO"], secret: "COLPO", exp: ["Colpo di scena", "Colpo di sole", "Colpo di teatro", "Colpo d'occhio", "Colpo di Stato"] },
+            { clues: ["CADENTE", "MARINA", "COMETA", "CINEMA", "POLARE"], secret: "STELLA", exp: ["Stella cadente", "Stella marina", "Stella cometa", "Stella del cinema", "Stella polare"] },
+            { clues: ["SALTARE", "VOCALE", "TIRARE", "STRUMENTO", "TAGLIARE"], secret: "CORDA", exp: ["Saltare la corda", "Corda vocale", "Tirare troppo la corda", "Strumento a corda", "Tagliare la corda"] },
             { clues: ["BRUTTO", "PERSO", "MACCHINA", "PRIMO", "SCADUTO"], secret: "TEMPO", exp: ["Brutto tempo", "Tempo perso", "Macchina del tempo", "Primo tempo", "Tempo scaduto"] },
-            { clues: ["BOCCA", "DOLCE", "PASSATA", "MINERALE", "FUOCO"], secret: "ACQUA", exp: ["Acqua in bocca", "Acqua dolce", "Acqua passata", "Acqua minerale", "Acqua e fuoco"] },
-            { clues: ["MADRE", "LUNGA", "SEGNI", "STRANIERA", "SCARPE"], secret: "LINGUA", exp: ["Lingua madre", "Avere la lingua lunga", "Lingua dei segni", "Lingua straniera", "Linguetta delle scarpe"] },
-            { clues: ["NEVE", "ORO", "MONTAGNA", "COLLO", "BICICLETTA"], secret: "CATENA", exp: ["Catene da neve", "Catena d'oro", "Catena montuosa", "Catenina al collo", "Catena della bicicletta"] },
-            { clues: ["LATTE", "SANGUE", "STRADA", "PAROLE", "VINO"], secret: "FIUME", exp: ["Fiume di latte", "Fiume di sangue", "Fiume per la strada", "Fiume di parole", "Fiume di vino"] },
-            { clues: ["FILO", "VERDE", "CATTIVA", "MEDICA", "VOGLIA"], secret: "ERBA", exp: ["Filo d'erba", "Erba verde", "Erba cattiva", "Erba medica", "L'erba voglio (non cresce nel giardino del re)"] },
-            { clues: ["OCCHIALI", "NOTTE", "BAGNO", "CREMA", "TRAMONTO"], secret: "SOLE", exp: ["Occhiali da sole", "Sole di notte (o a mezzanotte)", "Bagno di sole", "Crema solare", "Tramonto del sole"] }
+            { clues: ["BOCCA", "DOLCE", "PASSATA", "MINERALE", "SAPONE"], secret: "ACQUA", exp: ["Acqua in bocca", "Acqua dolce", "Acqua passata", "Acqua minerale", "Acqua e sapone"] },
+            { clues: ["MADRE", "LUNGA", "SEGNI", "STRANIERA", "MORTA"], secret: "LINGUA", exp: ["Lingua madre", "Avere la lingua lunga", "Lingua dei segni", "Lingua straniera", "Lingua morta"] },
+            { clues: ["NEVE", "ORO", "MONTAGNA", "SANT'ANTONIO", "BICICLETTA"], secret: "CATENA", exp: ["Catene da neve", "Catena d'oro", "Catena montuosa", "Catena di Sant'Antonio", "Catena della bicicletta"] },
+            { clues: ["LATTE", "PIENA", "PAROLE", "IN", "LETTO"], secret: "FIUME", exp: ["Fiume di latte", "Fiume in piena", "Fiume di parole", "Pesce di fiume", "Letto del fiume"] },
+            { clues: ["FILO", "VERDE", "CATTIVA", "MEDICA", "VOGLIO"], secret: "ERBA", exp: ["Filo d'erba", "Erba verde", "L'erba cattiva non muore mai", "Erba medica", "L'erba voglio"] },
+            { clues: ["OCCHIALI", "MEZZANOTTE", "BAGNO", "LUCE", " SISTEMA"], secret: "SOLE", exp: ["Occhiali da sole", "Sole di mezzanotte", "Bagno di sole", "Luce del sole", "Sistema solare"] },
+            { clues: ["FALSO", "INGLESE", "SOL", "PORTA", "LETTURA"], secret: "CHIAVE", exp: ["Falsa chiave", "Chiave inglese", "Chiave di sol", "Chiudere a chiave la porta", "Chiave di lettura"] },
+            { clues: ["CAVALLO", " BATTAGLIA", "SCACCHI", "MARE", "TROIA"], secret: "CAVALLO", exp: ["Andare a cavallo", "Cavallo di battaglia", "Cavallo degli scacchi", "Cavalluccio di mare", "Cavallo di Troia"] },
+            { clues: ["D'ARIA", "ELETTRICA", "CONTO", "ALTERNATA", "SPINA"], secret: "CORRENTE", exp: ["Corrente d'aria", "Corrente elettrica", "Conto corrente", "Corrente alternata", "Staccare la spina della corrente"] },
+            { clues: ["TERRA", "MARE", "GIRO", "BUIO", "LUNA"], secret: "FONDO", exp: ["Fondo della terra", "Fondo del mare", "In fondo al giro", "Buio pesto / Fondo", "Fondo schiena / Fondo"] },
+            { clues: [" NERO", "MERCATO", "CRONACA", "FUMO", "UMORISMO"], secret: "NERO", exp: ["Colore nero", "Mercato nero", "Cronaca nera", "Fumo nero", "Umorismo nero"] },
+            { clues: ["DENTE", " CORONA", "INGRANAGGIO", "PAVONE", "FORTUNA"], secret: "RUOTA", exp: ["Ruota dentata", "Ruota della corona", "Ruota dell'ingranaggio", "Fare la ruota come il pavone", "Ruota della fortuna"] },
+            { clues: ["VENTO", "SAPONE", "PAPALE", "ARIA", "ACQUA"], secret: "BOLLA", exp: ["Bolla di vento", "Bolla di sapone", "Bolla papale", "Bolla d'aria", "Bolla d'acqua"] },
+            { clues: ["LETTO", "FIUME", "MATRIMONIALE", "CASTELLO", "FOGLIA"], secret: "LETTO", exp: ["Andare a letto", "Letto del fiume", "Letto matrimoniale", "Letto a castello", "Letto di foglie"] },
+            { clues: ["BATTUTA", "CACCIA", "SPIRITO", "PESCA", "PRONTA"], secret: "BATTUTA", exp: ["Battuta d'arresto", "Battuta di caccia", "Battuta di spirito", "Battuta di pesca", "Avere la battuta pronta"] },
+            { clues: ["ORO", "SILENZIO", "NOZZE", "MEDAGLIA", "PESCIOLINO"], secret: "ORO", exp: ["Lingotto d'oro", "Il silenzio è d'oro", "Nozze d'oro", "Medaglia d'oro", "Pesciolino d'oro (o rosso)"] },
+            { clues: ["PUNTO", "VISTA", "ESCLAMATIVO", "CROCE", "DEBOLE"], secret: "PUNTO", exp: ["Punto e a capo", "Punto di vista", "Punto esclamativo", "Punto croce", "Punto debole"] }
         ];
         function updateGhigUI() {
             document.getElementById('ghig-jackpot-display').textContent = `${ghigJackpot} pt`;
             document.getElementById('ghig-award-btn').textContent = `Assegna (+${ghigJackpot} Punti)`;
-            const set = ghigDb[ghigIdx];
+            const set = ghigDb[ghigIdx % ghigDb.length];
             document.getElementById('ghigliottina-clues-container').innerHTML = set.clues.map((c, i) => `
                 <div onclick="ghigRevealed = Math.max(ghigRevealed, ${i+1}); renderGhigliottina();" class="cursor-pointer p-4 rounded-2xl border ${i < ghigRevealed ? 'bg-purple-900/60 border-purple-400 text-white' : 'bg-studio-900 border-white/10 text-slate-500'} font-display font-black text-xl">
-                    ${i < ghigRevealed ? c : 'INDICE NASCOSTO'}
+                    ${i < ghigRevealed ? c : 'INDIZIO NASCOSTO'}
                 </div>
             `).join('');
         }
@@ -885,7 +900,7 @@
         function halveGhigJackpot() { if (ghigJackpot > 1) { ghigJackpot = Math.floor(ghigJackpot / 2); updateGhigUI(); } }
         function revealGhigliottinaSolution() {
             ghigRevealed = 5;
-            const set = ghigDb[ghigIdx];
+            const set = ghigDb[ghigIdx % ghigDb.length];
             document.getElementById('ghigliottina-secret-word').textContent = set.secret;
             const exp = document.getElementById('ghigliottina-explanation');
             exp.innerHTML = set.exp.map(e => `<div>• ${e}</div>`).join('');
@@ -895,28 +910,40 @@
         function awardGhigJackpot() { awardActiveTeam(ghigJackpot, `Ghigliottina vinta (+${ghigJackpot})`); }
         function nextGhigliottinaSet() { ghigIdx = (ghigIdx + 1) % ghigDb.length; ghigRevealed = 1; ghigJackpot = 8; document.getElementById('ghigliottina-secret-word').textContent = '? ? ? ? ?'; document.getElementById('ghigliottina-explanation').classList.add('hidden'); updateGhigUI(); }
 
+        let mimaIdx = 0;
         const mimaDb = [
             { text: "IL GLADIATORE", cat: "Film" }, { text: "STRANGER THINGS", cat: "Serie TV" },
-            { text: "ASSAGGIATORE DI CIBO", cat: "Mestieri" },
-            { text: "PIRATI DEI CARAIBI", cat: "Film" }, { text: "INDOVINA CHI VIENE A CENA?", cat: "Film" },
+            { text: "ASSAGGIATORE DI CIBO", cat: "Mestieri" }, { text: "PIRATI DEI CARAIBI", cat: "Film" },
             { text: "RITORNO AL FUTURO", cat: "Film" }, { text: "PEPPA PIG", cat: "Cartoni" },
-            { text: "INFLUENCER", cat: "Mestieri" }, { text: "ASTRONAUTA", cat: "Mestieri" },
+            { text: "INFLUENCER", cat: "Mestieri" }, { text: "ASTRONAUTA SULLA LUNA", cat: "Azioni" },
             { text: "FARE ORECCHIE DA MERCANTE", cat: "Proverbi" }, { text: "CAN CHE ABBAIA NON MORDE", cat: "Proverbi" },
             { text: "BATMAN", cat: "Personaggi" }, { text: "SPIDERMAN", cat: "Personaggi" },
             { text: "LA PALLAVOLO", cat: "Sport" }, { text: "IL RE LEONE", cat: "Cartoni" },
-            { text: "IL PENSATORE", cat: "Scultura/Arte" }, { text: "IL DOTTORE", cat: "Mestieri" },
-            { text: "IL PADRINO", cat: "Film" }, { text: "L'UOMO RAGNO", cat: "Personaggi" },
-            { text: "PRENDERE DUE PICCIONI CON UNA FAVA", cat: "Proverbi" }, { text: "IL TRONO DI SPADE", cat: "Serie TV" },
-            { text: "HOMER SIMPSON", cat: "Personaggi" }, { text: "HARRY POTTER E LA PIETRA FILOSOFALE", cat: "Film" },
-            { text: "INFERMIERE", cat: "Mestieri" }, { text: "PILOTA DI FORMULA 1", cat: "Mestieri" },
+            { text: "IL PENSATORE", cat: "Scultura/Arte" }, { text: "IL DENTISTA", cat: "Mestieri" },
+            { text: "IL PADRINO", cat: "Film" }, { text: "PRENDERE DUE PICCIONI CON UNA FAVA", cat: "Proverbi" },
+            { text: "IL TRONO DI SPADE", cat: "Serie TV" }, { text: "HOMER SIMPSON", cat: "Personaggi" },
+            { text: "HARRY POTTER", cat: "Film" }, { text: "PILOTA DI FORMULA 1", cat: "Mestieri" },
             { text: "GALLINA VECCHIA FA BUON BRODO", cat: "Proverbi" }, { text: "IL GATTO CON GLI STIVALI", cat: "Favole" },
             { text: "AVENGERS: ENDGAME", cat: "Film" }, { text: "DRAGON BALL", cat: "Cartoni" },
-            { text: "BAGNINO", cat: "Mestieri" }, { text: "CHI DORME NON PIGLIA PESCI", cat: "Proverbi" },
-            { text: "LA GIOCONDA", cat: "Scultura/Arte" }, { text: "IL TENNIS", cat: "Sport" },
-            { text: "SALTO CON L'ASTA", cat: "Sport" }, { text: "MARIO BROS", cat: "Videogiochi" }
+            { text: "BAGNINO IN SPIAGGIA", cat: "Mestieri" }, { text: "CHI DORME NON PIGLIA PESCI", cat: "Proverbi" },
+            { text: "LA GIOCONDA", cat: "Arte" }, { text: "GIOCARE A TENNIS", cat: "Sport" },
+            { text: "SALTO CON L'ASTA", cat: "Sport" }, { text: "SUPER MARIO BROS", cat: "Videogiochi" },
+            { text: "CAMBIARE UN PANNOLINO", cat: "Azioni" }, { text: "MANGIARE GLI SPAGHETTI", cat: "Azioni" },
+            { text: "PERDERE L'AUTOBUS DI CORSA", cat: "Azioni" }, { text: "CAMMINARE SUI CARBONI ARDENTI", cat: "Azioni" },
+            { text: "JURASSIC PARK", cat: "Film" }, { text: "MATRIX", cat: "Film" },
+            { text: "ROCKY BALBOA", cat: "Film" }, { text: "FORREST GUMP", cat: "Film" },
+            { text: "SHREK", cat: "Cartoni" }, { text: "FROZEN - IL REGNO DI GHIACCIO", cat: "Cartoni" },
+            { text: "TOY STORY", cat: "Cartoni" }, { text: "ALLA RICERCA DI NEMO", cat: "Cartoni" },
+            { text: "PIZZAIOLO ACROBATICO", cat: "Mestieri" }, { text: "DIRETTORE D'ORCHESTRA", cat: "Mestieri" },
+            { text: "ARBITRO DI CALCIO", cat: "Mestieri" }, { text: "PARRUCCHIERE", cat: "Mestieri" },
+            { text: "POMPIERE", cat: "Mestieri" }, { text: "SOMMOZZATORE", cat: "Mestieri" },
+            { text: "NON DIRE GATTO SE NON CE L'HAI NEL SACCO", cat: "Proverbi" },
+            { text: "TRA I DUE LITIGANTI IL TERZO GODE", cat: "Proverbi" },
+            { text: "L'ABITO NON FA IL MONACO", cat: "Proverbi" }
         ];
         function generateMimaCard() {
-            const item = mimaDb[Math.floor(Math.random() * mimaDb.length)];
+            const item = mimaDb[mimaIdx % mimaDb.length];
+            mimaIdx++;
             document.getElementById('mima-card-cat').textContent = item.cat;
             document.getElementById('mima-card-text').textContent = item.text;
         }
@@ -966,15 +993,35 @@
             { cat: "Arte", q: "Chi ha dipinto la 'Notte Stellata'?", options: ["Picasso", "Van Gogh", "Dalì", "Monet"], correct: 1 },
             { cat: "Cinema", q: "Quale di questi NON è un supereroe Marvel?", options: ["Iron Man", "Batman", "Thor", "Hulk"], correct: 1 },
             { cat: "Geografia", q: "Qual è la capitale dell'Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], correct: 2 },
-            { cat: "Storia", q: "In che anno l'Italia ha vinto i Mondiali in Germania?", options: ["2002", "2006", "2010", "1998"], correct: 1 },
+            { cat: "Storia", q: "In che anno l'Italia ha vinto i Mondiali a Berlino?", options: ["2002", "2006", "2010", "1998"], correct: 1 },
             { cat: "Gossip", q: "Con chi era sposato Francesco Totti?", options: ["Belen Rodriguez", "Ilary Blasi", "Michelle Hunziker", "Diletta Leotta"], correct: 1 },
-            { cat: "Cucina", q: "Quale ingrediente NON va nella Carbonara originale?", options: ["Guanciale", "Pecorino", "Panna", "Uova"], correct: 2 },
+            { cat: "Cucina", q: "Quale ingrediente NON va nella Carbonara originale?", options: ["Guanciale", "Pecorino", "Panna", "Tuorlo d'uovo"], correct: 2 },
             { cat: "Geografia", q: "In quale continente si trova il deserto del Sahara?", options: ["Asia", "Africa", "America", "Oceania"], correct: 1 },
             { cat: "Cartoni", q: "Come si chiama il miglior amico di Spongebob?", options: ["Squiddi", "Mr. Krab", "Plankton", "Patrick"], correct: 3 },
-            { cat: "Musica", q: "Chi canta 'Tuta Gold'?", options: ["Mahmood", "Irama", "Geolier", "Blanco"], correct: 0 },
-            { cat: "Scienza", q: "Qual è il simbolo chimico dell'Acqua?", options: ["H2O", "CO2", "Au", "O2"], correct: 0 },
-            { cat: "Videogiochi", q: "Qual è il videogioco più venduto di sempre?", options: ["GTA V", "Minecraft", "Tetris", "FIFA"], correct: 1 },
-            { cat: "Cinema", q: "Chi interpreta Jack Dawson in Titanic?", options: ["Brad Pitt", "Johnny Depp", "Leonardo DiCaprio", "Tom Cruise"], correct: 2 }
+            { cat: "Musica", q: "Chi canta la hit 'Tuta Gold'?", options: ["Mahmood", "Irama", "Geolier", "Blanco"], correct: 0 },
+            { cat: "Scienza", q: "Qual è il simbolo chimico dell'Oro?", options: ["Ag", "Or", "Au", "Fe"], correct: 2 },
+            { cat: "Videogiochi", q: "Qual è il videogioco più venduto della storia?", options: ["GTA V", "Minecraft", "Super Mario", "FIFA"], correct: 1 },
+            { cat: "Cinema", q: "Chi interpreta Jack Dawson in Titanic?", options: ["Brad Pitt", "Johnny Depp", "Leonardo DiCaprio", "Tom Cruise"], correct: 2 },
+            { cat: "Musica", q: "Chi ha vinto il Festival di Sanremo 2024 con 'La Noia'?", options: ["Annalisa", "Angelina Mango", "Geolier", "Irama"], correct: 1 },
+            { cat: "Sport", q: "Quale tennista italiano è diventato numero 1 del mondo nel 2024?", options: ["Matteo Berrettini", "Lorenzo Musetti", "Jannik Sinner", "Fabio Fognini"], correct: 2 },
+            { cat: "Serie TV", q: "Come si chiama il protagonista di Breaking Bad?", options: ["Walter White", "Saul Goodman", "Tony Soprano", "Rick Grimes"], correct: 0 },
+            { cat: "Geografia", q: "Qual è il fiume più lungo d'Italia?", options: ["Tevere", "Arno", "Po", "Adige"], correct: 2 },
+            { cat: "Anatomia", q: "Quante ossa ha circa il corpo umano adulto?", options: ["106", "206", "306", "500"], correct: 1 },
+            { cat: "Cinema", q: "Quanti film compongono la saga principale di Harry Potter?", options: ["7", "8", "9", "6"], correct: 1 },
+            { cat: "Rap Italiano", q: "Qual è il vero nome di Sfera Ebbasta?", options: ["Gionata Boschetti", "Fabio Rizzo", "Jacopo Lazzarini", "Cosimo Fini"], correct: 0 },
+            { cat: "Rap Italiano", q: "Con quale socio storico Guè e Jake La Furia formano i Club Dogo?", options: ["Don Joe", "Charlie Charles", "Sick Luke", "Takagi"], correct: 0 },
+            { cat: "Cultura Pop", q: "Quale social network è nato prima con il nome 'Musical.ly'?", options: ["Instagram", "Snapchat", "TikTok", "BeReal"], correct: 2 },
+            { cat: "Storia", q: "In che anno è caduto il Muro di Berlino?", options: ["1985", "1989", "1991", "1994"], correct: 1 },
+            { cat: "Scienza", q: "Qual è l'animale terrestre più veloce del mondo?", options: ["Leone", "Ghepardo", "Antilope", "Struzzo"], correct: 1 },
+            { cat: "Cucina", q: "Di quale città è originaria la vera Pizza Margherita?", options: ["Roma", "Napoli", "Palermo", "Bari"], correct: 1 },
+            { cat: "Sport", q: "Quale nazionale ha vinto i Mondiali di Calcio 2022 in Qatar?", options: ["Francia", "Brasile", "Argentina", "Germania"], correct: 2 },
+            { cat: "Geografia", q: "Qual è lo Stato più piccolo del mondo?", options: ["San Marino", "Monaco", "Città del Vaticano", "Malta"], correct: 2 },
+            { cat: "Cartoni", q: "Quante sono le Sfere del Drago in Dragon Ball?", options: ["5", "6", "7", "9"], correct: 2 },
+            { cat: "Tecnologia", q: "Chi ha fondato la Apple insieme a Steve Wozniak?", options: ["Bill Gates", "Steve Jobs", "Elon Musk", "Jeff Bezos"], correct: 1 },
+            { cat: "Letteratura", q: "Chi ha scritto 'La Divina Commedia'?", options: ["Petrarca", "Boccaccio", "Dante Alighieri", "Manzoni"], correct: 2 },
+            { cat: "Cinema", q: "Quale film ha vinto l'Oscar come Miglior Film nel 2024?", options: ["Barbie", "Oppenheimer", "Povere Creature", "Joker"], correct: 1 },
+            { cat: "Musica", q: "Quale band britannica cantava 'Bohemian Rhapsody'?", options: ["The Beatles", "Oasis", "Queen", "Pink Floyd"], correct: 2 },
+            { cat: "Serie TV", q: "Qual è il numero della protagonista Undici (Eleven) in Stranger Things?", options: ["001", "011", "007", "010"], correct: 1 }
         ];
         function renderBuzzerButtons() {
             const grid = document.getElementById('buzzer-buttons-grid');
@@ -1008,26 +1055,71 @@
             else if (k === 'enter' && teams[3]) triggerBuzzer(teams[3].id);
         });
         function renderQuiz() {
-            const item = quizDb[quizIdx];
+            const item = quizDb[quizIdx % quizDb.length];
             document.getElementById('quiz-cat-badge').textContent = item.cat;
             document.getElementById('quiz-question-text').textContent = item.q;
             document.getElementById('quiz-answer-reveal').classList.add('hidden');
             document.getElementById('quiz-options-grid').innerHTML = item.options.map((opt, i) => `
-                <button onclick="checkQuiz(${i})" class="game-btn p-4 rounded-2xl bg-studio-900 border border-white/15 text-left font-bold text-white">${opt}</button>
+                <button onclick="checkQuiz(${i})" class="game-btn p-4 rounded-2xl bg-studio-900 border border-white/15 hover:border-yellow-400 text-left font-bold text-white">${opt}</button>
             `).join('');
         }
         function checkQuiz(i) {
-            const item = quizDb[quizIdx];
+            const item = quizDb[quizIdx % quizDb.length];
             if (i === item.correct) awardActiveTeam(2, "Risposta esatta (+2)");
             else updateTeamScore(activeTeamId, -1, "Errata (-1)");
         }
         function revealQuizAnswer() {
-            const item = quizDb[quizIdx];
+            const item = quizDb[quizIdx % quizDb.length];
             const rev = document.getElementById('quiz-answer-reveal');
             rev.textContent = `✅ Risposta: ${item.options[item.correct]}`;
             rev.classList.remove('hidden');
         }
         function nextQuizQuestion() { quizIdx = (quizIdx + 1) % quizDb.length; resetBuzzerLock(); renderQuiz(); }
+
+        // Funzione che rimescola tutto e può caricare nuove parole/quiz via AI
+        async function shuffleAndLoadNewContent() {
+            shuffleArray(intesaDb);
+            shuffleArray(tabuDb);
+            shuffleArray(ghigDb);
+            shuffleArray(mimaDb);
+            shuffleArray(quizDb);
+            shuffleArray(randomSongQueries);
+            intesaIdx = 0; tabuIdx = 0; ghigIdx = 0; mimaIdx = 0; quizIdx = 0; songDeckIdx = 0;
+            
+            nextIntesaWord();
+            renderTabuCard();
+            renderGhigliottina();
+            generateMimaCard();
+            renderQuiz();
+            showToast("🎲 Mazzi rimescolati! Tutte le parole e i quiz sono ora in ordine casuale!", "success");
+
+            // Tentativo opzionale di generare nuove domande e parole fresche tramite Gemini API se disponibile
+            const apiKey = "";
+            if (!apiKey) return;
+            try {
+                const payload = {
+                    contents: [{ parts: [{ text: "Genera 5 nuove parole italiane per Intesa Vincente (con categoria) e 3 nuove domande di quiz cultura pop/musica italiana." }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                intesa: { type: "ARRAY", items: { type: "OBJECT", properties: { word: { type: "STRING" }, cat: { type: "STRING" } } } },
+                                quiz: { type: "ARRAY", items: { type: "OBJECT", properties: { cat: { type: "STRING" }, q: { type: "STRING" }, options: { type: "ARRAY", items: { type: "STRING" } }, correct: { type: "INTEGER" } } } }
+                            }
+                        }
+                    }
+                };
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                const parsed = JSON.parse(data.candidates[0].content.parts[0].text);
+                if (parsed.intesa) intesaDb.unshift(...parsed.intesa);
+                if (parsed.quiz) quizDb.unshift(...parsed.quiz);
+                nextIntesaWord(); renderQuiz();
+            } catch (e) {}
+        }
 
         function showPodium() {
             const sorted = [...teams].sort((a,b) => b.score - a.score);
@@ -1053,6 +1145,14 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Randomizza automaticamente tutti i giochi ogni volta che si apre l'app!
+            shuffleArray(intesaDb);
+            shuffleArray(tabuDb);
+            shuffleArray(ghigDb);
+            shuffleArray(mimaDb);
+            shuffleArray(quizDb);
+            shuffleArray(randomSongQueries);
+
             renderTeams();
             nextIntesaWord();
             renderTabuCard();
