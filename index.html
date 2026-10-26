@@ -707,6 +707,85 @@
                 if (data.results && data.results.length > 0) {
                     const item = data.results[0];
                     setSongData({
+                        title: item.trackName,
+                        artist: item.artistName,
+                        audio: item.previewUrl,
+                        cover: item.artworkUrl100 ? item.artworkUrl100.replace('100x100bb', '500x500bb') : 'https://placehold.co/400x400/1e293b/facc15?text=Music',
+                        genre: item.primaryGenreName || 'Hit Italiana'
+                    });
+                    if (!isRandom) showToast("Brano caricato! Premi Ascolta", "success");
+                } else {
+                    showToast("Nessun brano trovato, riprova!", "error");
+                }
+            } catch (e) {
+                showToast("Errore di connessione ad Apple Music", "error");
+            }
+        }
+
+        function loadPresetSong(query) {
+            document.getElementById('song-search-input').value = query;
+            searchItunesSong(false);
+        }
+
+        function setSongData(songObj) {
+            stopSong();
+            currentSong = songObj;
+            currentSongStake = 5;
+            document.getElementById('song-genre-badge').textContent = songObj.genre || "Hit";
+            const img = document.getElementById('song-cover-img');
+            img.src = songObj.cover;
+            img.classList.add('blur-xl', 'scale-110');
+            document.getElementById('song-cover-overlay').classList.remove('hidden');
+            document.getElementById('song-prompt-text').textContent = "Premi ▶ Ascolta qui sotto!";
+            document.getElementById('song-points-badge').textContent = `In Palio: +${currentSongStake} Punti`;
+            document.getElementById('song-solution-box').classList.add('hidden');
+        }
+
+        let snippetTimeout = null;
+        function playSongSnippet(seconds, pointsStake) {
+            if (!currentSong || !currentSong.audio) {
+                getRandomSong();
+                return;
+            }
+            stopSong();
+            currentSongStake = pointsStake;
+            document.getElementById('song-points-badge').textContent = `In Palio: +${currentSongStake} Punti`;
+            if (!activeAudio) activeAudio = new Audio();
+            activeAudio.src = currentSong.audio;
+            activeAudio.currentTime = 0;
+            activeAudio.play().then(() => {
+                document.getElementById('audio-status-text').textContent = `🎵 Riproduzione in corso (${seconds}s)...`;
+                snippetTimeout = setTimeout(() => {
+                    stopSong();
+                    document.getElementById('audio-status-text').textContent = `⏹ Ascolto di ${seconds}s terminato! Indovina o ascolta più secondi.`;
+                }, seconds * 1000);
+            }).catch(() => {
+                showToast("Clicca prima su 'Sblocca Audio sul Telefono' in alto!", "error");
+            });
+        }
+
+        function stopSong() {
+            if (snippetTimeout) { clearTimeout(snippetTimeout); snippetTimeout = null; }
+            if (activeAudio) {
+                activeAudio.pause();
+            }
+        }
+
+        function revealSongSolution() {
+            if (!currentSong) return;
+            const img = document.getElementById('song-cover-img');
+            img.classList.remove('blur-xl', 'scale-110');
+            document.getElementById('song-cover-overlay').classList.add('hidden');
+            document.getElementById('song-real-title').textContent = currentSong.title;
+            document.getElementById('song-real-artist').textContent = currentSong.artist;
+            document.getElementById('song-solution-box').classList.remove('hidden');
+        }
+
+        function awardSongPoints() {
+            revealSongSolution();
+            awardActiveTeam(currentSongStake, `Canzone indovinata (+${currentSongStake})`);
+        }
+
         /* --- ALTRI GIOCHI & UTILITIES (DATABASE SUPER ESPANSI & RANDOMIZZATI) --- */
         let intesaIdx = 0, intesaScore = 0, intesaPass = 3, intesaTime = 60, intesaTimer = null;
         const intesaDb = [
