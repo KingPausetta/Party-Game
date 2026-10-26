@@ -646,7 +646,11 @@
             "Tedua Lo-Fi For U", "Shiva Auto Blu", "Fabri Fibra Stavo Pensando A Te", "Club Dogo Pes", 
             "Annalisa Saa Paradise", "Mahmood Tuta Gold", "Tananai Tango", "Rosa Chemical Made In Italy", 
             "Colapesce Dimartino Musica Leggerissima", "Ultimo I Tuoi Particolari", "Pinguini Tattici Nucleari Ringo Starr",
-            "Jovanotti Il Piu Grande Spettacolo", "Vasco Rossi Una Vita In Vacanza", "Ligabue Urlando Contro Il Cielo"
+            "Jovanotti Il Piu Grande Spettacolo", "Vasco Rossi Una Vita In Vacanza", "Ligabue Urlando Contro Il Cielo",
+            "Fedez Mille", "Pinguini Tattici Nucleari Gioventù Brucata", "Tony Effe Sesso e Samba", "Anna Bando", "Kid Yugi Eva",
+            "Artie 5ive Topboy", "Rose Villain Click Boom", "Guè Pequeno Bling Bling", "Marracash Crazy Love",
+            "Irama Tu No", "The Kolors Italodisco", "Angelina Mango La Noia", "Geolier Il Male Che Mi Fai", 
+            "Sfera Ebbasta Visiera A Becco", "Rkomi Nuovo Range", "Ernia Superclassico", "Bresh Angelina Jolie"
         ];
 
         function unlockPhoneAudio() {
@@ -757,7 +761,22 @@
         const intesaDb = [
             { word: "CAFFETTIERA MOKA", cat: "Casa" }, { word: "CRISTIANO RONALDO", cat: "Sport" },
             { word: "PIZZA MARGHERITA", cat: "Cibo" }, { word: "COLOSSEO", cat: "Monumenti" },
-            { word: "HARRY POTTER", cat: "Cinema" }, { word: "LAVATRICE", cat: "Elettrodomestici" }
+            { word: "HARRY POTTER", cat: "Cinema" }, { word: "LAVATRICE", cat: "Elettrodomestici" },
+            { word: "PIRAMIDI DI GIZA", cat: "Storia" }, { word: "SPAGHETTI CARBONARA", cat: "Cibo" },
+            { word: "CHITARRA ELETTRICA", cat: "Strumenti" }, { word: "GATTO CON GLI STIVALI", cat: "Favole" },
+            { word: "FRANCESCO TOTTI", cat: "Sport" }, { word: "LAVASTOVIGLIE", cat: "Elettrodomestici" },
+            { word: "ZAINO DA CAMPEGGIO", cat: "Oggetti" }, { word: "TORRE EIFFEL", cat: "Monumenti" },
+            { word: "SQUID GAME", cat: "Serie TV" }, { word: "PALLONE D'ORO", cat: "Sport" },
+            { word: "STATUA DELLA LIBERTÀ", cat: "Monumenti" }, { word: "PLAYSTATION 5", cat: "Tecnologia" },
+            { word: "GELATO AL PISTACCHIO", cat: "Cibo" }, { word: "FREDDIE MERCURY", cat: "Musica" },
+            { word: "CAN CHE ABBAIA NON MORDE", cat: "Proverbi" }, { word: "ROMA CAPOCCIA", cat: "Canzoni" },
+            { word: "LEONARDO DA VINCI", cat: "Personaggi" }, { word: "BOTTIGLIA D'ACQUA", cat: "Oggetti" },
+            { word: "TIRANNOSAURO REX", cat: "Animali" }, { word: "AEROPORTO", cat: "Luoghi" },
+            { word: "CANE CARLINO", cat: "Animali" }, { word: "IL SIGNORE DEGLI ANELLI", cat: "Cinema" },
+            { word: "FESTIVAL DI SANREMO", cat: "Eventi" }, { word: "CAPPELLO DI PAGLIA", cat: "Abbigliamento" },
+            { word: "MONTE BIANCO", cat: "Geografia" }, { word: "OCEANO ATLANTICO", cat: "Geografia" },
+            { word: "POLMONE", cat: "Corpo Umano" }, { word: "MARTEDÌ GRASSO", cat: "Festività" },
+            { word: "PATTINAGGIO SUL GHIACCIO", cat: "Sport" }, { word: "GIOCO DELL'OCA", cat: "Giochi" }
         ];
         function nextIntesaWord() {
             intesaIdx = (intesaIdx + 1) % intesaDb.length;
@@ -791,7 +810,24 @@
         const tabuDb = [
             { word: "TIRAMISÙ", forbidden: ["Mascarpone", "Caffè", "Savoiardi", "Dolce", "Cacao"] },
             { word: "NETFLIX", forbidden: ["Serie TV", "Film", "Streaming", "Divano", "Abbonamento"] },
-            { word: "WHATSAPP", forbidden: ["Messaggio", "Gruppo", "Audio", "Telefono", "Spunta"] }
+            { word: "WHATSAPP", forbidden: ["Messaggio", "Gruppo", "Audio", "Telefono", "Spunta"] },
+            { word: "ASTRONAUTA", forbidden: ["Spazio", "Luna", "Tuta", "Nave", "Volare"] },
+            { word: "FOTOGRAFIA", forbidden: ["Macchina", "Obiettivo", "Scattare", "Immagine", "Flash"] },
+            { word: "PALLAVOLO", forbidden: ["Rete", "Mani", "Schiacciata", "Campo", "Palla"] },
+            { word: "ZANZARA", forbidden: ["Insetto", "Sangue", "Pungere", "Estate", "Volare"] },
+            { word: "DIZIONARIO", forbidden: ["Parole", "Libro", "Vocabolario", "Significato", "Leggere"] },
+            { word: "MARIO BROS", forbidden: ["Idraulico", "Funghi", "Luigi", "Videogioco", "Baffi"] },
+            { word: "SUSHI", forbidden: ["Riso", "Pesce", "Crudo", "Giappone", "Bacchette"] },
+            { word: "PASSAPORTO", forbidden: ["Viaggiare", "Documento", "Aereo", "Dogana", "Timbro"] },
+            { word: "VAMPIRO", forbidden: ["Dracula", "Sangue", "Aglio", "Notte", "Denti"] },
+            { word: "CHITARRA", forbidden: ["Corde", "Suonare", "Strumento", "Musica", "Plettro"] },
+            { word: "BILIARDO", forbidden: ["Stecca", "Palle", "Tavolo", "Buche", "Verde"] },
+            { word: "YOUTUBE", forbidden: ["Video", "Iscriviti", "Canale", "Internet", "Guardare"] },
+            { word: "OROLOGIO", forbidden: ["Ora", "Tempo", "Lancette", "Polso", "Minuti"] },
+            { word: "OMBRELLO", forbidden: ["Pioggia", "Acqua", "Ripararsi", "Bagnarsi", "Aperto"] },
+            { word: "AMAZON", forbidden: ["Comprare", "Spedizione", "Prime", "Pacchi", "Online"] },
+            { word: "FRIGORIFERO", forbidden: ["Freddo", "Cibo", "Cucina", "Ghiaccio", "Conservare"] },
+            { word: "BARBIERE", forbidden: ["Capelli", "Tagliare", "Barba", "Forbici", "Pettine"] }
         ];
         function renderTabuCard() {
             const item = tabuDb[tabuIdx % tabuDb.length];
@@ -823,7 +859,16 @@
         let ghigIdx = 0, ghigRevealed = 1, ghigJackpot = 8;
         const ghigDb = [
             { clues: ["BIANCA", "MATRIMONIO", "CREDITO", "IGIENICA", "D'IDENTITÀ"], secret: "CARTA", exp: ["Carta bianca", "Carta di matrimonio", "Carta di credito", "Carta igienica", "Carta d'identità"] },
-            { clues: ["COLPO", "SOLE", "TEATRO", "OCCHIO", "STATO"], secret: "SCENA / COLPO", exp: ["Colpo di scena", "Colpo di sole", "Colpo di teatro", "Colpo d'occhio", "Colpo di Stato"] }
+            { clues: ["COLPO", "SOLE", "TEATRO", "OCCHIO", "STATO"], secret: "SCENA / COLPO", exp: ["Colpo di scena", "Colpo di sole", "Colpo di teatro", "Colpo d'occhio", "Colpo di Stato"] },
+            { clues: ["CADENTE", "MARINA", "COMETA", "CINEMA", "NOTTE"], secret: "STELLA", exp: ["Stella cadente", "Stella marina", "Stella cometa", "Stella del cinema", "Notte stellata"] },
+            { clues: ["SALTARE", "VOCALE", "TIRARE", "STRUMENTO", "PAZZO"], secret: "CORDA", exp: ["Saltare la corda", "Corda vocale", "Tirare la corda", "Strumento a corda", "Roba da matti / Fuori di corda (o Dare la corda)"] },
+            { clues: ["BRUTTO", "PERSO", "MACCHINA", "PRIMO", "SCADUTO"], secret: "TEMPO", exp: ["Brutto tempo", "Tempo perso", "Macchina del tempo", "Primo tempo", "Tempo scaduto"] },
+            { clues: ["BOCCA", "DOLCE", "PASSATA", "MINERALE", "FUOCO"], secret: "ACQUA", exp: ["Acqua in bocca", "Acqua dolce", "Acqua passata", "Acqua minerale", "Acqua e fuoco"] },
+            { clues: ["MADRE", "LUNGA", "SEGNI", "STRANIERA", "SCARPE"], secret: "LINGUA", exp: ["Lingua madre", "Avere la lingua lunga", "Lingua dei segni", "Lingua straniera", "Linguetta delle scarpe"] },
+            { clues: ["NEVE", "ORO", "MONTAGNA", "COLLO", "BICICLETTA"], secret: "CATENA", exp: ["Catene da neve", "Catena d'oro", "Catena montuosa", "Catenina al collo", "Catena della bicicletta"] },
+            { clues: ["LATTE", "SANGUE", "STRADA", "PAROLE", "VINO"], secret: "FIUME", exp: ["Fiume di latte", "Fiume di sangue", "Fiume per la strada", "Fiume di parole", "Fiume di vino"] },
+            { clues: ["FILO", "VERDE", "CATTIVA", "MEDICA", "VOGLIA"], secret: "ERBA", exp: ["Filo d'erba", "Erba verde", "Erba cattiva", "Erba medica", "L'erba voglio (non cresce nel giardino del re)"] },
+            { clues: ["OCCHIALI", "NOTTE", "BAGNO", "CREMA", "TRAMONTO"], secret: "SOLE", exp: ["Occhiali da sole", "Sole di notte (o a mezzanotte)", "Bagno di sole", "Crema solare", "Tramonto del sole"] }
         ];
         function updateGhigUI() {
             document.getElementById('ghig-jackpot-display').textContent = `${ghigJackpot} pt`;
@@ -852,7 +897,23 @@
 
         const mimaDb = [
             { text: "IL GLADIATORE", cat: "Film" }, { text: "STRANGER THINGS", cat: "Serie TV" },
-            { text: "ASSAGGIATORE DI CIBO", cat: "Mestieri" }
+            { text: "ASSAGGIATORE DI CIBO", cat: "Mestieri" },
+            { text: "PIRATI DEI CARAIBI", cat: "Film" }, { text: "INDOVINA CHI VIENE A CENA?", cat: "Film" },
+            { text: "RITORNO AL FUTURO", cat: "Film" }, { text: "PEPPA PIG", cat: "Cartoni" },
+            { text: "INFLUENCER", cat: "Mestieri" }, { text: "ASTRONAUTA", cat: "Mestieri" },
+            { text: "FARE ORECCHIE DA MERCANTE", cat: "Proverbi" }, { text: "CAN CHE ABBAIA NON MORDE", cat: "Proverbi" },
+            { text: "BATMAN", cat: "Personaggi" }, { text: "SPIDERMAN", cat: "Personaggi" },
+            { text: "LA PALLAVOLO", cat: "Sport" }, { text: "IL RE LEONE", cat: "Cartoni" },
+            { text: "IL PENSATORE", cat: "Scultura/Arte" }, { text: "IL DOTTORE", cat: "Mestieri" },
+            { text: "IL PADRINO", cat: "Film" }, { text: "L'UOMO RAGNO", cat: "Personaggi" },
+            { text: "PRENDERE DUE PICCIONI CON UNA FAVA", cat: "Proverbi" }, { text: "IL TRONO DI SPADE", cat: "Serie TV" },
+            { text: "HOMER SIMPSON", cat: "Personaggi" }, { text: "HARRY POTTER E LA PIETRA FILOSOFALE", cat: "Film" },
+            { text: "INFERMIERE", cat: "Mestieri" }, { text: "PILOTA DI FORMULA 1", cat: "Mestieri" },
+            { text: "GALLINA VECCHIA FA BUON BRODO", cat: "Proverbi" }, { text: "IL GATTO CON GLI STIVALI", cat: "Favole" },
+            { text: "AVENGERS: ENDGAME", cat: "Film" }, { text: "DRAGON BALL", cat: "Cartoni" },
+            { text: "BAGNINO", cat: "Mestieri" }, { text: "CHI DORME NON PIGLIA PESCI", cat: "Proverbi" },
+            { text: "LA GIOCONDA", cat: "Scultura/Arte" }, { text: "IL TENNIS", cat: "Sport" },
+            { text: "SALTO CON L'ASTA", cat: "Sport" }, { text: "MARIO BROS", cat: "Videogiochi" }
         ];
         function generateMimaCard() {
             const item = mimaDb[Math.floor(Math.random() * mimaDb.length)];
@@ -899,7 +960,21 @@
         let lockedTeam = null, quizIdx = 0;
         const quizDb = [
             { cat: "Rap & Musica", q: "Quale artista ha portato 'Cenere' a Sanremo 2023?", options: ["Lazza", "Geolier", "Blanco", "Tedua"], correct: 0 },
-            { cat: "Serie TV", q: "In quale città si svolge 'Mare Fuori'?", options: ["Palermo", "Roma", "Napoli", "Bari"], correct: 2 }
+            { cat: "Serie TV", q: "In quale città si svolge 'Mare Fuori'?", options: ["Palermo", "Roma", "Napoli", "Bari"], correct: 2 },
+            { cat: "Sport", q: "Quanti sono gli anelli nel logo delle Olimpiadi?", options: ["4", "5", "6", "7"], correct: 1 },
+            { cat: "Scienza", q: "Qual è il pianeta più vicino al Sole?", options: ["Terra", "Marte", "Venere", "Mercurio"], correct: 3 },
+            { cat: "Arte", q: "Chi ha dipinto la 'Notte Stellata'?", options: ["Picasso", "Van Gogh", "Dalì", "Monet"], correct: 1 },
+            { cat: "Cinema", q: "Quale di questi NON è un supereroe Marvel?", options: ["Iron Man", "Batman", "Thor", "Hulk"], correct: 1 },
+            { cat: "Geografia", q: "Qual è la capitale dell'Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], correct: 2 },
+            { cat: "Storia", q: "In che anno l'Italia ha vinto i Mondiali in Germania?", options: ["2002", "2006", "2010", "1998"], correct: 1 },
+            { cat: "Gossip", q: "Con chi era sposato Francesco Totti?", options: ["Belen Rodriguez", "Ilary Blasi", "Michelle Hunziker", "Diletta Leotta"], correct: 1 },
+            { cat: "Cucina", q: "Quale ingrediente NON va nella Carbonara originale?", options: ["Guanciale", "Pecorino", "Panna", "Uova"], correct: 2 },
+            { cat: "Geografia", q: "In quale continente si trova il deserto del Sahara?", options: ["Asia", "Africa", "America", "Oceania"], correct: 1 },
+            { cat: "Cartoni", q: "Come si chiama il miglior amico di Spongebob?", options: ["Squiddi", "Mr. Krab", "Plankton", "Patrick"], correct: 3 },
+            { cat: "Musica", q: "Chi canta 'Tuta Gold'?", options: ["Mahmood", "Irama", "Geolier", "Blanco"], correct: 0 },
+            { cat: "Scienza", q: "Qual è il simbolo chimico dell'Acqua?", options: ["H2O", "CO2", "Au", "O2"], correct: 0 },
+            { cat: "Videogiochi", q: "Qual è il videogioco più venduto di sempre?", options: ["GTA V", "Minecraft", "Tetris", "FIFA"], correct: 1 },
+            { cat: "Cinema", q: "Chi interpreta Jack Dawson in Titanic?", options: ["Brad Pitt", "Johnny Depp", "Leonardo DiCaprio", "Tom Cruise"], correct: 2 }
         ];
         function renderBuzzerButtons() {
             const grid = document.getElementById('buzzer-buttons-grid');
